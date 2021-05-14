@@ -1,0 +1,1133 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/Kubernetes/Installing_Kubernetes/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>Lab Install - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installing-kubernetes-cluster-on-azure-cloud-vms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab Install
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../AWS/0200_EC2_Overview/" class="md-tabs__link">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Lab Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Lab Install
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setting-up-the-workspace-directory-and-ansible-inventory-file-as-root" class="md-nav__link">
+    Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-creating-a-non-root-user-ansible-on-all-remote-servers" class="md-nav__link">
+    Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-installing-kubernetes-dependencies" class="md-nav__link">
+    Step 3 — Installing Kubernetes Dependencies:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-setting-up-the-master-node" class="md-nav__link">
+    Step 4 — Setting Up the Master Node:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-setting-up-the-worker-nodes" class="md-nav__link">
+    Step 5 — Setting Up the Worker Nodes:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-verifying-the-cluster" class="md-nav__link">
+    Step 6 — Verifying the Cluster:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-running-an-application-on-the-cluster" class="md-nav__link">
+    Step 7 — Running An Application on the Cluster:
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 7 — Running An Application on the Cluster:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-test-that-everything-is-working" class="md-nav__link">
+    To test that everything is working:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#now-cleanup-the-resources-tosave-the-bill" class="md-nav__link">
+    Now Cleanup the resources tosave the bill.
+  </a>
+  
+    <nav class="md-nav" aria-label="Now Cleanup the resources tosave the bill.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-you-would-like-to-remove-the-nginx-application-first-delete-the-nginx-service-from-the-master-node" class="md-nav__link">
+    If you would like to remove the Nginx application, first delete the nginx service from the master node:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-following-to-ensure-that-the-service-has-been-deleted" class="md-nav__link">
+    Run the following to ensure that the service has been deleted:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#then-delete-the-deployment" class="md-nav__link">
+    Then delete the deployment:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-kubectl-get-services-again-to-confirm-it-worked" class="md-nav__link">
+    Run the kubectl get services again to confirm it worked:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AWS/0200_EC2_Overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AWS/0300_EC2_Autoscaling/" class="md-nav__link">
+        EC2 Autoscaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AWS/0400_Databases_and_Application_Services/" class="md-nav__link">
+        Database & Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AWS/0500_Networking_and_Best_Practice/" class="md-nav__link">
+        Networking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AWS/2000_Well_Architected_Framework/" class="md-nav__link">
+        Well Architected
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-setting-up-the-workspace-directory-and-ansible-inventory-file-as-root" class="md-nav__link">
+    Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-creating-a-non-root-user-ansible-on-all-remote-servers" class="md-nav__link">
+    Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-installing-kubernetes-dependencies" class="md-nav__link">
+    Step 3 — Installing Kubernetes Dependencies:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-setting-up-the-master-node" class="md-nav__link">
+    Step 4 — Setting Up the Master Node:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-setting-up-the-worker-nodes" class="md-nav__link">
+    Step 5 — Setting Up the Worker Nodes:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-verifying-the-cluster" class="md-nav__link">
+    Step 6 — Verifying the Cluster:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-7-running-an-application-on-the-cluster" class="md-nav__link">
+    Step 7 — Running An Application on the Cluster:
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 7 — Running An Application on the Cluster:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#to-test-that-everything-is-working" class="md-nav__link">
+    To test that everything is working:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion :
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#now-cleanup-the-resources-tosave-the-bill" class="md-nav__link">
+    Now Cleanup the resources tosave the bill.
+  </a>
+  
+    <nav class="md-nav" aria-label="Now Cleanup the resources tosave the bill.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if-you-would-like-to-remove-the-nginx-application-first-delete-the-nginx-service-from-the-master-node" class="md-nav__link">
+    If you would like to remove the Nginx application, first delete the nginx service from the master node:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-following-to-ensure-that-the-service-has-been-deleted" class="md-nav__link">
+    Run the following to ensure that the service has been deleted:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#then-delete-the-deployment" class="md-nav__link">
+    Then delete the deployment:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-kubectl-get-services-again-to-confirm-it-worked" class="md-nav__link">
+    Run the kubectl get services again to confirm it worked:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="installing-kubernetes-cluster-on-azure-cloud-vms"><strong>Installing Kubernetes cluster on Azure Cloud VM's</strong><a class="headerlink" href="#installing-kubernetes-cluster-on-azure-cloud-vms" title="Permanent link">&para;</a></h1>
+<p>In this document we are going to install kubernetes on Azure VM's and will deploy the containers from there. You can use the <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI">AzureCLI</a> &amp; <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install">Ansible</a> scripts from my github  to proceed.</p>
+<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ol>
+<li>A Jumphost with PublicIP, (We will use jumphost as Ansible Master and Datahost for KubeMaster and Worker nodes)</li>
+</ol>
+<p>An SSH key pair from jumphost to all the servers. (Remember to enble root login to yes in sshd_config).</p>
+<p>Use the script <code>Azure_create_vm_jumphost.ps1</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI">AzureCLI</a> to create a jumphost with PublicIP and in seperate VNET.</p>
+<ol>
+<li>Two or Three Linux servers with at least 2GB RAM and 2 vCPUs each. You should be able to SSH into each server as the root user with your SSH key pair.</li>
+</ol>
+<p>Use the script <code>Azure_create_vm_4kubernetes_NATGW.ps1</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI">AzureCLI</a> for Kube Master and worker nodes.</p>
+<p>The above script will create the Data host with Debian 10 and in Seperate VNET from jumphost. </p>
+<ol>
+<li>Ansible installed on jumphost. For installation instructions, follow the official <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installation documentation</a>.</li>
+</ol>
+<p>Update the /etc/hosts file on all servers:
+<div class="highlight"><pre><span></span><code>10.1.0.4 debian1 master
+10.1.0.5 debian2 worker1
+10.1.0.6 debian3 worker2
+root@jumphost:~/kube-cluster#
+</code></pre></div></p>
+<h2 id="step-1-setting-up-the-workspace-directory-and-ansible-inventory-file-as-root">Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root:<a class="headerlink" href="#step-1-setting-up-the-workspace-directory-and-ansible-inventory-file-as-root" title="Permanent link">&para;</a></h2>
+<p>This will be on the jumphost we just created. </p>
+<p><div class="highlight"><pre><span></span><code>mkdir ~/kube-cluster ; cd ~/kube-cluster
+</code></pre></div>
+This directory will be our workspace and will contain all of our Ansible playbooks. It will also be the directory inside which you will run local commands.</p>
+<p>Create a file named <code>~/kube-cluster/hosts</code> using nano or your favorite text editor and update below:</p>
+<div class="highlight"><pre><span></span><code>[masters]
+master ansible_host=10.1.0.4 ansible_user=root
+
+[workers]
+worker1 ansible_host=10.1.0.5 ansible_user=root
+worker2 ansible_host=10.1.0.6 ansible_user=root
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+</code></pre></div>
+<h2 id="step-2-creating-a-non-root-user-ansible-on-all-remote-servers">Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:<a class="headerlink" href="#step-2-creating-a-non-root-user-ansible-on-all-remote-servers" title="Permanent link">&para;</a></h2>
+<p>Use script <code>user_creation_initial.yml</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install">Ansible</a></p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i hosts ~/kube-cluster/user_creation_initial.yml
+</code></pre></div>
+<h2 id="step-3-installing-kubernetes-dependencies">Step 3 — Installing Kubernetes Dependencies:<a class="headerlink" href="#step-3-installing-kubernetes-dependencies" title="Permanent link">&para;</a></h2>
+<p>Use script <code>kube_dependencies_install.yml</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install">Ansible</a></p>
+<p><div class="highlight"><pre><span></span><code>ansible-playbook -i hosts ~/kube-cluster/kube_dependencies_install.yml
+</code></pre></div>
+(Current version of k8s is 1.21.0-00 change it as required)</p>
+<p>After execution, Docker, kubeadm, and kubelet will be installed on all of the remote servers. kubectl is not a required component and is only needed for executing cluster commands. </p>
+<h2 id="step-4-setting-up-the-master-node">Step 4 — Setting Up the Master Node:<a class="headerlink" href="#step-4-setting-up-the-master-node" title="Permanent link">&para;</a></h2>
+<p>Use <code>kube-cluster/master_initial.yml</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install">Ansible</a></p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i hosts ~/kube-cluster/master_initial.yml 
+</code></pre></div>
+<p>Once inside the master node as <strong>ansible</strong> user ssh ansible@master, execute below command:</p>
+<p><div class="highlight"><pre><span></span><code>kubectl get nodes
+</code></pre></div>
+Output: 
+<div class="highlight"><pre><span></span><code>ansible@debian1:~$ kubectl get nodes
+NAME      STATUS   ROLES                  AGE   VERSION
+debian1   Ready    control-plane,master   20m   v1.21.0
+ansible@debian1:~$
+</code></pre></div></p>
+<h2 id="step-5-setting-up-the-worker-nodes">Step 5 — Setting Up the Worker Nodes:<a class="headerlink" href="#step-5-setting-up-the-worker-nodes" title="Permanent link">&para;</a></h2>
+<p>Use <code>kube-cluster/join_worker_nodes.yml</code> from <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install">Ansible</a></p>
+<div class="highlight"><pre><span></span><code>ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
+</code></pre></div>
+<h2 id="step-6-verifying-the-cluster">Step 6 — Verifying the Cluster:<a class="headerlink" href="#step-6-verifying-the-cluster" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>kubectl get nodes
+</code></pre></div>
+<p>Output:
+<div class="highlight"><pre><span></span><code>ansible@debian1:~$ kubectl get nodes
+NAME      STATUS   ROLES                  AGE   VERSION
+debian1   Ready    control-plane,master   24m   v1.21.0
+debian2   Ready    &lt;none&gt;                 81s   v1.21.0
+debian3   Ready    &lt;none&gt;                 81s   v1.21.0
+ansible@debian1:~$
+</code></pre></div>
+If all of your nodes have the value Ready for STATUS, it means that they’re part of the cluster and ready to run workloads.</p>
+<h2 id="step-7-running-an-application-on-the-cluster">Step 7 — Running An Application on the Cluster:<a class="headerlink" href="#step-7-running-an-application-on-the-cluster" title="Permanent link">&para;</a></h2>
+<h3 id="deployment">Deployment<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>kubectl create deployment nginx --image=nginx
+</code></pre></div>
+A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The above deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.</p>
+<p>Next, run the following command to create a service named nginx that will expose the app publicly. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port opened on each node of the cluster:</p>
+<div class="highlight"><pre><span></span><code>kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
+</code></pre></div>
+<h3 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h3>
+<p>Services are another type of Kubernetes object that expose cluster internal services to clients, both internal and external. They are also capable of load balancing requests to multiple pods, and are an integral component in Kubernetes, frequently interacting with other components.</p>
+<p>Run the following command on maaster as ansible:
+<div class="highlight"><pre><span></span><code>kubectl get services
+</code></pre></div>
+Output:
+<div class="highlight"><pre><span></span><code>ansible@debian1:~$ kubectl get services
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP        34m
+nginx        NodePort    10.104.93.128   &lt;none&gt;        80:32638/TCP   8m10s
+ansible@debian1:~$
+</code></pre></div></p>
+<h2 id="to-test-that-everything-is-working">To test that everything is working:<a class="headerlink" href="#to-test-that-everything-is-working" title="Permanent link">&para;</a></h2>
+<p>Run below command:
+<div class="highlight"><pre><span></span><code>curl http://10.1.0.5:32638
+</code></pre></div>
+Output:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Welcome to nginx!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="nt">body</span> <span class="p">{</span>
+        <span class="k">width</span><span class="p">:</span> <span class="mi">35</span><span class="kt">em</span><span class="p">;</span>
+        <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="kc">auto</span><span class="p">;</span>
+        <span class="k">font-family</span><span class="p">:</span> <span class="n">Tahoma</span><span class="p">,</span> <span class="n">Verdana</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welcome to nginx!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>For online documentation and support please refer to
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://nginx.org/&quot;</span><span class="p">&gt;</span>nginx.org<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;</span><span class="nt">br</span><span class="p">/&gt;</span>
+Commercial support is available at
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;http://nginx.com/&quot;</span><span class="p">&gt;</span>nginx.com<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">em</span><span class="p">&gt;</span>Thank you for using nginx.<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+ansible@debian1:~$ 
+</code></pre></div>
+<h2 id="conclusion">Conclusion :<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>If you get the output. COngragulations !! you’ve successfully set up a Kubernetes cluster on Debian Linux using Kubeadm and Ansible.</p>
+<h2 id="now-cleanup-the-resources-tosave-the-bill">Now Cleanup the resources tosave the bill.<a class="headerlink" href="#now-cleanup-the-resources-tosave-the-bill" title="Permanent link">&para;</a></h2>
+<h3 id="if-you-would-like-to-remove-the-nginx-application-first-delete-the-nginx-service-from-the-master-node">If you would like to remove the Nginx application, first delete the nginx service from the master node:<a class="headerlink" href="#if-you-would-like-to-remove-the-nginx-application-first-delete-the-nginx-service-from-the-master-node" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl delete service nginx
+</code></pre></div>
+<h3 id="run-the-following-to-ensure-that-the-service-has-been-deleted">Run the following to ensure that the service has been deleted:<a class="headerlink" href="#run-the-following-to-ensure-that-the-service-has-been-deleted" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>kubectl get services
+</code></pre></div>
+Output:</p>
+<div class="highlight"><pre><span></span><code>ansible@debian1:~$ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   38m
+ansible@debian1:~$
+</code></pre></div>
+<h3 id="then-delete-the-deployment">Then delete the deployment:<a class="headerlink" href="#then-delete-the-deployment" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl delete deployment nginx
+</code></pre></div>
+<h3 id="run-the-kubectl-get-services-again-to-confirm-it-worked">Run the <code>kubectl get services</code> again to confirm it worked:<a class="headerlink" href="#run-the-kubectl-get-services-again-to-confirm-it-worked" title="Permanent link">&para;</a></h3>
+<p>Output:
+<div class="highlight"><pre><span></span><code>&quot;ansible@debian1:~$ kubectl get deployments
+No resources found in default namespace.
+ansible@debian1:~$&quot;
+</code></pre></div>
+ ### To delete all the resources created in Azure </p>
+<p>We created all the resources in one single Resource Group. By deleting the RG, we will be deleting all the resources created for this expriment.</p>
+<p>Use <code>Azure_delete_resourcegroup.ps1 from</code> <a href="https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI">AzureCLI</a></p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../DevOps/DevOps_Cloud/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../../AWS/0200_EC2_Overview/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Overview
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>

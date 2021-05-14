@@ -1,0 +1,2117 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/2000_Well_Architected_Framework/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>Well Architected - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-well-architected-framework-waf" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Well Architected
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-tabs__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0200_EC2_Overview/" class="md-tabs__link md-tabs__link--active">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-nav__link">
+        Lab Install
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0200_EC2_Overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0300_EC2_Autoscaling/" class="md-nav__link">
+        EC2 Autoscaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0400_Databases_and_Application_Services/" class="md-nav__link">
+        Database & Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0500_Networking_and_Best_Practice/" class="md-nav__link">
+        Networking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Well Architected
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Well Architected
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-well-architected-framework-pillars" class="md-nav__link">
+    AWS Well-Architected Framework Pillars
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Well-Architected Framework Pillars">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operational-excellence-pillar" class="md-nav__link">
+    Operational Excellence Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-pillar" class="md-nav__link">
+    Security Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-pillar" class="md-nav__link">
+    Reliability Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-pillar" class="md-nav__link">
+    Performance Efficiency Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-optimization-pillar" class="md-nav__link">
+    Cost Optimization Pillar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    Definitions
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component" class="md-nav__link">
+    component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workload" class="md-nav__link">
+    workload
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#milestones" class="md-nav__link">
+    milestones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    architecture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technology-portfolio" class="md-nav__link">
+    technology portfolio
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trade-offs" class="md-nav__link">
+    Trade-offs
+  </a>
+  
+    <nav class="md-nav" aria-label="Trade-offs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast" class="md-nav__link">
+    Fast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheap" class="md-nav__link">
+    Cheap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#good" class="md-nav__link">
+    Good
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-group" class="md-nav__link">
+    Architecture group
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-design-principles" class="md-nav__link">
+    General design principles
+  </a>
+  
+    <nav class="md-nav" aria-label="General design principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stop-guessing-your-capacity-needs" class="md-nav__link">
+    Stop guessing your capacity needs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-systems-at-production-scale" class="md-nav__link">
+    Test systems at production scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-to-make-architectural-experimentation-easier" class="md-nav__link">
+    Automate to make architectural experimentation easier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-for-evolutionary-architectures" class="md-nav__link">
+    Allow for evolutionary architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-architectures-using-data" class="md-nav__link">
+    Drive architectures using data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improve-through-game-days" class="md-nav__link">
+    Improve through game days
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-operational-excellence" class="md-nav__link">
+    AWS Operational Excellence
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Operational Excellence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perform-operations-as-code" class="md-nav__link">
+    Perform operations as code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annotate-documentation" class="md-nav__link">
+    Annotate documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-frequent-small-reversible-changes" class="md-nav__link">
+    Make frequent, small, reversible changes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refine-operations-procedures-frequently" class="md-nav__link">
+    Refine operations procedures frequently
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anticipate-failure" class="md-nav__link">
+    Anticipate failure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learn-from-all-operational-failures" class="md-nav__link">
+    Learn from all operational failures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-operational-excellence-prepare-operate-evolve" class="md-nav__link">
+    Best practices for Operational Excellence: Prepare, Operate, Evolve
+  </a>
+  
+    <nav class="md-nav" aria-label="Best practices for Operational Excellence: Prepare, Operate, Evolve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare" class="md-nav__link">
+    Prepare
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operate" class="md-nav__link">
+    Operate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolve" class="md-nav__link">
+    Evolve
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    Security
+  </a>
+  
+    <nav class="md-nav" aria-label="Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implement-a-strong-identity-foundation" class="md-nav__link">
+    Implement a strong identity foundation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-traceability" class="md-nav__link">
+    Enable traceability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-security-at-all-layers" class="md-nav__link">
+    Apply security at all layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-security-best-practices" class="md-nav__link">
+    Automate security best practices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protect-data-in-transit-and-at-rest" class="md-nav__link">
+    Protect data in transit and at rest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-people-away-from-data" class="md-nav__link">
+    Keep people away from data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-for-security-events" class="md-nav__link">
+    Prepare for security events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-security-identity-and-access-management-detective-controls-infrastructure-protection-data-protection-and-incident-response" class="md-nav__link">
+    Best Practices for Security: Identity and Access Management, Detective Controls, Infrastructure Protection, Data Protection, and Incident Response
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Security: Identity and Access Management, Detective Controls, Infrastructure Protection, Data Protection, and Incident Response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-and-access-management" class="md-nav__link">
+    Identity and Access Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Identity and Access Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#role-vs-user" class="md-nav__link">
+    Role vs. User
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detective-controls" class="md-nav__link">
+    Detective Controls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-protection" class="md-nav__link">
+    Infrastructure Protection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    Data Protection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response" class="md-nav__link">
+    Incident Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-resources" class="md-nav__link">
+    Security Resources
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reliability" class="md-nav__link">
+    Reliability
+  </a>
+  
+    <nav class="md-nav" aria-label="Reliability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-recovery-procedures" class="md-nav__link">
+    Test recovery procedures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatically-recover-from-failure" class="md-nav__link">
+    Automatically recover from failure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-horizontally" class="md-nav__link">
+    Scale horizontally
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-guessing-capacity" class="md-nav__link">
+    Stop guessing capacity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-change-in-automation" class="md-nav__link">
+    Manage change in automation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-reliability-foundations-change-management-and-failure-management" class="md-nav__link">
+    Best Practices for Reliability: Foundations, Change Management, and Failure Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Reliability: Foundations, Change Management, and Failure Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foundations-for-reliability" class="md-nav__link">
+    Foundations for Reliability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-management-for-reliability" class="md-nav__link">
+    Change Management for Reliability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-management-for-reliability" class="md-nav__link">
+    Failure Management for Reliability
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-efficiency" class="md-nav__link">
+    Performance Efficiency
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#democratize-advanced-technologies" class="md-nav__link">
+    Democratize advanced technologies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-global-in-minutes" class="md-nav__link">
+    Go global in minutes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-serverless-architectures" class="md-nav__link">
+    Use serverless architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-more-often" class="md-nav__link">
+    Experiment more often
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanical-sympathy" class="md-nav__link">
+    Mechanical sympathy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-performance-efficiency-selection-review-monitoring-tradeoffs" class="md-nav__link">
+    Best Practices for Performance Efficiency: Selection, Review, Monitoring, Tradeoffs
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Performance Efficiency: Selection, Review, Monitoring, Tradeoffs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-selection" class="md-nav__link">
+    Performance Efficiency: Selection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-review" class="md-nav__link">
+    Performance Efficiency: Review
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-monitoring" class="md-nav__link">
+    Performance Efficiency: Monitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-tradeoffs" class="md-nav__link">
+    Performance Efficiency: Tradeoffs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo-finish-performance-efficiency-and-cost-optimization-once-i-learn-azure-better" class="md-nav__link">
+    TODO: Finish Performance Efficiency and Cost Optimization once I learn Azure better
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-well-architected-tool" class="md-nav__link">
+    AWS Well-Architected Tool
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-well-architected-framework-pillars" class="md-nav__link">
+    AWS Well-Architected Framework Pillars
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Well-Architected Framework Pillars">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operational-excellence-pillar" class="md-nav__link">
+    Operational Excellence Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-pillar" class="md-nav__link">
+    Security Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reliability-pillar" class="md-nav__link">
+    Reliability Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-pillar" class="md-nav__link">
+    Performance Efficiency Pillar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-optimization-pillar" class="md-nav__link">
+    Cost Optimization Pillar
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    Definitions
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component" class="md-nav__link">
+    component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workload" class="md-nav__link">
+    workload
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#milestones" class="md-nav__link">
+    milestones
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    architecture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technology-portfolio" class="md-nav__link">
+    technology portfolio
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trade-offs" class="md-nav__link">
+    Trade-offs
+  </a>
+  
+    <nav class="md-nav" aria-label="Trade-offs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fast" class="md-nav__link">
+    Fast
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cheap" class="md-nav__link">
+    Cheap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#good" class="md-nav__link">
+    Good
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-group" class="md-nav__link">
+    Architecture group
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-design-principles" class="md-nav__link">
+    General design principles
+  </a>
+  
+    <nav class="md-nav" aria-label="General design principles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stop-guessing-your-capacity-needs" class="md-nav__link">
+    Stop guessing your capacity needs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-systems-at-production-scale" class="md-nav__link">
+    Test systems at production scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-to-make-architectural-experimentation-easier" class="md-nav__link">
+    Automate to make architectural experimentation easier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-for-evolutionary-architectures" class="md-nav__link">
+    Allow for evolutionary architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drive-architectures-using-data" class="md-nav__link">
+    Drive architectures using data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improve-through-game-days" class="md-nav__link">
+    Improve through game days
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-operational-excellence" class="md-nav__link">
+    AWS Operational Excellence
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Operational Excellence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perform-operations-as-code" class="md-nav__link">
+    Perform operations as code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annotate-documentation" class="md-nav__link">
+    Annotate documentation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make-frequent-small-reversible-changes" class="md-nav__link">
+    Make frequent, small, reversible changes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refine-operations-procedures-frequently" class="md-nav__link">
+    Refine operations procedures frequently
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anticipate-failure" class="md-nav__link">
+    Anticipate failure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#learn-from-all-operational-failures" class="md-nav__link">
+    Learn from all operational failures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-operational-excellence-prepare-operate-evolve" class="md-nav__link">
+    Best practices for Operational Excellence: Prepare, Operate, Evolve
+  </a>
+  
+    <nav class="md-nav" aria-label="Best practices for Operational Excellence: Prepare, Operate, Evolve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare" class="md-nav__link">
+    Prepare
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operate" class="md-nav__link">
+    Operate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolve" class="md-nav__link">
+    Evolve
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    Security
+  </a>
+  
+    <nav class="md-nav" aria-label="Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implement-a-strong-identity-foundation" class="md-nav__link">
+    Implement a strong identity foundation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-traceability" class="md-nav__link">
+    Enable traceability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-security-at-all-layers" class="md-nav__link">
+    Apply security at all layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-security-best-practices" class="md-nav__link">
+    Automate security best practices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protect-data-in-transit-and-at-rest" class="md-nav__link">
+    Protect data in transit and at rest
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-people-away-from-data" class="md-nav__link">
+    Keep people away from data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-for-security-events" class="md-nav__link">
+    Prepare for security events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices-for-security-identity-and-access-management-detective-controls-infrastructure-protection-data-protection-and-incident-response" class="md-nav__link">
+    Best Practices for Security: Identity and Access Management, Detective Controls, Infrastructure Protection, Data Protection, and Incident Response
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Security: Identity and Access Management, Detective Controls, Infrastructure Protection, Data Protection, and Incident Response">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-and-access-management" class="md-nav__link">
+    Identity and Access Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Identity and Access Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#role-vs-user" class="md-nav__link">
+    Role vs. User
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detective-controls" class="md-nav__link">
+    Detective Controls
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-protection" class="md-nav__link">
+    Infrastructure Protection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    Data Protection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incident-response" class="md-nav__link">
+    Incident Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-resources" class="md-nav__link">
+    Security Resources
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reliability" class="md-nav__link">
+    Reliability
+  </a>
+  
+    <nav class="md-nav" aria-label="Reliability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-recovery-procedures" class="md-nav__link">
+    Test recovery procedures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatically-recover-from-failure" class="md-nav__link">
+    Automatically recover from failure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-horizontally" class="md-nav__link">
+    Scale horizontally
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-guessing-capacity" class="md-nav__link">
+    Stop guessing capacity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-change-in-automation" class="md-nav__link">
+    Manage change in automation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-reliability-foundations-change-management-and-failure-management" class="md-nav__link">
+    Best Practices for Reliability: Foundations, Change Management, and Failure Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Reliability: Foundations, Change Management, and Failure Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#foundations-for-reliability" class="md-nav__link">
+    Foundations for Reliability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#change-management-for-reliability" class="md-nav__link">
+    Change Management for Reliability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-management-for-reliability" class="md-nav__link">
+    Failure Management for Reliability
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-efficiency" class="md-nav__link">
+    Performance Efficiency
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#democratize-advanced-technologies" class="md-nav__link">
+    Democratize advanced technologies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-global-in-minutes" class="md-nav__link">
+    Go global in minutes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-serverless-architectures" class="md-nav__link">
+    Use serverless architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experiment-more-often" class="md-nav__link">
+    Experiment more often
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mechanical-sympathy" class="md-nav__link">
+    Mechanical sympathy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices-for-performance-efficiency-selection-review-monitoring-tradeoffs" class="md-nav__link">
+    Best Practices for Performance Efficiency: Selection, Review, Monitoring, Tradeoffs
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices for Performance Efficiency: Selection, Review, Monitoring, Tradeoffs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-selection" class="md-nav__link">
+    Performance Efficiency: Selection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-review" class="md-nav__link">
+    Performance Efficiency: Review
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-monitoring" class="md-nav__link">
+    Performance Efficiency: Monitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-efficiency-tradeoffs" class="md-nav__link">
+    Performance Efficiency: Tradeoffs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo-finish-performance-efficiency-and-cost-optimization-once-i-learn-azure-better" class="md-nav__link">
+    TODO: Finish Performance Efficiency and Cost Optimization once I learn Azure better
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-well-architected-tool" class="md-nav__link">
+    AWS Well-Architected Tool
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="aws-well-architected-framework-waf"><strong>AWS Well-Architected Framework (WAF)</strong><a class="headerlink" href="#aws-well-architected-framework-waf" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>The AWS Well-Architected Framework helps you understand the pros and cons of decisions you make while building systems on AWS. By using the Framework you will learn architectural best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud.</p>
+<h2 id="aws-well-architected-framework-pillars"><strong>AWS Well-Architected Framework Pillars</strong><a class="headerlink" href="#aws-well-architected-framework-pillars" title="Permanent link">&para;</a></h2>
+<p><img alt="Five Pillars" src="../Well-Architected-Framework.png" /></p>
+<h3 id="operational-excellence-pillar">Operational Excellence Pillar<a class="headerlink" href="#operational-excellence-pillar" title="Permanent link">&para;</a></h3>
+<p>Keep things running and react appropriately to unusual events.</p>
+<h3 id="security-pillar">Security Pillar<a class="headerlink" href="#security-pillar" title="Permanent link">&para;</a></h3>
+<p>Protect the confidentiality, integrity, and availability of the information kept in AWS.</p>
+<h3 id="reliability-pillar">Reliability Pillar<a class="headerlink" href="#reliability-pillar" title="Permanent link">&para;</a></h3>
+<p>Similar to the "availability" portion of security, but this is about being resistant to unexpected events rather than deliberate attacks.</p>
+<h3 id="performance-efficiency-pillar">Performance Efficiency Pillar<a class="headerlink" href="#performance-efficiency-pillar" title="Permanent link">&para;</a></h3>
+<p>Use resources with as little waste as practical.</p>
+<h3 id="cost-optimization-pillar">Cost Optimization Pillar<a class="headerlink" href="#cost-optimization-pillar" title="Permanent link">&para;</a></h3>
+<p>Find the lowest cost solution which meets the business needs.</p>
+<h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h2>
+<h3 id="component">component<a class="headerlink" href="#component" title="Permanent link">&para;</a></h3>
+<p>A collection of AWS resources that work together to fulfil a particular need. Often used as a collection of tightly coupled items within a much larger collection of loosely coupled components.</p>
+<h3 id="workload">workload<a class="headerlink" href="#workload" title="Permanent link">&para;</a></h3>
+<p>A loosely coupled group of components that fulfil some buiness role.</p>
+<h3 id="milestones">milestones<a class="headerlink" href="#milestones" title="Permanent link">&para;</a></h3>
+<p><strong>Beware the waterfall model!</strong> These can mark more significant changes made to the architecture, but if we get continuous delivery going these should either be extremely common or absent.</p>
+<h3 id="architecture">architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h3>
+<p>How all the components work together and interact to produce the desired workload.</p>
+<h3 id="technology-portfolio">technology portfolio<a class="headerlink" href="#technology-portfolio" title="Permanent link">&para;</a></h3>
+<p>A grouping of multiple workloads.</p>
+<h2 id="trade-offs">Trade-offs<a class="headerlink" href="#trade-offs" title="Permanent link">&para;</a></h2>
+<h3 id="fast">Fast<a class="headerlink" href="#fast" title="Permanent link">&para;</a></h3>
+<p>This usually refers to the speed of development and implementation. More planning and/or more iterations let optimizations for performance and cost happen so when more time is taken the architecture can improve.</p>
+<h3 id="cheap">Cheap<a class="headerlink" href="#cheap" title="Permanent link">&para;</a></h3>
+<p>Often components with lower reliability are cheaper. Costs can also be lower if we can accept a poor response time by overcommitting resources.</p>
+<h3 id="good">Good<a class="headerlink" href="#good" title="Permanent link">&para;</a></h3>
+<p>Often this means "reliable" or "not too expensive to operate" but can also reflect on the ultimate end-user experience. As usual, if we spend more time and money on a highly redundant, well-scaled workload it will be higher quality.</p>
+<h2 id="architecture-group">Architecture group<a class="headerlink" href="#architecture-group" title="Permanent link">&para;</a></h2>
+<p>"At AWS, we prefer to distribute capabilities into teams rather than having a centralized team with design capability."</p>
+<h2 id="general-design-principles">General design principles<a class="headerlink" href="#general-design-principles" title="Permanent link">&para;</a></h2>
+<h3 id="stop-guessing-your-capacity-needs">Stop guessing your capacity needs<a class="headerlink" href="#stop-guessing-your-capacity-needs" title="Permanent link">&para;</a></h3>
+<p>I'm impressed that this is the first one listed since "premature optimization" is such a common issue, and has been for decades. Rather than guess about capacity needs, <strong>measure them</strong>. Start small and scale up as needed.</p>
+<p>In order to determine "need" we will need good measurements of actual end-user experiences (and not just system level metrics, which are at best a loose proxy for the end user experience. At worst, they're completely decoupled from that experience.)</p>
+<h3 id="test-systems-at-production-scale">Test systems at production scale<a class="headerlink" href="#test-systems-at-production-scale" title="Permanent link">&para;</a></h3>
+<p>The flexibility of AWS makes this possible. With apropriate automation it becomes not only possible, but trivial.</p>
+<h3 id="automate-to-make-architectural-experimentation-easier">Automate to make architectural experimentation easier<a class="headerlink" href="#automate-to-make-architectural-experimentation-easier" title="Permanent link">&para;</a></h3>
+<p>What was I saying about automation? This enables safety features like "revert back" as well as reducing small errors that appear when changes are made by hand.</p>
+<h3 id="allow-for-evolutionary-architectures">Allow for evolutionary architectures<a class="headerlink" href="#allow-for-evolutionary-architectures" title="Permanent link">&para;</a></h3>
+<p>Basically, the above automation can allow for more, smaller changes vs. fewer, larger changes.</p>
+<h3 id="drive-architectures-using-data">Drive architectures using data<a class="headerlink" href="#drive-architectures-using-data" title="Permanent link">&para;</a></h3>
+<p>Use science to measure and adjust instead of taking a blind guess.</p>
+<h3 id="improve-through-game-days">Improve through game days<a class="headerlink" href="#improve-through-game-days" title="Permanent link">&para;</a></h3>
+<p>This might be something good to combine with Value Stream Mapping to see how long it takes us to react to and complete common tasks.</p>
+<h2 id="aws-operational-excellence"><a href="https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/wellarchitected-operational-excellence-pillar.pdf#welcome">AWS Operational Excellence</a><a class="headerlink" href="#aws-operational-excellence" title="Permanent link">&para;</a></h2>
+<h3 id="perform-operations-as-code">Perform operations as code<a class="headerlink" href="#perform-operations-as-code" title="Permanent link">&para;</a></h3>
+<p><strong>AMEN, BROTHER AWS!</strong> This is completely appropriate as the first thing listed as this can enable so many other good behaviors.</p>
+<h3 id="annotate-documentation">Annotate documentation<a class="headerlink" href="#annotate-documentation" title="Permanent link">&para;</a></h3>
+<p>This seems to be a nod to the difficulties with keeping documentation up-to-date. I agree that documentation should be something that the end-users can easily update. I'm not sure I completely agree with the specifics of "automatically annotate documentation", but it's also possible that I misunderstand what they mean. This will be something to keep an eye on as I learn more.</p>
+<h3 id="make-frequent-small-reversible-changes">Make frequent, small, reversible changes<a class="headerlink" href="#make-frequent-small-reversible-changes" title="Permanent link">&para;</a></h3>
+<p>Agreed! It's much easier to undo a small change than a large one. Those tend to be effectively irreversible, which substantially increases the risk of outages or other unwanted behaviors that require a large, immediate effort to mitigate.</p>
+<h3 id="refine-operations-procedures-frequently">Refine operations procedures frequently<a class="headerlink" href="#refine-operations-procedures-frequently" title="Permanent link">&para;</a></h3>
+<p>Yes! The feedback loop from operations back to the creators of an architecture is one of the most neglected yet most important. If the "documented procedures" aren't being followed, find out what is being used instead rather than attempting to force compliance.</p>
+<h3 id="anticipate-failure">Anticipate failure<a class="headerlink" href="#anticipate-failure" title="Permanent link">&para;</a></h3>
+<p>Most of the time there are enough real failures that creating false ones is overkill. Perhaps someday we'll get things so stable that we end up needing something like the Netflix Chaos Monkey.</p>
+<h3 id="learn-from-all-operational-failures">Learn from all operational failures<a class="headerlink" href="#learn-from-all-operational-failures" title="Permanent link">&para;</a></h3>
+<p>Avoid blame and encourage transparency. Assume the best intentions of workers.</p>
+<h2 id="best-practices-for-operational-excellence-prepare-operate-evolve">Best practices for Operational Excellence: Prepare, Operate, Evolve<a class="headerlink" href="#best-practices-for-operational-excellence-prepare-operate-evolve" title="Permanent link">&para;</a></h2>
+<h3 id="prepare">Prepare<a class="headerlink" href="#prepare" title="Permanent link">&para;</a></h3>
+<p>This can involve using common, well-documented standards that are prepared in advance. (Ideally implemented from coded descriptions rather than human action.) However, they also caution "Implement the minimum number of architecture standards for your workloads." in order to ensure that the few standards that are present will be followed.</p>
+<p>Workloads are designed with methods to measure and monitor the behavior of the business applications and their effects on the infrastructure.</p>
+<p>The end-user (customer) experience is also measured and included in ongoing evaluation.</p>
+<p>Verify that changes are ready for production through the use of (automated!) checklists against the defined standards. This includes documentation checks. (<code>awspec</code>?)</p>
+<p>Test failures or other issues in the pre-prod testing area. (That might be a good place to let the Chaos Monkey go nuts even if we're not ready for prod testing to that degree.)</p>
+<p>CloudFormation as a way to set up the <strong>same workload</strong> in multiple different locations for both testing and (finally) production.</p>
+<p>Operational data collected using CloudTrail, VPC Flow Logs, or OS agents (<code>collectd</code>.) Analyzed/checked using CloudWatch.</p>
+<h3 id="operate">Operate<a class="headerlink" href="#operate" title="Permanent link">&para;</a></h3>
+<p>"Define expected outcomes" is great advice, but if the customer is unhappy and "expected outcomes" are being met, it may be worth a re-evaluation. This is not necessarily free of charge, but our goal is client satisfaction and that can be acccomplished by meeting expectations. When that's not happening there are pretty much two options:</p>
+<ol>
+<li>Achieve better results OR</li>
+<li>Adjust expectations</li>
+</ol>
+<p>"Ensure that if an alert is raised in response to an event,
+there is an associated process to be executed, with a specifically identified owner."</p>
+<p>"AWS provides workload insights through logging capabilities including Amazon Web Services AWS Well-Architected Framework
+AWS X-Ray, CloudWatch, CloudTrail, and VPC Flow Logs enabling the identification of workload issues in support of root cause analysis and remediation."</p>
+<p>"Manual processes for deployments, release management, changes, and rollbacks should be avoided."</p>
+<p>"Align metrics to business needs so that responses are effective at maintaining business continuity."</p>
+<h3 id="evolve">Evolve<a class="headerlink" href="#evolve" title="Permanent link">&para;</a></h3>
+<p>"Dedicate work cycles to making continuous incremental improvements."</p>
+<p>This is a nice way of saying that we need to <strong>MAKE TIME</strong> for constant improvement. My general rule of thumb is a <strong>MINIMUM</strong> of 2 hours per week for some sort of strategic improvement and in almost every case 4 hours per week will give a better outcome. This means the following:</p>
+<ol>
+<li>During that time someone else must handle interruptions, this can be managed within a team by alternating times of coverage and strategic improvement between team members.</li>
+<li>There will be some (possibly important) short term work that does not get done due to the above longer term time investment. Pick the least impactful items, drop/defer them, and don't look back.</li>
+</ol>
+<p>"Include feedback loops within your procedures to rapidly identify areas for improvement and capture learnings from the execution of operations."</p>
+<p>Hmmm... sounds like a counter to my earlier rant about the lack of feedback from operations back into the design.</p>
+<p>"Share lessons learned across teams to share the benefits of those lessons."</p>
+<p>Yes! Writing things down is a good first step, and one that is worth doing even if nobody else reads it. (Possible case in point right here!)</p>
+<p>"The AWS service that is essential to Operational Excellence is AWS CloudFormation, which you can use to create templates based on best practices."</p>
+<p>References:</p>
+<ul>
+<li><a href="https://aws.amazon.com/devops/">DevOps and AWS</a></li>
+<li><a href="https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/wellarchitected-operational-excellence-pillar.pdf#welcome">Operational Excellence Pillar</a></li>
+</ul>
+<h2 id="security"><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/wellarchitected-framework.pdf#security">Security</a><a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<h3 id="implement-a-strong-identity-foundation">Implement a strong identity foundation<a class="headerlink" href="#implement-a-strong-identity-foundation" title="Permanent link">&para;</a></h3>
+<p>If we don't know who exactly people are, there's no way to know who did what and no way to keep people out of resources they don't need to be in. This includes special care with "role" accounts that aren't associated with a person. There should be no way for a person to ever use role account credentials and any such attempts should be quickly detected and acted upon appropriately.</p>
+<h3 id="enable-traceability">Enable traceability<a class="headerlink" href="#enable-traceability" title="Permanent link">&para;</a></h3>
+<p>In addition to alerting, having good audit logs available to assist in manual investigations is very important. Where possible automatic actions should be configured, but use caution not to sacrifice availability for confidentiality or your security responses could be used against you as an attack vector.</p>
+<h3 id="apply-security-at-all-layers">Apply security at all layers<a class="headerlink" href="#apply-security-at-all-layers" title="Permanent link">&para;</a></h3>
+<p>The "hard exterior" approach is incompatible with modern uses of computing resources. Instead, create multiple softer boundaries.</p>
+<h3 id="automate-security-best-practices">Automate security best practices<a class="headerlink" href="#automate-security-best-practices" title="Permanent link">&para;</a></h3>
+<p>This includes automated checks for security configurations and automatic implementations using Infrastructure as Code methods.</p>
+<h3 id="protect-data-in-transit-and-at-rest">Protect data in transit and at rest<a class="headerlink" href="#protect-data-in-transit-and-at-rest" title="Permanent link">&para;</a></h3>
+<p>Classify data and use encryption and tokenization as needed to keep data safe. Tokenization is especially important for HIPPA and GPDR to anonymize personal information.</p>
+<h3 id="keep-people-away-from-data">Keep people away from data<a class="headerlink" href="#keep-people-away-from-data" title="Permanent link">&para;</a></h3>
+<p>This helps with both confidentiality and integrity. By having an automated, version-controlled method for working with data a clear record of what happened when is kept, often with the ability to revert back. The only human error will be when changes are introduced into the automated systems, which provides an opportunity for automated sanity checks and/or peer reviews as appropriate. Those checks can prevent the human errors from actually reaching the data and causing permanent harm.</p>
+<h3 id="prepare-for-security-events">Prepare for security events<a class="headerlink" href="#prepare-for-security-events" title="Permanent link">&para;</a></h3>
+<p>Running reaction exercises is a good plan given how infrequently security events actually happen. Ones that track and record the human responses are especially good since those can identify specific people who might need extra training or experience. (e.g. phishing E-mail tests.)</p>
+<h2 id="best-practices-for-security-identity-and-access-management-detective-controls-infrastructure-protection-data-protection-and-incident-response">Best Practices for Security: Identity and Access Management, Detective Controls, Infrastructure Protection, Data Protection, and Incident Response<a class="headerlink" href="#best-practices-for-security-identity-and-access-management-detective-controls-infrastructure-protection-data-protection-and-incident-response" title="Permanent link">&para;</a></h2>
+<h3 id="identity-and-access-management">Identity and Access Management<a class="headerlink" href="#identity-and-access-management" title="Permanent link">&para;</a></h3>
+<p>Define principals (users, roles, groups, and services) and assemble them in an org-appropriate way. Assign policies to the appropriate principals (avoid direct assignment to users) using the principle of least-privilege.</p>
+<p>Programmatic access (API calls) should use temporary limited-privilege credentials like those from <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html">AWS Security Token Service.</a>.</p>
+<h4 id="role-vs-user">Role vs. User<a class="headerlink" href="#role-vs-user" title="Permanent link">&para;</a></h4>
+<p>Based on the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html">AWS Identity and Access Management User Guide</a> a role is like a user except a role has no way to log in (no credentials) and instead is assumed by a user temporarily to perform some specific task.</p>
+<h3 id="detective-controls">Detective Controls<a class="headerlink" href="#detective-controls" title="Permanent link">&para;</a></h3>
+<p>What is a <a href="https://web.archive.org/web/20190315022007/https://www.investopedia.com/terms/d/detective-control.asp">detective control</a>? They're methods used to find issues with processes themselves, often as a form of a "double check" that two different methods which are supposed to give the same result actually do. For example, checking actual inventory vs. the inventory based on recorded changes.</p>
+<p><a href="https://aws.amazon.com/guardduty/">Amazon GuardDuty</a> is mentioned, but not a lot of specifics are given on examples of Detective Controls in use.</p>
+<p>Other supporting tools for this are AWS CloudTrail, Amazon CloudWatch, and AWS Config.</p>
+<h3 id="infrastructure-protection">Infrastructure Protection<a class="headerlink" href="#infrastructure-protection" title="Permanent link">&para;</a></h3>
+<p>There was some discussion of making "hardened" AMIs, which is great, but seems to skip over the elephant in the room of cloud infrastructure security: the permissions needed to control normal infrastructure changes are exactly the same ones that can be used to destroy it. Leaked AWS credentials frequenly lead to infrastructure destruction or misuse and an awareness of this possibility seems to be important, yet not mentioned here.</p>
+<p>Like the detective controls section, there is a lot in here about how we "are able to..." do various things, but nothing about how to do that or what the best practices might be-- a glaring omission from a best practices document.</p>
+<p>The supporting tools mentioned for this are Amazon VPC, Amazon CloudFront, AWS Shield (DDoS protection), and Amazon Web Application Firewall.</p>
+<h3 id="data-protection">Data Protection<a class="headerlink" href="#data-protection" title="Permanent link">&para;</a></h3>
+<p>They mention versioning as a way to protect data from accidental or malicious changes. I agree-- it's a good plan from a data integrity standpoint. (Less good from a data confidentiality standpoint since accidental releases of confidential info are harder to undo.)</p>
+<p>While they mention the importance of data classification, no specifics are given. Tags seem like they would be a really good way to make this process much easier by classifying objects appropriately. It would even be possible to automate the process of exploring the data classification of a number of interconnected objects and finding the most sensitive classification among them. That might help determine if there are unexpected relationships between sensitive and non-sensitive systems or determine if an object has the wrong overall classification. (e.g. if we attach sensitive storage to a non-sensitive VM, that VM might need to be re-classified.)</p>
+<p>Amazon Macie sounds a lot like what was just mentioned.</p>
+<p>Amazon Key Management Service makes managing keys for encryption simpler.</p>
+<h3 id="incident-response">Incident Response<a class="headerlink" href="#incident-response" title="Permanent link">&para;</a></h3>
+<p>The ability to spin up a forensics investigation environment was a nice observation. The cloud environment also lends itself well to quick system imaging via snapshots.</p>
+<p>Amazon services mentioned include IAM, CloudFormation, and CloudWatch + AWS Lambda.</p>
+<h3 id="security-resources">Security Resources<a class="headerlink" href="#security-resources" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="http://aws.amazon.com/security/">AWS Cloud Security</a></li>
+<li><a href="https://aws.amazon.com/compliance/">AWS Compliance</a></li>
+<li><a href="http://blogs.aws.amazon.com/security/">AWS Security Blog</a></li>
+<li><a href="https://d0.awsstatic.com/whitepapers/architecture/AWS-Security-Pillar.pdf">Security Pillar</a></li>
+<li><a href="https://d0.awsstatic.com/whitepapers/Security/AWS%20Security%20Whitepaper.pdf">AWS Security Overview</a></li>
+<li><a href="https://aws.amazon.com/whitepapers/aws-security-best-practices/">AWS Security Best Practices</a></li>
+<li><a href="https://d0.awsstatic.com/whitepapers/compliance/AWS_Risk_and_Compliance_Whitepaper.pdf">AWS Risk and Compliance</a></li>
+</ul>
+<h2 id="reliability">Reliability<a class="headerlink" href="#reliability" title="Permanent link">&para;</a></h2>
+<p>This relates to handling unexpected failures and unexpected performance issues.</p>
+<h3 id="test-recovery-procedures">Test recovery procedures<a class="headerlink" href="#test-recovery-procedures" title="Permanent link">&para;</a></h3>
+<p>It's easier to simulate failures in the cloud to test recovery procedures. This can range from setting up a test environment for specific failures or testing a complete AZ failure.</p>
+<h3 id="automatically-recover-from-failure">Automatically recover from failure<a class="headerlink" href="#automatically-recover-from-failure" title="Permanent link">&para;</a></h3>
+<p>Tie automated changes to the results of monitoring-- but don't forget the notification. Rather than relying on a human response to act, we act and notify and rely on humans to come back and undo it if the decision was incorrect.</p>
+<h3 id="scale-horizontally">Scale horizontally<a class="headerlink" href="#scale-horizontally" title="Permanent link">&para;</a></h3>
+<p>This helps avoid single points of failure and reduces the costs of scaling. Sometimes hard to do (database) but still worth considering whenever possible.</p>
+<h3 id="stop-guessing-capacity">Stop guessing capacity<a class="headerlink" href="#stop-guessing-capacity" title="Permanent link">&para;</a></h3>
+<p>Measure and adapt instead of trying to view the future.</p>
+<h3 id="manage-change-in-automation">Manage change in automation<a class="headerlink" href="#manage-change-in-automation" title="Permanent link">&para;</a></h3>
+<p>Rather than managing servers or other infrastructure, manage the automation that changes them. (Infrastructure as Code.)</p>
+<h3 id="best-practices-for-reliability-foundations-change-management-and-failure-management">Best Practices for Reliability: Foundations, Change Management, and Failure Management<a class="headerlink" href="#best-practices-for-reliability-foundations-change-management-and-failure-management" title="Permanent link">&para;</a></h3>
+<h4 id="foundations-for-reliability">Foundations for Reliability<a class="headerlink" href="#foundations-for-reliability" title="Permanent link">&para;</a></h4>
+<p>This covers the basics and can include things outside the scope of AWS. For example, be sure that the network connections to AWS have sufficient bandwidth and are monitored for their health. Choose regions that are network-close to the most latency-sensitive consumers.</p>
+<p>Ensure the service limits are appropriate-- this includes billing limits though that is not spelled out. If Amazon can't charge you, they're going to suddenly stop your service. AWS Trusted Advisor can help show these limits. AWS Shield provides DDoS protection.</p>
+<h4 id="change-management-for-reliability">Change Management for Reliability<a class="headerlink" href="#change-management-for-reliability" title="Permanent link">&para;</a></h4>
+<p>"Being aware of how change affects a system allows you to plan proactively..."</p>
+<p>That's true, however, in modern complex environments there's no way to predict the emergent behavior that results from the interactions of all the many parts. Thinking otherwise is to downplay the risks involved in making changes. While one answer is to cease making changes, there is another approach that cloud enables well-- quick reversion to the prior (good) state.</p>
+<p>Some of the normal aspects of operation that previously might have required a cumbersome approval process can instead be automated.</p>
+<p>AWS CloudTrail and AWS Config can help with tracking changes. Amazon Auto Scaling can help with load or performance related issues, especially when combined with CloudWatch.</p>
+<h4 id="failure-management-for-reliability">Failure Management for Reliability<a class="headerlink" href="#failure-management-for-reliability" title="Permanent link">&para;</a></h4>
+<p>"In any system of reasonable complexity it is expected that failures will occur." That sounds a lot like that "emergent behavior" I was talking about earlier.</p>
+<p>"Rather than trying to diagnose and fix a failed resource that is part of your production environment, you can replace it with a new one and carry out the analysis on the failed resource out of band." That's a good point, and even the analysis is somewhat optional unless it becomes a regular problem. This does require the ability to create the same server in a repeatable way. (Infrastructure as Code again.)</p>
+<p>Backups must be able to protect from both loss of infrastructure as well as bugs or other errors that damage data through software.</p>
+<p>AWS CloudFormation helps create the ability to quickly bring up additional or replacement resources. Amazon S3 is useful for backups, and Glacier is useful for archived backups.</p>
+<h2 id="performance-efficiency">Performance Efficiency<a class="headerlink" href="#performance-efficiency" title="Permanent link">&para;</a></h2>
+<h3 id="democratize-advanced-technologies">Democratize advanced technologies<a class="headerlink" href="#democratize-advanced-technologies" title="Permanent link">&para;</a></h3>
+<p>Sounds like Amazon marketing their expensive services... transcoding, machine learning, etc.</p>
+<p>"We built all this for Netflix anyhow, maybe you can use it too?"</p>
+<h3 id="go-global-in-minutes">Go global in minutes<a class="headerlink" href="#go-global-in-minutes" title="Permanent link">&para;</a></h3>
+<p>This is indeed one of the nice things about cloud-- get a global presence without having to build and maintain a data center in multiple spots.</p>
+<h3 id="use-serverless-architectures">Use serverless architectures<a class="headerlink" href="#use-serverless-architectures" title="Permanent link">&para;</a></h3>
+<p>"storage services can act as static websites" things like this are good to keep in mind. The trick is either building or migrating traditional server-based applications to make use of it.</p>
+<h3 id="experiment-more-often">Experiment more often<a class="headerlink" href="#experiment-more-often" title="Permanent link">&para;</a></h3>
+<h3 id="mechanical-sympathy">Mechanical sympathy<a class="headerlink" href="#mechanical-sympathy" title="Permanent link">&para;</a></h3>
+<h3 id="best-practices-for-performance-efficiency-selection-review-monitoring-tradeoffs">Best Practices for Performance Efficiency: Selection, Review, Monitoring, Tradeoffs<a class="headerlink" href="#best-practices-for-performance-efficiency-selection-review-monitoring-tradeoffs" title="Permanent link">&para;</a></h3>
+<h4 id="performance-efficiency-selection">Performance Efficiency: Selection<a class="headerlink" href="#performance-efficiency-selection" title="Permanent link">&para;</a></h4>
+<h4 id="performance-efficiency-review">Performance Efficiency: Review<a class="headerlink" href="#performance-efficiency-review" title="Permanent link">&para;</a></h4>
+<h4 id="performance-efficiency-monitoring">Performance Efficiency: Monitoring<a class="headerlink" href="#performance-efficiency-monitoring" title="Permanent link">&para;</a></h4>
+<h4 id="performance-efficiency-tradeoffs">Performance Efficiency: Tradeoffs<a class="headerlink" href="#performance-efficiency-tradeoffs" title="Permanent link">&para;</a></h4>
+<h2 id="todo-finish-performance-efficiency-and-cost-optimization-once-i-learn-azure-better">TODO: Finish Performance Efficiency and Cost Optimization once I learn Azure better<a class="headerlink" href="#todo-finish-performance-efficiency-and-cost-optimization-once-i-learn-azure-better" title="Permanent link">&para;</a></h2>
+<p>There is a strong short-term need for Azure support in CloudOps.</p>
+<h2 id="aws-well-architected-tool"><a href="https://aws.amazon.com/well-architected-tool/">AWS Well-Architected Tool</a><a class="headerlink" href="#aws-well-architected-tool" title="Permanent link">&para;</a></h2>
+<p>Checks an existing workload for known design issues.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The AWS Well-Architected Framework provides architectural best practices across the ﬁve pillars for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. The Framework provides a set of questions that allows you to review an existing or proposed architecture. It also provides a set of AWS best practices for each pillar. Using the Framework in your architecture will help you produce stable and efficient systems, which allow you to focus on your functional requirements. </p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../0500_Networking_and_Best_Practice/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Networking
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>

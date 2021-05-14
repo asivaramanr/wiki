@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/DevOps/DevOps_Cloud/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/Kubernetes/Installing_Kubernetes/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0200_EC2_Overview/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0300_EC2_Autoscaling/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0400_Databases_and_Application_Services/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0500_Networking_and_Best_Practice/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/2000_Well_Architected_Framework/</loc>
+     <lastmod>2021-05-14</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>

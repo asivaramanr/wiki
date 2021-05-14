@@ -1,0 +1,1890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0400_Databases_and_Application_Services/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>Database & Application - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#databases-and-application-services" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database & Application
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-tabs__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0200_EC2_Overview/" class="md-tabs__link md-tabs__link--active">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-nav__link">
+        Lab Install
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0200_EC2_Overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0300_EC2_Autoscaling/" class="md-nav__link">
+        EC2 Autoscaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Database & Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Database & Application
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relational-databases" class="md-nav__link">
+    Relational Databases
+  </a>
+  
+    <nav class="md-nav" aria-label="Relational Databases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relational-database-service-overview" class="md-nav__link">
+    Relational Database Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-rds-db-instance" class="md-nav__link">
+    Launching an RDS DB Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-rds-db-access-with-iam" class="md-nav__link">
+    Managing RDS DB Access with IAM.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypting-rds-resources" class="md-nav__link">
+    Encrypting RDS Resources.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rds-security-groups" class="md-nav__link">
+    RDS Security Groups.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-database-services" class="md-nav__link">
+    Other Database Services
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Database Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamodb-concepts" class="md-nav__link">
+    DynamoDB Concepts.
+  </a>
+  
+    <nav class="md-nav" aria-label="DynamoDB Concepts.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#working-with-dynamodb-local" class="md-nav__link">
+    Working with DynamoDB Local.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-aws-elasticache" class="md-nav__link">
+    Overview of AWS ElastiCache.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-elasticache-cluster" class="md-nav__link">
+    Launching an ElastiCache cluster.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-aws-redshift" class="md-nav__link">
+    Overview of AWS RedShift.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#big-data" class="md-nav__link">
+    Big Data
+  </a>
+  
+    <nav class="md-nav" aria-label="Big Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-kinesis-overview" class="md-nav__link">
+    Amazon Kinesis Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-elastic-mapreduce-overview" class="md-nav__link">
+    Amazon Elastic MapReduce Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-services" class="md-nav__link">
+    Application Services
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-queue-service-overview" class="md-nav__link">
+    Simple Queue Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-workflow-service-overview" class="md-nav__link">
+    Simple Workflow Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-notification-service-overview" class="md-nav__link">
+    Simple Notification Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-e-mail-with-simple-e-mail-service" class="md-nav__link">
+    Sending E-mail with Simple E-mail Service.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transcoding-media-with-elastic-transcoder" class="md-nav__link">
+    Transcoding Media with Elastic Transcoder.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudsearch-overview" class="md-nav__link">
+    CloudSearch Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-and-management" class="md-nav__link">
+    Deployment and Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment and Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-aws-with-cloudwatch" class="md-nav__link">
+    Monitoring AWS with CloudWatch.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-simple-application-stack-with-opsworks" class="md-nav__link">
+    Creating a Simple Application Stack with OpsWorks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-beanstalk-overview" class="md-nav__link">
+    Elastic Beanstalk Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-audit-trail-with-cloudtrail" class="md-nav__link">
+    Creating an Audit Trail with CloudTrail.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-data-pipeline" class="md-nav__link">
+    Creating a Data Pipeline.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudformation-overview" class="md-nav__link">
+    CloudFormation Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-database-monitoring" class="md-nav__link">
+    Practice: Database Monitoring
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Database Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-a-microsoft-sql-server-db-instance" class="md-nav__link">
+    Launch a Microsoft SQL Server DB Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-the-db-instance" class="md-nav__link">
+    Connect to the DB Instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-the-db-instance" class="md-nav__link">
+    Monitor the DB Instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0500_Networking_and_Best_Practice/" class="md-nav__link">
+        Networking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2000_Well_Architected_Framework/" class="md-nav__link">
+        Well Architected
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relational-databases" class="md-nav__link">
+    Relational Databases
+  </a>
+  
+    <nav class="md-nav" aria-label="Relational Databases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relational-database-service-overview" class="md-nav__link">
+    Relational Database Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-rds-db-instance" class="md-nav__link">
+    Launching an RDS DB Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-rds-db-access-with-iam" class="md-nav__link">
+    Managing RDS DB Access with IAM.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#encrypting-rds-resources" class="md-nav__link">
+    Encrypting RDS Resources.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rds-security-groups" class="md-nav__link">
+    RDS Security Groups.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-database-services" class="md-nav__link">
+    Other Database Services
+  </a>
+  
+    <nav class="md-nav" aria-label="Other Database Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamodb-concepts" class="md-nav__link">
+    DynamoDB Concepts.
+  </a>
+  
+    <nav class="md-nav" aria-label="DynamoDB Concepts.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#working-with-dynamodb-local" class="md-nav__link">
+    Working with DynamoDB Local.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-aws-elasticache" class="md-nav__link">
+    Overview of AWS ElastiCache.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-elasticache-cluster" class="md-nav__link">
+    Launching an ElastiCache cluster.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-aws-redshift" class="md-nav__link">
+    Overview of AWS RedShift.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#big-data" class="md-nav__link">
+    Big Data
+  </a>
+  
+    <nav class="md-nav" aria-label="Big Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-kinesis-overview" class="md-nav__link">
+    Amazon Kinesis Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amazon-elastic-mapreduce-overview" class="md-nav__link">
+    Amazon Elastic MapReduce Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-services" class="md-nav__link">
+    Application Services
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-queue-service-overview" class="md-nav__link">
+    Simple Queue Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-workflow-service-overview" class="md-nav__link">
+    Simple Workflow Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-notification-service-overview" class="md-nav__link">
+    Simple Notification Service Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-e-mail-with-simple-e-mail-service" class="md-nav__link">
+    Sending E-mail with Simple E-mail Service.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transcoding-media-with-elastic-transcoder" class="md-nav__link">
+    Transcoding Media with Elastic Transcoder.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudsearch-overview" class="md-nav__link">
+    CloudSearch Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-and-management" class="md-nav__link">
+    Deployment and Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment and Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-aws-with-cloudwatch" class="md-nav__link">
+    Monitoring AWS with CloudWatch.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-simple-application-stack-with-opsworks" class="md-nav__link">
+    Creating a Simple Application Stack with OpsWorks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-beanstalk-overview" class="md-nav__link">
+    Elastic Beanstalk Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-audit-trail-with-cloudtrail" class="md-nav__link">
+    Creating an Audit Trail with CloudTrail.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-data-pipeline" class="md-nav__link">
+    Creating a Data Pipeline.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloudformation-overview" class="md-nav__link">
+    CloudFormation Overview.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-database-monitoring" class="md-nav__link">
+    Practice: Database Monitoring
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Database Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-a-microsoft-sql-server-db-instance" class="md-nav__link">
+    Launch a Microsoft SQL Server DB Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-the-db-instance" class="md-nav__link">
+    Connect to the DB Instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-the-db-instance" class="md-nav__link">
+    Monitor the DB Instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="databases-and-application-services"><strong>Databases and Application Services</strong><a class="headerlink" href="#databases-and-application-services" title="Permanent link">&para;</a></h1>
+<h2 id="relational-databases">Relational Databases<a class="headerlink" href="#relational-databases" title="Permanent link">&para;</a></h2>
+<h3 id="relational-database-service-overview">Relational Database Service Overview.<a class="headerlink" href="#relational-database-service-overview" title="Permanent link">&para;</a></h3>
+<p>RDS cloud instances can run MS SQL, Oracle, PostgreSQL, MySQL, or Amazon Aurora.</p>
+<p>Steps for deploying an RDS:</p>
+<ol>
+<li>Select Engine</li>
+<li>Production?</li>
+<li>Specify DB Details: like instance size/class, multi-availability-zone config, underlying storage type, etc.</li>
+<li>Configure Advanced Settings</li>
+</ol>
+<p>Storage 5GB to 3TB. Different EBS volume types available. 30,000 IOPS max. (20,000 for other types?)</p>
+<p>VPC (or EC2?) security groups can limit access to the database so only appropriate sources will work.</p>
+<p>EC2 security groups with databases are deprecated.</p>
+<p>Multi-AZ = synchronous replication across the AZs. Can also generate read-only replicas in other AZs.</p>
+<p>DB parameter groups define the database engine configuration. They can apply to DB instances of the same type (e.g. MySQL)</p>
+<p>DB option groups applied to a specific instance to support vendor-specific items (Oracle, MS SQL Server, and MySQL only.) For example enabling network encryption.</p>
+<h3 id="launching-an-rds-db-instance">Launching an RDS DB Instance.<a class="headerlink" href="#launching-an-rds-db-instance" title="Permanent link">&para;</a></h3>
+<p>Launching a new instance can be done in a few minutes. In many cases we don't even need a usage license.</p>
+<p>SQL Server can be deployed with our own license or asking Amazon to use an included license.</p>
+<p>Advanced settings include things like:</p>
+<ul>
+<li>VPC to use</li>
+<li>Subnet</li>
+<li>Public access?</li>
+<li>Availability zone</li>
+<li>VPC security group</li>
+<li>Database port</li>
+<li>DB parameter group (?)</li>
+<li>Backup retention</li>
+<li>Backup window</li>
+<li>Auto-upgrade minor version</li>
+<li>Maintenance window for minor version updates</li>
+</ul>
+<p>Details:</p>
+<ul>
+<li>Endpoint: how other services connect to this database instance.</li>
+</ul>
+<p>Can use remote admin tools on the endpoint to do DBA tasks. Specify the user account we created with the DB instance.</p>
+<p>Import/Export or bulk copy can be used to bring data into a new instance.</p>
+<h3 id="managing-rds-db-access-with-iam">Managing RDS DB Access with IAM.<a class="headerlink" href="#managing-rds-db-access-with-iam" title="Permanent link">&para;</a></h3>
+<p>Can use DB-specific tools for user management. Users would be specific to that instance.</p>
+<p>Can attach policies to users/groups to give RDS privileges such as <code>AmazonRDSFullAccess</code> or <code>AmazonRDSReadOnlyAccess</code> or get much more fine-grained with a custom policy.</p>
+<p>Policy Generator:</p>
+<ul>
+<li>AWS Service: Amazon RDS</li>
+<li>Actions: (lots of options)</li>
+<li>ARN: * (for all instances)</li>
+<li>Conditions: might require MFA, for example</li>
+<li>Policy Name: probably want something more descriptive than the default</li>
+<li>Can Validate Policy, then Create Policy</li>
+</ul>
+<h3 id="encrypting-rds-resources">Encrypting RDS Resources.<a class="headerlink" href="#encrypting-rds-resources" title="Permanent link">&para;</a></h3>
+<p>Encryption applies to database instance, snapshots, backups, logs, and read-only replicas. Enabled during creation of the instance.</p>
+<p>Uses a default AWS account-wide key (if available) or an instance-specific key we specify. <strong>Key cannot be changed later</strong></p>
+<p>Amazon Aurora cannot be encrypted. MS SQL, Oracle, MySQL, and PostgreSQL can be.</p>
+<p>All storage types are supported.</p>
+<p>Only these instance types can be encrypted:</p>
+<ul>
+<li>General purpose (M3): db.m3.medium - db.m3.2xlarge</li>
+<li>Memory optimized (R3): db.r3.large - db.r3.8xlarge</li>
+<li>Memory optimized (CR1): db.cr1.8xlarge</li>
+</ul>
+<p>Keys are managed by AWS Key Management Service.</p>
+<p>Default keys cannot be deleted, revoked, or rotated. Customer-managed keys can.</p>
+<p>CloudTrail can audit key usage.</p>
+<p>Existing instances cannot be encrypted. Encrypted instances cannot have encryption disabled. Unencrypted backups cannot be restored to an encrypted instance. (That seems nonsensical, I can understand the reverse...)</p>
+<p>KMS keys are assigned to a specific region so we cannot copy encrypted snapshots between regions, nor replicate encrypted instances between regions.</p>
+<h3 id="rds-security-groups">RDS Security Groups.<a class="headerlink" href="#rds-security-groups" title="Permanent link">&para;</a></h3>
+<p>Two types of security groups with RDS</p>
+<ol>
+<li>DB security group (only on EC2-classic, deprecated)</li>
+<li>Each rule allows a source (IP, EC2 security group) access to a database</li>
+<li>inbound only</li>
+<li>Port numbers are inferred from the config</li>
+<li>VPC security group</li>
+<li>allows a source to access and instance</li>
+<li>source can be IP range or another VPC security group</li>
+<li>inbound or outbound</li>
+<li>Ports specified to match DB ports</li>
+</ol>
+<p>DB security groups can control access to instances not in the same VPC. They use the RDS API to set access. Don't require protocol/port info. They allow access from EC2 groups.</p>
+<p>VPC security groups work within the same VPC. They use EC2 APIs to set access. They use TCP and require port info.</p>
+<p>If the app servers + DB are in the same VPC, we can use the same VPC security group for both groups of EC2 instances.</p>
+<h2 id="other-database-services">Other Database Services<a class="headerlink" href="#other-database-services" title="Permanent link">&para;</a></h2>
+<h3 id="dynamodb-concepts">DynamoDB Concepts.<a class="headerlink" href="#dynamodb-concepts" title="Permanent link">&para;</a></h3>
+<p>NoSQL database service-- non-relational database. Simple key-value store.</p>
+<p>Tables contain multiple items. Item = row = record = tuple.</p>
+<p>No limit to the items per table. Items can be added via GUI, or AWS SDK for Java, .NET, or PHP. (Seems like a small list.)</p>
+<p>Attributes = fact = column = field</p>
+<p>Primay key: uniquely identifies a particular row/item. Required for each row.</p>
+<p>Two kinds of primary keys:</p>
+<ol>
+<li>
+<p>Hash attribute: single attribute which uniquely identifies the record within a table</p>
+</li>
+<li>
+<p>Hash and range attributes: more than one item together which combine to uniquely identifies a record within a table</p>
+</li>
+</ol>
+<p>Secondary indexes: quickly find data on non-primary-key attributes. Once created, the index is accessed like a table.</p>
+<p>Creating a DynamoDB:</p>
+<ol>
+<li>Primary Key</li>
+<li>Table Name: specify name for the DB here</li>
+<li>Add Indexes (optional)</li>
+<li>Provisioned Throughput Capacity in read and write "capacity units"</li>
+<li>Additional options (optional)</li>
+<li>Enable streams: useful for replicating changes to DynamoDB to other databases</li>
+<li>Basic alarms: useful for determining if the usage is exceeding the available throughput</li>
+</ol>
+<h4 id="working-with-dynamodb-local">Working with DynamoDB Local.<a class="headerlink" href="#working-with-dynamodb-local" title="Permanent link">&para;</a></h4>
+<p>Free of charge, does not interact with AWS' real DynamoDB. Useful for prototyping or testing apps that would use DynamoDB without the cost of an actual DynamoDB instance.</p>
+<p>Run as a Java JAR file like:</p>
+<p><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</code></p>
+<p>Web-based semi-GUI at <code>http://localhost:8000/shell/</code></p>
+<h3 id="overview-of-aws-elasticache">Overview of AWS ElastiCache.<a class="headerlink" href="#overview-of-aws-elasticache" title="Permanent link">&para;</a></h3>
+<p>Distributed in-memory cache of Database info.</p>
+<p>Based on <code>memcached</code> or <code>redis</code> engine.</p>
+<p>Redis allows the use of lists. Memcached is simpler and scales better.</p>
+<p>Cache nodes contain CPU/memory used for caching. Cache cluster = collection of cache nodes. Cache Parameter Groups are used to manage cache settings for each node. Cache Replication Groups define multiple copies of the data which can be accessed different ways.</p>
+<p>Security is whitelist, based on EC2 instance.</p>
+<p>Performance tuning parameters include heartbeat (delay between read synchronization?), number of databases, memory to reserve for non-cache use.</p>
+<p>Replication group: 2+ sychronized cluster nodes used for high availability</p>
+<p>Not all regions support ElastiCache.</p>
+<h3 id="launching-an-elasticache-cluster">Launching an ElastiCache cluster.<a class="headerlink" href="#launching-an-elasticache-cluster" title="Permanent link">&para;</a></h3>
+<p>Configuring ElastiCache:</p>
+<ol>
+<li>Select Engine</li>
+<li>Memcached</li>
+<li>Redis</li>
+<li>Specify Cluster Details</li>
+<li>Engine version</li>
+<li>Port</li>
+<li>Parameter group</li>
+<li>Enable replication</li>
+<li>Cluster name</li>
+<li>Note type</li>
+<li>S3 location of Redis RDB file</li>
+<li>Configure Advanced Settings</li>
+<li>Cache subnet group</li>
+<li>Availability Zone</li>
+<li>VPC Security Group</li>
+<li>Automatic backups</li>
+<li>Maintenance Window</li>
+<li>Topic for SNS notifications</li>
+<li>Review</li>
+</ol>
+<p>Adjust security group to allow Redis port 6379 if needed.</p>
+<p>Endpoint for Redis is needed for clients to connect with it. (Is network-based access really faster? Shouldn't this be local to each EC2 node running the Redis client?)</p>
+<p>Created new EC2 instance in the same security group as ElastiCache used (or at least one that would allow communications with Redis' TCP port.)</p>
+<p>Test basic Redis functions using telnet to port 6379:</p>
+<p>(Note the lack of any authentication-- those security groups appear pretty important to data security!)</p>
+<p><code>telnet &lt;endpoint&gt; 6379</code></p>
+<p><code>info server</code></p>
+<p><code>info all</code></p>
+<p><code>exists customerid</code></p>
+<p><code>append customerid "100"</code></p>
+<p><code>get customerid</code></p>
+<p>(Our inserted data is present. Scary!)</p>
+<p>Some tiny amount of security is available in theory, but is very vulnerable to brute-force attacks: <a href="https://redis.io/commands/auth">redis password protection</a></p>
+<h3 id="overview-of-aws-redshift">Overview of AWS RedShift.<a class="headerlink" href="#overview-of-aws-redshift" title="Permanent link">&para;</a></h3>
+<p>Data Warehouse service.</p>
+<p>To use:</p>
+<ol>
+<li>Provision a Redshift cluster</li>
+<li>Upload data sets</li>
+<li>Run analysis queries</li>
+</ol>
+<p>Redshift clusters have "leaders" which orchestrates the proces of receiving queries, splitting the load, gathering replies, and responding back to the client request.</p>
+<p>Clusters need only one node. Can add/remove online. Snapshots can be made.</p>
+<p>Permissions managed via IAM. Security groups define access from SQL client tools-- either RedShift-specific security groups or VPC security groups.</p>
+<p>Encryption possible.</p>
+<p>Redshift IAM policies include the usual defaults like <code>AmazonRedshiftFullAccess</code> and <code>AmazonRedshiftReadOnlyAccess</code>.</p>
+<p>Redshift monitoring</p>
+<ul>
+<li>Database audit logging (tracking access)</li>
+<li>Events and notifications when "certain things" happen</li>
+<li>Performance metrics (CloudWatch)</li>
+</ul>
+<p>Redshift creates one database by default but more can be added.</p>
+<p>Parameter groups are used to make consistent configurations across databases (?) in the same cluster. Or would that be used to create multiple clusters with the same config? (a bit unclear.)</p>
+<h2 id="big-data">Big Data<a class="headerlink" href="#big-data" title="Permanent link">&para;</a></h2>
+<h3 id="amazon-kinesis-overview">Amazon Kinesis Overview.<a class="headerlink" href="#amazon-kinesis-overview" title="Permanent link">&para;</a></h3>
+<p>Processes large amounts of data in real-time. Dat often processed as it's created. A Kinesis application is created from client libraries or APIs. It takes data from "producers", fold/spindle/mutiliates it, then puts it in "streams."</p>
+<p>What is a "producer"? Log file, transactions on a web app, data from mobile devices, etc.</p>
+<p>Once data is in a stream it can be directed to dashboards, alerts, or sent to other AWS services for storage.</p>
+<p>Terminology:</p>
+<ul>
+<li>Data record: one data unit in Kinesis</li>
+<li>Streams: ordered sequence (group) of Data Records</li>
+<li>Producers: write data to streams</li>
+<li>EC2 instances</li>
+<li>End users' client devices</li>
+<li>Mobile devices</li>
+<li>Other servers</li>
+<li>Consumers: read data from streams</li>
+<li>EC2 instance apps</li>
+<li>Kinesis application: run on the shards within an EC2 instance</li>
+<li>Application Name: identifies the Kenesis app</li>
+<li>Shard: group of data records with unique ID (also a unit of capacity)</li>
+<li>Partition key: groups data within a stream by shard</li>
+<li>Sequence number: unique number for each data record</li>
+</ul>
+<p>Creating a stream:</p>
+<p>Services -&gt; Kenesis -&gt; Create Stream</p>
+<p>Stream name and number of "shards" (1MB/s write + 2MB/s read capacity) needed.</p>
+<p>Kinesis apps run within EC2 instances. Kinesis apps have a unique name used for failover/HA.</p>
+<h3 id="amazon-elastic-mapreduce-overview">Amazon Elastic MapReduce Overview.<a class="headerlink" href="#amazon-elastic-mapreduce-overview" title="Permanent link">&para;</a></h3>
+<p>Used for storing and processing very large amounts of data without managing the details of the underlying infrastructure.</p>
+<p>Also useful for moving large data volumes to/from S3 or databases.</p>
+<p>EMR requires the use of a custom application which is run within the EMR cluster.</p>
+<p>An EMR cluster is created from EC2 instances-- at least a master node and optional slave nodes. These are provisioned from an AMI with Hadoop pre-installed.</p>
+<p>EMR is scalable-- we can add nodes for times when more processing needed. Can auto-replace nodes with performance issues or other problems.</p>
+<p>Can use S3 buckets for storage.</p>
+<p>EMR can also use Spark or Presto with (instead of?) Hadoop.</p>
+<p>Within the cluster, nodes use HDFS cluster filesystem for sharing. Apps and data used by the cluster externally are stored in S3.</p>
+<p>Cluster resources managed via <a href="https://hadoop.apache.org/docs/current/hadoop-yarn/hadoop-yarn-site/YARN.html">YARN</a> which splits up tasks.</p>
+<p>Application languages supported: <a href="https://hive.apache.org/">Hive</a>, <a href="https://pig.apache.org/">Pig</a>, <a href="https://spark.apache.org/sql/">Spark SQL</a>, <a href="https://spark.apache.org/mllib/">Mlib</a>, <a href="https://spark.apache.org/graphx/">GraphX</a>, and <a href="https://spark.apache.org/streaming/">Spark Streaming</a>.</p>
+<h2 id="application-services">Application Services<a class="headerlink" href="#application-services" title="Permanent link">&para;</a></h2>
+<h3 id="simple-queue-service-overview">Simple Queue Service Overview.<a class="headerlink" href="#simple-queue-service-overview" title="Permanent link">&para;</a></h3>
+<p>A queue is used to store information temporarily. Apps can push messages (info) into the queue and others can pull data from the queue. Often used for web applications. This helps keep web applications more loosely coupled with their dependents.</p>
+<p>Delivery (eventually) is guaranteed even if there are temporary problems. Once the problems are fixed the consumer can poll the queue again and receive its messages.</p>
+<p>FIFO is NOT guaranteed.</p>
+<p>Message sizes are variable. Configurable settings per queue (e.g. polling interval.) There can be multiple simultaneous readers and writers per queue.</p>
+<p>Delay queues possible-- consumers only see the messages appear a given time after they are added to the queue.</p>
+<p>Either IAM or SQS policies can be used to control access to queues.</p>
+<p>SQS message lifecycle:</p>
+<ol>
+<li>Sender puts a message on the queue</li>
+<li>Consumer retrieves the message, "visibility timeout" period starts. During this time the message is invisible to other consumers.</li>
+<li>Consumer processes the message and deletes it before the "visibility timeout" expires</li>
+</ol>
+<p>Services -&gt; SQS -&gt; Create New Queue</p>
+<p>Queue Settings:</p>
+<ul>
+<li>Queue name:</li>
+<li>Default visibility timeout: 30s</li>
+<li>Message retention period: 4d</li>
+<li>Maximum message size: 256KB</li>
+<li>Delivery delay: 0s</li>
+<li>Receive message wait time: 0s</li>
+</ul>
+<p>Dead Letter Queue Settings:</p>
+<ul>
+<li>Use Redrive Policy:</li>
+<li>Dead letter queue:</li>
+<li>Maximum receives:</li>
+</ul>
+<p>Once created, we can add permissions from the SQS web GUI.</p>
+<p>We can also send a message to the queue from there. (Unusual) Normally apps would send messages to each other.</p>
+<h3 id="simple-workflow-service-overview">Simple Workflow Service Overview.<a class="headerlink" href="#simple-workflow-service-overview" title="Permanent link">&para;</a></h3>
+<p>Development tool for making distributed web apps. The web app components could be running on different EC2 instances.</p>
+<p>A process for running coordinated tasks on multiple servers is needed. SWF handles scheduling the tasks, their dependencies, and managing concurrent task execution.</p>
+<p>Workflows contain activities. Activities perform tasks. Tasks can either be synchronous (sequential) or asynchronous (parallel) with other tasks (?). He says "job" but that's not defined yet.</p>
+<p>An activity worker takes a task and performs that activity. These are built by developers.</p>
+<p>Decider: coordinates work within a task. This logic is defined by developers.</p>
+<p>The task logic (code) can be written in any langage. It doesn't need to run within AWS.</p>
+<p>Workflow execution:</p>
+<ol>
+<li>Create activity workers (developers)</li>
+<li>Create a decider (developers)</li>
+<li>Register the activities and workflow within SWF</li>
+<li>Start the workers and decider</li>
+<li>Start executing the whole workflow</li>
+<li>View executions in AWS console</li>
+</ol>
+<p>Workflow example: splitting, uploading, and re-combining a large media file sent to S3.</p>
+<h3 id="simple-notification-service-overview">Simple Notification Service Overview.<a class="headerlink" href="#simple-notification-service-overview" title="Permanent link">&para;</a></h3>
+<p>Send messages to "subscriber endpoints" (so far sounds suspiciously similar to Simple Queue Service.)</p>
+<p>What is a "subscriber endpoint"?</p>
+<ul>
+<li>application running somewhere else</li>
+<li>user on mobile device who has subscribed to notifications</li>
+<li>newsletter on a website</li>
+<li>etc.</li>
+</ul>
+<p>Uses a publisher (producer) - subscriber (consumer) model. (Still sounds a lot like Simple Queue Service.)</p>
+<p>Subscribers don't need to poll for messages. (OK, there's a difference!) The messages get pushed to an app that has already agreed to receive them.</p>
+<p>Possible subscriber types:</p>
+<ul>
+<li>Users (desktops, mobile devices)</li>
+<li>E-mail</li>
+<li>Amazon SQS</li>
+<li>Amazon Lambda</li>
+<li>HTTP (HTTPS) endpoint</li>
+<li>SMS (texting)</li>
+</ul>
+<p>SNS "topics" combine multiple recipients into one group and can contain multiple endpoint types.</p>
+<p>Crucial API calls:</p>
+<ol>
+<li>CreateTopic</li>
+<li>Subscribe</li>
+<li>Publish</li>
+</ol>
+<p>Mobile push can use protocols like ADM, APNS, Baidu, GCM, MPNS, or WNS. (Getting definitions for these acronyms seems difficult. APNS is probably Apple Push Notification Service, but many of the others are completely ambiguous.)</p>
+<p>Services -&gt; Mobile -&gt; SNS -&gt; Create new topic</p>
+<p>Can sbscribe programmatically or via GUI: Actions -&gt; Subscribe to topic</p>
+<p>Protocols used for that method:</p>
+<ul>
+<li>HTTP</li>
+<li>HTTPS</li>
+<li>Email</li>
+<li>Email-JSON</li>
+<li>Amazon SQS</li>
+<li>Application</li>
+<li>AWS Lambda</li>
+</ul>
+<p>E-mail subscription requests send the user an E-mail with a confirmation. They need to click the link (with the right Amazon cookies present) to confirm the subscription.</p>
+<p>Services -&gt; Mobile -&gt; SNS -&gt; Create platform application</p>
+<ul>
+<li>Application Name</li>
+<li>Push Notification Platform</li>
+<li>Amazon Device Messaging (ADM) (TLA revealed!)</li>
+<li>Apple production</li>
+<li>Apple development</li>
+<li>Baidu Cloud Push for Android in China</li>
+<li>Google Cloud Messaging (GCM)</li>
+<li>Microsoft MPNS for Windows Phone 7+</li>
+<li>Microsoft WNS for Windows 8+ and Windows Phone 8.1+</li>
+<li>Client ID</li>
+<li>Client secret</li>
+</ul>
+<h3 id="sending-e-mail-with-simple-e-mail-service">Sending E-mail with Simple E-mail Service.<a class="headerlink" href="#sending-e-mail-with-simple-e-mail-service" title="Permanent link">&para;</a></h3>
+<p>Outbound SMTP E-mail sending service. <strong>SPAM MACHINE!</strong></p>
+<p>Developers can build in sending E-mails using API calls.</p>
+<p>Or a mail client can use the SMTP mail relay to send directly. (Perhaps from an EC2 instance? This doesn't make a lot of sense in terms of most end users' real mail clients-- e.g. Outlook.)</p>
+<p>Another option, configure our SMTP relay to itself relay messages via Amazon Simple E-mail Service. That seems especially odd since we are likely to have a mix of non-AWS-sourced E-mails mixed in there.</p>
+<p>Services -&gt; Application Services -&gt; SES</p>
+<p>SMTP settings shows server name. SMTP requires a username/password to authenticate before a message will be accepted. These SMTP users are managed through (big surprise!) IAM. Note that the SMTP username is not the same as the IAM user name (since the SMTP usernames probably need to be globally unique.)</p>
+<p>The user gets created with a policy called <code>AmazonSESSendingAccess</code></p>
+<p>In order to send E-mails either our <a href="https://docs.aws.amazon.com/ses/latest/dg/Welcome.html">account needs to undergo some additional scrutiny to get out of "sandbox" SMTP access</a> or E-mail addresses must be individually verified to be willing to receive E-mails from this AWS account.</p>
+<p>Can also send SES messages via AMS CLI using JSON.</p>
+<p>Example <code>destination.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;ToAddresses&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">],</span>
+  <span class="nt">&quot;CcAddresses&quot;</span><span class="p">:</span>  <span class="p">[],</span>
+  <span class="nt">&quot;BccAddresses&quot;</span><span class="p">:</span>  <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Example <code>message.json</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;Subject&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;Data&quot;</span><span class="p">:</span> <span class="nt">&quot;Subject of Email Goes Here&quot;</span>
+    <span class="nt">&quot;Charset&quot;</span><span class="p">:</span> <span class="s2">&quot;UTF-8&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;Body&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;Text&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;Data&quot;</span><span class="p">:</span> <span class="nt">&quot;Body of message goes here.&quot;</span>
+      <span class="nt">&quot;Charset&quot;</span><span class="p">:</span> <span class="s2">&quot;UTF-8&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>aws ses send-mail --from &lt;from address&gt; --destination file://destination.json --message file://message.json</code></p>
+<p>Output will be message ID.</p>
+<h3 id="transcoding-media-with-elastic-transcoder">Transcoding Media with Elastic Transcoder.<a class="headerlink" href="#transcoding-media-with-elastic-transcoder" title="Permanent link">&para;</a></h3>
+<p>Convert media files from one format to another to allow for a wider playback audience (at the expense of image quality.)</p>
+<p>Services -&gt; Application Services -&gt; Elastic Transcoder -&gt; Create a new Pipeline</p>
+<p>The pipeline defines the transcoding jobs that we want to execute.</p>
+<p>Configuration options:</p>
+<ul>
+<li>Pipeline name</li>
+<li>Input bucket: (existing S3 bucket for uploaded media)</li>
+<li>IAM role: auto-created on first pipeline</li>
+<li>S3 Bucket: (for output)</li>
+<li>Storage class: standard or reduced redundancy (the latter might be appropriate since we can always re-transcode the original media.)</li>
+<li>S3 Bucket: (for thumbnails)</li>
+<li>Notifications (optional) (via SNS Topic)</li>
+<li>On progressing</li>
+<li>On Warning</li>
+<li>On Completion</li>
+<li>On Error</li>
+<li>Encryption (optional)</li>
+</ul>
+<p>"Presets" define various options for video output. For example:</p>
+<ul>
+<li>Generic 1080p (mp4)</li>
+<li>Generic 720p (mp4)</li>
+<li>iPhone4S (mp4)</li>
+<li>iPod Touch (mp4)</li>
+<li>Apple TV 2G (mp4)</li>
+</ul>
+<p>"Jobs" shows existing jobs or allows us to create a new job.</p>
+<p>Create new job parameters/options:</p>
+<ul>
+<li>Pipeline</li>
+<li>Input Key (S3 Keys): media file already uploaded. ("Key" is an odd description for a media file...)</li>
+<li>Output Key Prefix: start of the name of transcoded files (optional)</li>
+<li>Decryption Parameters</li>
+<li>Output Preset</li>
+<li>Output Key: Output file name</li>
+<li>Encryption Parameters</li>
+<li>Available settings</li>
+<li>Clip</li>
+<li>Captions</li>
+<li>Additional output details (optional)</li>
+<li>Watermarks (optional)</li>
+<li>Additional Outputs (e.g. another preset)</li>
+<li>Override Detected Input Parameters (e.g. force interpretation as a specific frame rate, etc.)</li>
+</ul>
+<p>Initial status "progressing"</p>
+<h3 id="cloudsearch-overview">CloudSearch Overview.<a class="headerlink" href="#cloudsearch-overview" title="Permanent link">&para;</a></h3>
+<p>Search capability can be added to data collections. For example web pages, documents, blogs, etc.</p>
+<p>Can self-provision storage to hold indexes and self-scale as the search volume changes.</p>
+<p>Can be unstructured data, semi-structured, or structured. (Not sure how these are defined.)</p>
+<p>Each searchable item is described as a document and gets a unique ID. Documents uploaded as JSON or XML but the content can be PDF, MS-Office docs, CSV, HTML, etc. which gets converted to JSON or XML for indexing.</p>
+<p>Deleting content might leave its search index behind for a short time.</p>
+<p>Search indexes defined by fields within the uploaded documents. Each document field that will be indexed needs an index field. Fields have a type, category, and possibly other attributes. Data in the documents to be indexed must match the indexing configuration.</p>
+<p>"Facets" are used to refine and filter searches on other index fields. (like date info?) They give an example of letting a user search within a specific region.</p>
+<p>I don't really follow what "Hits that share the same value in a facet" means... What's a "value in a facet"?</p>
+<p>Creating a CloudSearch:</p>
+<ol>
+<li>Create a CloudSearch domain</li>
+<li>Upload your data</li>
+<li>Index the uploaded data</li>
+<li>Search the index</li>
+</ol>
+<p>Search requests are HTTP GETs. Pre-processed to do the following:</p>
+<ol>
+<li>Convert to lowercase</li>
+<li>Split on whitespace and punctuation</li>
+<li>Remove stopwords ("the" "is" "at")</li>
+</ol>
+<p>(All of these can make searching on certain terms very difficult or impossible.)</p>
+<p>Can specify options for facet information or ranking weights.</p>
+<p>Search results returned as JSON or XML.</p>
+<p>Creation proicess:</p>
+<ol>
+<li>Name your domain</li>
+<li>Search Domain Name</li>
+<li>Desired instance type</li>
+<li>Desired replication count</li>
+<li>Configure index</li>
+<li>Analyze sample files from local machine</li>
+<li>Analyze sample objects from S3</li>
+<li>Analyze sample objects from DynamoDB</li>
+<li>Predefined config</li>
+<li>Manual config</li>
+<li>Review index configuration</li>
+<li>Setup access policies</li>
+</ol>
+<h2 id="deployment-and-management">Deployment and Management<a class="headerlink" href="#deployment-and-management" title="Permanent link">&para;</a></h2>
+<h3 id="monitoring-aws-with-cloudwatch">Monitoring AWS with CloudWatch.<a class="headerlink" href="#monitoring-aws-with-cloudwatch" title="Permanent link">&para;</a></h3>
+<p>Performance monitoring for EC2, storage volumes, load balancers, databases, etc.</p>
+<p>Services -&gt; Administration &amp; Security -&gt; CloudWatch</p>
+<p>Alerts triggered when pre-defined thresholds are crossed. Can send a message to a given SNS topic. That can, in turn, send E-mails to appropriate recipients.</p>
+<p>Metric categories:</p>
+<ul>
+<li>CloudSearch</li>
+<li>DynamoDB</li>
+<li>EBS</li>
+<li>EC2</li>
+<li>ELB</li>
+<li>ElastiCache</li>
+<li>RDS</li>
+<li>S3</li>
+<li>SNS</li>
+<li>SQS</li>
+</ul>
+<p>Some metrics are per-instance, others per-group, as appropriate for the metric.</p>
+<p>Graphs can show a metric over time. Time spans can include:</p>
+<ul>
+<li>1 min</li>
+<li>5 min</li>
+<li>15 min</li>
+<li>1 hour</li>
+<li>6 hours</li>
+<li>1 day</li>
+</ul>
+<p>Can show average, minimum, maximum, sum, or "data samples" (number of samples?)</p>
+<p>Alarms on a given instance + metric can be created with "Create Alarm" button on the same graph screen.</p>
+<p>The create alarm process is two steps:</p>
+<ol>
+<li>Select Metric (already selected if we were viewing it)</li>
+<li>Define Alarm</li>
+<li>Name:</li>
+<li>Description:</li>
+<li>Whenever <code>&lt;metric&gt;</code> is <code>&gt;=</code> <code>&lt;value&gt;</code> for <code>N</code> consecutive periods</li>
+<li>Actions: based on <code>state</code> send notification to <code>&lt;SNS topic&gt;</code> (can also add auto-scaling actions or EC2 actions)</li>
+</ol>
+<h3 id="creating-a-simple-application-stack-with-opsworks">Creating a Simple Application Stack with OpsWorks.<a class="headerlink" href="#creating-a-simple-application-stack-with-opsworks" title="Permanent link">&para;</a></h3>
+<p>OpsWorks is an application management platform. Manages an application lifecycle to automate things like deployment and scaling.</p>
+<p>Services -&gt; Deployment &amp; Management -&gt; OpsWorks</p>
+<p>We can create the stack from nothing or by adding existing EC2 instances.</p>
+<p>"Add your first stack" -- create from nothing.</p>
+<p>Options:</p>
+<ul>
+<li>Name</li>
+<li>Region</li>
+<li>VPC</li>
+<li>Default subnet</li>
+<li>Default operating system</li>
+<li>Default root device</li>
+<li>EBS backed (persistent)</li>
+<li>Instance store (ephemeral)</li>
+<li>IAM role: assists with interdependencies betweeen AWS resources</li>
+<li>Default SSH key</li>
+<li>Default IAM instance profile</li>
+<li>Hostname theme</li>
+<li>Stack color</li>
+<li>Advanced</li>
+<li>Chef version</li>
+<li>Custom chef cookbooks (<a href="https://github.com/awslabs/opsworks-example-cookbooks">awslabs has a bunch of them on GitHub</a>)</li>
+<li>OpsWorks Agent version</li>
+<li>Custom JSON: passed to Chef recipes</li>
+<li>Use OpsWorks security groups</li>
+</ul>
+<p>Once the stack is made we can add "Layers" which are sets of similar EC2 instances. Layer types include things like HAproxy, static web server, Rails App server, PHP app server, Node.js app server, Java app server, AWS Flow (Ruby), MySQL, memcached, ganglia, ECS Cluster, or "Custom."</p>
+<p>Layers can get Chef recipes assigned. Some of them are included like <code>ssh_host_key</code>, <code>ssh_users</code>, or <code>php::configure</code>.</p>
+<h3 id="elastic-beanstalk-overview">Elastic Beanstalk Overview<a class="headerlink" href="#elastic-beanstalk-overview" title="Permanent link">&para;</a></h3>
+<p>Automates provisioning of resources for apps running on AWS.</p>
+<p>Workflow:</p>
+<ol>
+<li>Create application</li>
+<li>Upload version</li>
+<li>Launch environment</li>
+<li>Manage environment</li>
+<li>Update version: go to "Upload version" and repeat as needed with future versions.</li>
+</ol>
+<p>The application can use whatever language we want: .NET, python, Java, Ruby, etc. Can be deployed straight from GitHub.</p>
+<p>"Manage environment" can also mean setting up appropriate capacity, load balancing, CloudWatch.</p>
+<p>A BeanStalk application is a collection of Beanstalk components. For example, a particular application version (collection of code) along with an environment (a deployed collection of other code, dependencies?)</p>
+<p>The Environment Configuration are the parameters for deployed code that define the behavior of the underlying AWS resources.</p>
+<p>The Configuration Template starts creating the environment.</p>
+<p>An application version is the code itself sitting in S3, ready to be used.</p>
+<h3 id="creating-an-audit-trail-with-cloudtrail">Creating an Audit Trail with CloudTrail.<a class="headerlink" href="#creating-an-audit-trail-with-cloudtrail" title="Permanent link">&para;</a></h3>
+<p>Logs API calls realted to resources. Could be normal internal API calls or could be external API calls due to development activities, etc. These may need to be logged and saved due to regulatory requirements also.</p>
+<p>CloudTrail logs go into an S3 bucket.</p>
+<p>Services -&gt; Administraton &amp; Security -&gt; CloudTrail</p>
+<p>Config options:</p>
+<ul>
+<li>Create new S3 bucket (will auto-set permissions on S3 to allow logs)</li>
+<li>S3 bucket</li>
+<li>Advanced</li>
+<li>log file prefix</li>
+<li>SNS notify for every log delivery</li>
+<li>SNS topic</li>
+<li>CloudWatch Logs</li>
+</ul>
+<p>Can filter log display from the view history screen (web GUI) based on time range, resource name, etc.</p>
+<h3 id="creating-a-data-pipeline">Creating a Data Pipeline.<a class="headerlink" href="#creating-a-data-pipeline" title="Permanent link">&para;</a></h3>
+<p>Copies data between data stores like:</p>
+<ul>
+<li>S3</li>
+<li>DynamoDB</li>
+<li>MySQL</li>
+<li>Redshift</li>
+</ul>
+<p>Scheduled based on preconditions and run when they are met.</p>
+<p>Can be fed to Elastic MapReduce clusters for auto-scaling.</p>
+<p>IAM policies control what the pipelines can do.</p>
+<p>AWSDataPipelineRole policy.</p>
+<p>Services -&gt; Analytics -&gt; Data Pipeline -&gt; Create new pipeline</p>
+<ul>
+<li>Name</li>
+<li>Description (optional)</li>
+<li>Source</li>
+<li>Build using template (lots of options, including)<ul>
+<li>Run AWS CLI command</li>
+<li>Export DynamoDB to S3</li>
+<li>Full copy RDS MySQL table to S3</li>
+<li>Incremental copy RDS MySQL table to S3</li>
+</ul>
+</li>
+<li>Import a definition</li>
+<li>Build using Architect</li>
+<li>Schedule</li>
+<li>Run once on pipeline activation OR on a schedule</li>
+<li>Run every <code>N</code> days</li>
+<li>Starting on pipeline activation OR given date</li>
+</ul>
+<p>The parameters are appropriate for the Source type. (e.g. login and source/target details.)</p>
+<h3 id="cloudformation-overview">CloudFormation Overview.<a class="headerlink" href="#cloudformation-overview" title="Permanent link">&para;</a></h3>
+<p>Method of provisioning resources from a template via automation.</p>
+<p>Can automate provisioning of EC3, S3, ELB, etc.</p>
+<p>Services -&gt; Deployment and Management -&gt; CloudFormation</p>
+<p>Create New Stack or Create a template from your existing resources (CloudFormer)</p>
+<p>Create new stack:</p>
+<ul>
+<li>Stack</li>
+<li>Name</li>
+<li>Template</li>
+<li>Source<ul>
+<li>Select a sample template (lots of options including):</li>
+<li>LAMP stack</li>
+<li>Wordpress blog</li>
+<li>CloudFormer</li>
+<li>Windows Active Directory</li>
+<li>Upload a template to Amazon S3</li>
+<li>Specify an Amazon S3 template URL</li>
+</ul>
+</li>
+<li>Parameters:</li>
+<li>Features: Specific to your source type</li>
+<li>Instance Type</li>
+<li>KeyName (keypair)</li>
+<li>Roles</li>
+</ul>
+<p>Can also automate the process with Chef or Puppet.</p>
+<h2 id="practice-database-monitoring">Practice: Database Monitoring<a class="headerlink" href="#practice-database-monitoring" title="Permanent link">&para;</a></h2>
+<h3 id="launch-a-microsoft-sql-server-db-instance">Launch a Microsoft SQL Server DB Instance.<a class="headerlink" href="#launch-a-microsoft-sql-server-db-instance" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; Database -&gt; RDS -&gt; Create Database</p>
+<p>Microsoft SQL Server</p>
+<p>SQL Server Express Edition (keep it cheap!)</p>
+<p>Template: Free tier</p>
+<p>Name: <code>database-sql-server</code></p>
+<p>Master username: <code>admin</code> (default)</p>
+<p>DB instance: <code>db.t2.micro</code> (default)</p>
+<p>Storage type: <code>General Purpose</code> (default)</p>
+<p>Allocated storage: <code>20GB</code> (default)</p>
+<p>Connectivity:</p>
+<ul>
+<li>Virtual Private Cloud: <code>Default VPC</code> (default)</li>
+<li>Subnet group: <code>default</code> (default)</li>
+<li>Publicly accessible: <code>No</code> (default)</li>
+<li>VPC security group: <code>create new</code></li>
+<li>New VPC security group name: <code>database-sql-sg</code></li>
+<li>Availability zone: <code>No preference</code> (default)</li>
+<li>Database port: <code>1433</code> (default)</li>
+</ul>
+<p>SQL Server Windows Auth: None (default)</p>
+<p>There are no free AWS-hosted databases. Skip the practice and save it for a future lab.</p>
+<h3 id="connect-to-the-db-instance">Connect to the DB Instance<a class="headerlink" href="#connect-to-the-db-instance" title="Permanent link">&para;</a></h3>
+<p>Skipping to avoid costs.</p>
+<h3 id="monitor-the-db-instance">Monitor the DB Instance<a class="headerlink" href="#monitor-the-db-instance" title="Permanent link">&para;</a></h3>
+<p>Skipping to avoid costs.</p>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../0300_EC2_Autoscaling/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              EC2 Autoscaling
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../0500_Networking_and_Best_Practice/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Networking
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>

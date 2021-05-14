@@ -1,0 +1,1976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0300_EC2_Autoscaling/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>EC2 Autoscaling - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#autoscaling-using-ec2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EC2 Autoscaling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-tabs__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0200_EC2_Overview/" class="md-tabs__link md-tabs__link--active">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-nav__link">
+        Lab Install
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0200_EC2_Overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          EC2 Autoscaling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        EC2 Autoscaling
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aws-command-line" class="md-nav__link">
+    AWS Command Line
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Command Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-aws-cli-on-windows" class="md-nav__link">
+    Installing the AWS CLI on Windows.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-aws-cli-on-linux" class="md-nav__link">
+    Installing the AWS CLI on Linux.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-aws-cli" class="md-nav__link">
+    Configuring the AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-iam-role-for-ec2-with-aws-cli" class="md-nav__link">
+    Creating an IAM Role for EC2 with AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-an-iam-role-for-ec2-with-aws-cli" class="md-nav__link">
+    Configuring an IAM Role for EC2 with AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-instance-with-an-iam-role-using-aws-cli" class="md-nav__link">
+    Launching an Instance with an IAM Role Using AWS CLI.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boot-scripts" class="md-nav__link">
+    Boot Scripts
+  </a>
+  
+    <nav class="md-nav" aria-label="Boot Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#writing-shell-scripts" class="md-nav__link">
+    Writing Shell Scripts.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-cloud-init-directive" class="md-nav__link">
+    Configuring the cloud-init Directive.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-scaling-groups" class="md-nav__link">
+    Auto Scaling Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto Scaling Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#planning-ec2-auto-scaling" class="md-nav__link">
+    Planning EC2 Auto Scaling.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-launch-configuration" class="md-nav__link">
+    Creating a Launch Configuration.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-launch-configuration-from-an-instance" class="md-nav__link">
+    Creating a Launch Configuration from an Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-auto-scaling-group" class="md-nav__link">
+    Creating an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-auto-scaling-group-from-an-instance" class="md-nav__link">
+    Creating an Auto Scaling Group from an Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linking-an-instance-to-a-vpc" class="md-nav__link">
+    Linking an Instance to a VPC.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging-auto-scaling-groups" class="md-nav__link">
+    Tagging Auto Scaling Groups.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-auto-scaling-groups" class="md-nav__link">
+    Configuring Auto Scaling Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Auto Scaling Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-balancing-an-auto-scaling-group" class="md-nav__link">
+    Load Balancing an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-an-instance-to-an-auto-scaling-group" class="md-nav__link">
+    Attaching an Instance to an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaching-an-instance-from-an-auto-scaling-group" class="md-nav__link">
+    Detaching an Instance from an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suspending-and-resuming-an-auto-scaling-group" class="md-nav__link">
+    Suspending and Resuming an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shutting-down-an-auto-scaling-group" class="md-nav__link">
+    Shutting Down an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placement-groups" class="md-nav__link">
+    Placement Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Placement Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-placement-groups" class="md-nav__link">
+    Overview of Placement Groups.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-placement-group" class="md-nav__link">
+    Creating a Placement Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-instance-into-a-placement-group" class="md-nav__link">
+    Launching an Instance into a Placement Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-a-placement-group" class="md-nav__link">
+    Deleting a Placement Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-auto-scaling" class="md-nav__link">
+    Practice: Auto Scaling
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Auto Scaling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-lunch-configuration" class="md-nav__link">
+    Create a Lunch Configuration.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-launch-template" class="md-nav__link">
+    Create a Launch Template.
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Launch Template.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#edit-launch-template" class="md-nav__link">
+    Edit Launch Template.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-auto-scaling-group" class="md-nav__link">
+    Edit Auto Scaling Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-auto-scaling-group" class="md-nav__link">
+    Create an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attach-instances" class="md-nav__link">
+    Attach Instances.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-balance-the-auto-scaling-group" class="md-nav__link">
+    Load Balance the auto scaling group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-change-scaling-policy-to-use-elb" class="md-nav__link">
+    (Optional) Change scaling policy to use ELB.
+  </a>
+  
+    <nav class="md-nav" aria-label="(Optional) Change scaling policy to use ELB.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-group-checks" class="md-nav__link">
+    security group checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoscaling-group-checks" class="md-nav__link">
+    autoscaling group checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-load-balancing-checks" class="md-nav__link">
+    Elastic Load Balancing checks.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-check-go-to-the-elb-public-ip-and-confirm-we-see-the-apache-page" class="md-nav__link">
+    Final Check: Go to the ELB public IP and confirm we see the Apache page
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0400_Databases_and_Application_Services/" class="md-nav__link">
+        Database & Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0500_Networking_and_Best_Practice/" class="md-nav__link">
+        Networking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2000_Well_Architected_Framework/" class="md-nav__link">
+        Well Architected
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aws-command-line" class="md-nav__link">
+    AWS Command Line
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Command Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-aws-cli-on-windows" class="md-nav__link">
+    Installing the AWS CLI on Windows.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-the-aws-cli-on-linux" class="md-nav__link">
+    Installing the AWS CLI on Linux.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-aws-cli" class="md-nav__link">
+    Configuring the AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-iam-role-for-ec2-with-aws-cli" class="md-nav__link">
+    Creating an IAM Role for EC2 with AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-an-iam-role-for-ec2-with-aws-cli" class="md-nav__link">
+    Configuring an IAM Role for EC2 with AWS CLI.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-instance-with-an-iam-role-using-aws-cli" class="md-nav__link">
+    Launching an Instance with an IAM Role Using AWS CLI.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boot-scripts" class="md-nav__link">
+    Boot Scripts
+  </a>
+  
+    <nav class="md-nav" aria-label="Boot Scripts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#writing-shell-scripts" class="md-nav__link">
+    Writing Shell Scripts.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-the-cloud-init-directive" class="md-nav__link">
+    Configuring the cloud-init Directive.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auto-scaling-groups" class="md-nav__link">
+    Auto Scaling Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Auto Scaling Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#planning-ec2-auto-scaling" class="md-nav__link">
+    Planning EC2 Auto Scaling.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-launch-configuration" class="md-nav__link">
+    Creating a Launch Configuration.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-launch-configuration-from-an-instance" class="md-nav__link">
+    Creating a Launch Configuration from an Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-auto-scaling-group" class="md-nav__link">
+    Creating an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-auto-scaling-group-from-an-instance" class="md-nav__link">
+    Creating an Auto Scaling Group from an Instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linking-an-instance-to-a-vpc" class="md-nav__link">
+    Linking an Instance to a VPC.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tagging-auto-scaling-groups" class="md-nav__link">
+    Tagging Auto Scaling Groups.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-auto-scaling-groups" class="md-nav__link">
+    Configuring Auto Scaling Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring Auto Scaling Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-balancing-an-auto-scaling-group" class="md-nav__link">
+    Load Balancing an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-an-instance-to-an-auto-scaling-group" class="md-nav__link">
+    Attaching an Instance to an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detaching-an-instance-from-an-auto-scaling-group" class="md-nav__link">
+    Detaching an Instance from an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#suspending-and-resuming-an-auto-scaling-group" class="md-nav__link">
+    Suspending and Resuming an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shutting-down-an-auto-scaling-group" class="md-nav__link">
+    Shutting Down an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placement-groups" class="md-nav__link">
+    Placement Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Placement Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview-of-placement-groups" class="md-nav__link">
+    Overview of Placement Groups.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-placement-group" class="md-nav__link">
+    Creating a Placement Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching-an-instance-into-a-placement-group" class="md-nav__link">
+    Launching an Instance into a Placement Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleting-a-placement-group" class="md-nav__link">
+    Deleting a Placement Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-auto-scaling" class="md-nav__link">
+    Practice: Auto Scaling
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Auto Scaling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-lunch-configuration" class="md-nav__link">
+    Create a Lunch Configuration.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-launch-template" class="md-nav__link">
+    Create a Launch Template.
+  </a>
+  
+    <nav class="md-nav" aria-label="Create a Launch Template.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#edit-launch-template" class="md-nav__link">
+    Edit Launch Template.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-auto-scaling-group" class="md-nav__link">
+    Edit Auto Scaling Group.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-auto-scaling-group" class="md-nav__link">
+    Create an Auto Scaling Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attach-instances" class="md-nav__link">
+    Attach Instances.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-balance-the-auto-scaling-group" class="md-nav__link">
+    Load Balance the auto scaling group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-change-scaling-policy-to-use-elb" class="md-nav__link">
+    (Optional) Change scaling policy to use ELB.
+  </a>
+  
+    <nav class="md-nav" aria-label="(Optional) Change scaling policy to use ELB.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#security-group-checks" class="md-nav__link">
+    security group checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoscaling-group-checks" class="md-nav__link">
+    autoscaling group checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic-load-balancing-checks" class="md-nav__link">
+    Elastic Load Balancing checks.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-check-go-to-the-elb-public-ip-and-confirm-we-see-the-apache-page" class="md-nav__link">
+    Final Check: Go to the ELB public IP and confirm we see the Apache page
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="autoscaling-using-ec2"><strong>Autoscaling using EC2</strong><a class="headerlink" href="#autoscaling-using-ec2" title="Permanent link">&para;</a></h1>
+<p>Before looking at the overview of Autoscalling, lets configure the ASW-CLI to deploy our resources without accessing the console. </p>
+<h2 id="aws-command-line">AWS Command Line<a class="headerlink" href="#aws-command-line" title="Permanent link">&para;</a></h2>
+<h3 id="installing-the-aws-cli-on-windows">Installing the AWS CLI on Windows.<a class="headerlink" href="#installing-the-aws-cli-on-windows" title="Permanent link">&para;</a></h3>
+<p>Click <a href="https://awscli.amazonaws.com/AWSCLIV2.msi">here</a> to download the latest AWSCLIV2.msi</p>
+<h3 id="installing-the-aws-cli-on-linux">Installing the AWS CLI on Linux.<a class="headerlink" href="#installing-the-aws-cli-on-linux" title="Permanent link">&para;</a></h3>
+<p>Amazon Linux AMI includes Amazon AWS CLI. Handy!</p>
+<p>Linux install doesn't use OS packaging.</p>
+<p>Also a "pip" based option which might be slightly better than a script-based install.</p>
+<p>AWS CLI needs Java 1.7.0 or later.</p>
+<p>Possibly helpful env vars:</p>
+<ul>
+<li><code>EC2_BASE</code>: install dir for the utilities</li>
+<li><code>EC2_HOME</code>: <code>$EC2_BASE/tools</code> (parent of the <code>bin</code> directory)</li>
+<li><code>AWS_ACCESS_KEY</code>: key ID used for CLI access</li>
+<li><code>AWS_SECRET_KEY</code>: secret key used for CLI access (security risk having it as ENV)</li>
+<li><code>EC2_URL</code>: includes region, e.g. <code>https://ec2.us-west-2.amazonaws.com</code></li>
+<li><code>PATH</code>: <code>$PATH:$EC2_HOME/bin</code></li>
+<li><code>JAVA_HOME</code>: path to Java install location</li>
+</ul>
+<p>Verify setup via <code>ec2-describe-regions</code> or <code>ec2-describe-instances</code></p>
+<h3 id="configuring-the-aws-cli">Configuring the AWS CLI.<a class="headerlink" href="#configuring-the-aws-cli" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>aws configure
+</code></pre></div>
+It will ask for below information:</p>
+<ul>
+<li><code>AWS Access Key ID [****************EAFY]</code>:</li>
+<li><code>AWS Secret Access Key [****************5m37]</code>:</li>
+<li><code>Default region name [US West (Oregon)]: us-west-2</code>:</li>
+<li><code>Default output format [None]: json</code></li>
+</ul>
+<p>Use your own Key ID and Secret Access Key, preferably for a non-root account.</p>
+<p><code>aws ec2 help</code>: more info about EC2 commands</p>
+<p><code>aws ec2 describe-instances</code>: lots of instance details</p>
+<h3 id="creating-an-iam-role-for-ec2-with-aws-cli">Creating an IAM Role for EC2 with AWS CLI.<a class="headerlink" href="#creating-an-iam-role-for-ec2-with-aws-cli" title="Permanent link">&para;</a></h3>
+<p>Create a JSON file describing the role, a trust policy file.</p>
+<p><code>aws iam create-role --role-name &lt;name&gt; --assume-role-policy-document file://filename.json</code></p>
+<p>This might also be helpful for creating policies (mentioned in another course):</p>
+<div class="highlight"><pre><span></span><code>&quot;--generate-cli-skeleton&quot; (string) Prints a JSON skeleton to standard
+output without sending an API request. If provided with no value or
+the value &quot;input&quot;, prints a sample input JSON that can be used as an
+argument for &quot;--cli-input-json&quot;. If provided with the value &quot;output&quot;,
+it validates the command inputs and returns a sample output JSON for
+that command.
+</code></pre></div>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>$ aws iam create-role --generate-cli-skeleton
+<span class="o">{</span>
+    <span class="s2">&quot;Path&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;RoleName&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;AssumeRolePolicyDocument&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;Description&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;MaxSessionDuration&quot;</span>: <span class="m">0</span>,
+    <span class="s2">&quot;PermissionsBoundary&quot;</span>: <span class="s2">&quot;&quot;</span>,
+    <span class="s2">&quot;Tags&quot;</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">&quot;Key&quot;</span>: <span class="s2">&quot;&quot;</span>,
+            <span class="s2">&quot;Value&quot;</span>: <span class="s2">&quot;&quot;</span>
+        <span class="o">}</span>
+    <span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>
+<p><code>aws iam list-roles</code>: shows all our roles</p>
+<h3 id="configuring-an-iam-role-for-ec2-with-aws-cli">Configuring an IAM Role for EC2 with AWS CLI.<a class="headerlink" href="#configuring-an-iam-role-for-ec2-with-aws-cli" title="Permanent link">&para;</a></h3>
+<p>Show permission policies assigned to a role with
+<code>aws iam list-attached-role-policies --role-name &lt;name&gt;</code></p>
+<p>Example <code>aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess --role-name WebApp</code></p>
+<h3 id="launching-an-instance-with-an-iam-role-using-aws-cli">Launching an Instance with an IAM Role Using AWS CLI.<a class="headerlink" href="#launching-an-instance-with-an-iam-role-using-aws-cli" title="Permanent link">&para;</a></h3>
+<p>Instance Profile: group for storing roles</p>
+<p>Example: <code>aws iam add-role-to-instance-profile --instance-profile-name s3readonly --role-name WebApp</code></p>
+<p>In the GUI on step 3 of configuring an instance, there's the option for "IAM role" to use.</p>
+<p><code>aws ec2 run-instances --image-id ami-&lt;stuff&gt; --count 1 --key-name &lt;key pair name&gt; --instance-type t2.micro --iam-instance-profile Arn=arn:aws:iam:&lt;account id&gt;:instance-profile/&lt;instance profile name&gt;</code></p>
+<p>The permissions in the policy will be applied to software running within this instance, for example the <code>aws</code> CLI.</p>
+<p>Above CLI created a nameless instance. Correct that with:</p>
+<p><code>aws ec2 create-tags --resources &lt;ID&gt; --tags Key=Name,Value=&lt;instance name&gt;</code></p>
+<h2 id="boot-scripts">Boot Scripts<a class="headerlink" href="#boot-scripts" title="Permanent link">&para;</a></h2>
+<h3 id="writing-shell-scripts">Writing Shell Scripts.<a class="headerlink" href="#writing-shell-scripts" title="Permanent link">&para;</a></h3>
+<p>When creating instance:</p>
+<p>Configure Instance -&gt; Advanced Details -&gt; User Data</p>
+<p>Add bash commands to run including shebang line. (Terrible example of allow world-write to a directory in his example.)</p>
+<p>(Don't need sudo to read /etc/passwd.)</p>
+<h3 id="configuring-the-cloud-init-directive">Configuring the <code>cloud-init</code> Directive.<a class="headerlink" href="#configuring-the-cloud-init-directive" title="Permanent link">&para;</a></h3>
+<p>Configure Instance -&gt; Advanced Details -&gt; User Data</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#cloud-config</span>
+<span class="nt">repo_update</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">repo_upgrade</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">all</span>
+
+<span class="nt">packages</span><span class="p">:</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">httpd</span>
+<span class="nt">runcmd</span><span class="p">:</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">chkconfig httpd on</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">service httpd start</span>
+</code></pre></div>
+<p>Hope that RHEL7 server isn't using systemd... oh, wait... <strong>it does!</strong></p>
+<p>Should instead be:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">runcmd</span><span class="p">:</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl enable httpd</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl start httpd</span>
+</code></pre></div>
+<p>Or:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">runcmd</span><span class="p">:</span>
+ <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">systemctl enable --now httpd</span>
+</code></pre></div>
+<h2 id="auto-scaling-groups">Auto Scaling Groups<a class="headerlink" href="#auto-scaling-groups" title="Permanent link">&para;</a></h2>
+<h3 id="planning-ec2-auto-scaling">Planning EC2 Auto Scaling.<a class="headerlink" href="#planning-ec2-auto-scaling" title="Permanent link">&para;</a></h3>
+<p>Launch Configuration: configuration of the instances used for scaling up</p>
+<p>Scaling plans: defines when to scale and how to scale</p>
+<p>Launch config set up when the group is initially created. Describes how the auto-added instances will be configured.</p>
+<p>Only one launch configuration per auto scaling group. Launch configuration cannot be changed. (Destroy and re-create the scaling group instead?) Looks like a new Launch Configuration would be created and the new Configuration assigned to the Auto Scaling Group.</p>
+<p>Launch config contains:</p>
+<ul>
+<li>AMI to use</li>
+<li>Instance type</li>
+<li>Other instance config items to use when new instances are created</li>
+</ul>
+<p>Scaling plan can do things like:</p>
+<ul>
+<li>Maintain a given number of instances</li>
+<li>Re-create instances to replace unhealthy ones</li>
+<li>Manual or automatic creation</li>
+<li>Schedule-based scaling</li>
+<li>Demand-based scaling (E.g. instance CPU usage.)</li>
+</ul>
+<h3 id="creating-a-launch-configuration">Creating a Launch Configuration.<a class="headerlink" href="#creating-a-launch-configuration" title="Permanent link">&para;</a></h3>
+<p>Can create a Launch Configuration from an existing instance using EC2 -&gt; Instances -&gt; Actions -&gt; Attach to Auto Scaling Group</p>
+<p>EC2 -&gt; Auto Scaling -&gt; Launch Configurations -&gt; Create Auto Scaling Group first screen is "Create a new launch configuration" vs. "Create an Auto Scaling group from an existing launch configuration"</p>
+<h3 id="creating-a-launch-configuration-from-an-instance">Creating a Launch Configuration from an Instance.<a class="headerlink" href="#creating-a-launch-configuration-from-an-instance" title="Permanent link">&para;</a></h3>
+<p>EC2 -&gt; Instances -&gt; Actions -&gt; Attach to Auto Scaling Group</p>
+<p>Prompted to create a new Auto Scaling group or change the Launch Configuration for an existing Auto Scaling group. (I bet the latter would make a heck of a mess if done unexpectedly.)</p>
+<p>EC2 -&gt; Auto Scaling -&gt; Launch Configurations shows the config copied from the instance we used above.</p>
+<p>Also have a "Copy Launch Configuration" button to create yet another launch configuration based on this one which was based on an instance.</p>
+<h3 id="creating-an-auto-scaling-group">Creating an Auto Scaling Group.<a class="headerlink" href="#creating-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Groups of healthy servers that serve up identical content.</p>
+<p>EC2 -&gt; Auto Scaling -&gt; Auto Scaling Groups -&gt; "Create Auto Scaling Group"</p>
+<p>Steps to create a Launch Configuration:</p>
+<ol>
+<li>Choose AMI</li>
+<li>Choose Instance Type</li>
+<li>Configure details</li>
+<li>Add Storage</li>
+<li>Configure Security Group</li>
+<li>Review</li>
+</ol>
+<p>Steps to create an Auto Scaling Group:</p>
+<ol>
+<li>Configure Auto Scaling group details</li>
+<li>Configure scaling policies</li>
+<li>Configure Notifications</li>
+<li>Configure Tags</li>
+</ol>
+<p>Group Details include</p>
+<ul>
+<li>Name</li>
+<li>Initial group size: (number of instances)</li>
+<li>Network to use</li>
+<li>Subnet(s) to use</li>
+<li>Advanced Details: Load Balancing -&gt; use an Elastic Load Balancer + health check details</li>
+</ul>
+<p>Scaling policies: either keep the group at its initial size or use scaling policies to adjust the capacity</p>
+<ul>
+<li>Scale between <code>initial size</code> and <code>max size</code> instances</li>
+<li>Increase group size:</li>
+<li>Name</li>
+<li>Execute policy when: (alarm definition)</li>
+<li>Take the action: Add (or Set to) <code>N</code> instances</li>
+<li>Decrease group size:</li>
+<li>Name</li>
+<li>Execute policy when: (alarm definition)</li>
+<li>Take the action: Remove <code>N</code> instances</li>
+</ul>
+<p>Putting the instances on a schedule is done using the AWS CLI.</p>
+<h3 id="creating-an-auto-scaling-group-from-an-instance">Creating an Auto Scaling Group from an Instance.<a class="headerlink" href="#creating-an-auto-scaling-group-from-an-instance" title="Permanent link">&para;</a></h3>
+<p>EC2 -&gt; Instances -&gt; Actions -&gt; Attach to Auto Scaling Group</p>
+<p>New or existing Auto Scaling group.</p>
+<p>Instance cannot be part of another Auto Scaling group. Must be in the same Availability Zone as the Auto Scaling group. he AMI used to launch this instance must still be available.</p>
+<p>Scaling Policy created from new, including alarm creation.</p>
+<h3 id="linking-an-instance-to-a-vpc">Linking an Instance to a VPC.<a class="headerlink" href="#linking-an-instance-to-a-vpc" title="Permanent link">&para;</a></h3>
+<p>EC2 -&gt; Launch Instance</p>
+<p>On step 3 (Instance Details) we can choose a VPC to contain the Instance.</p>
+<p>VPC defined when instance is launched, not editable. Can create an AMI then launch that AMI into a new VPC.</p>
+<h3 id="tagging-auto-scaling-groups">Tagging Auto Scaling Groups.<a class="headerlink" href="#tagging-auto-scaling-groups" title="Permanent link">&para;</a></h3>
+<p>Auto Scaling group tags can be auto-added to the new instances created from scaling actions.</p>
+<p><code>aws autoscaling create-or-update-tags --tags</code> via CLI.</p>
+<p><code>aws autoscaling describe-tags</code></p>
+<p>Up to 10 tags can be added per Auto Scaling group.</p>
+<h2 id="configuring-auto-scaling-groups">Configuring Auto Scaling Groups<a class="headerlink" href="#configuring-auto-scaling-groups" title="Permanent link">&para;</a></h2>
+<h3 id="load-balancing-an-auto-scaling-group">Load Balancing an Auto Scaling Group.<a class="headerlink" href="#load-balancing-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Having a method to spread load across a group that varies in size makes sense-- that's how the extra capacity gets used.</p>
+<p>Want to be sure we're using a Launch Configuration using an AMI with our website content already included.</p>
+<p>Health Check type can be EC2 or ELB.</p>
+<p>"OutOfService" could mean the servers are broken or it might just be that the checks haven't completed yet.</p>
+<h3 id="attaching-an-instance-to-an-auto-scaling-group">Attaching an Instance to an Auto Scaling Group.<a class="headerlink" href="#attaching-an-instance-to-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Can't attach more than the max instance to an Auto Scaling Group.</p>
+<p>EC2 -&gt; Instances -&gt; Actions -&gt; Instance Settings -&gt; Attach to Auto Scaling Group</p>
+<h3 id="detaching-an-instance-from-an-auto-scaling-group">Detaching an Instance from an Auto Scaling Group.<a class="headerlink" href="#detaching-an-instance-from-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>EC2 -&gt; Instances -&gt; Actions -&gt; MISSING</p>
+<p>EC2 -&gt; Auto Scaling -&gt; Instances -&gt; Checkbox -&gt; Lower Actions -&gt; Detach</p>
+<h3 id="suspending-and-resuming-an-auto-scaling-group">Suspending and Resuming an Auto Scaling Group.<a class="headerlink" href="#suspending-and-resuming-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>The instances stay running, but the automated actions like launching new instances, terminating old instances, and performing health checks will not take place while suspended.</p>
+<p>No web GUI method to do this-- CLI only.</p>
+<p><code>aws autoscaling suspend-process --auto-scaling-group-name</code></p>
+<p><code>aws autoscaling resume-process --auto-scaling-group-name</code></p>
+<h3 id="shutting-down-an-auto-scaling-group">Shutting Down an Auto Scaling Group.<a class="headerlink" href="#shutting-down-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Shut down = delete. Permanent.</p>
+<p>EC2 -&gt; Auto Scaling -&gt; Actions -&gt; Delete</p>
+<p>Launch Configurations remain behind. Load Balancer also not deleted. <strong>Instances will be terminated (deleted) when the group is deleted</strong></p>
+<h2 id="placement-groups">Placement Groups<a class="headerlink" href="#placement-groups" title="Permanent link">&para;</a></h2>
+<h3 id="overview-of-placement-groups">Overview of Placement Groups.<a class="headerlink" href="#overview-of-placement-groups" title="Permanent link">&para;</a></h3>
+<p>Group of instances within a single Availability Zone.</p>
+<p>Enable 10Gig low-latency network connectivity between specialized "enhanced networking" instances. The instance OS must also support this type of "enhanced networking."</p>
+<p>Placement groups cannot be merged later on.</p>
+<p>Placement group created first. Then instances are launched within the placement group. Use the same instance type within the group. Existing instances cannot be moved to a placement group. (But an AMI could be created from an existing instance and that AMI used to launch new instances within the group.)</p>
+<p>Instance types allowed in a placement group:</p>
+<ul>
+<li>General Purpose</li>
+<li>m4.large through m4.10xlarge</li>
+<li>Compute Optimized</li>
+<li>c4.large through c4.8xlarge</li>
+<li>c3.large through c3.8xlarge</li>
+<li>cc2.8xlarge</li>
+<li>Memory Optimized</li>
+<li>cr1.8xlarge</li>
+<li>r3.large - r3.8xlarge</li>
+<li>Storage Optimized</li>
+<li>d2.large - d2.8xlarge</li>
+<li>hi1.4xlarge</li>
+<li>hs1.4xlarge</li>
+<li>i2.xlarge - i2.8xlarge</li>
+<li>GPU Optimizaed</li>
+<li>cg1.4xlarge</li>
+<li>g2.2xlarge - g2.8xlarge</li>
+</ul>
+<h3 id="creating-a-placement-group">Creating a Placement Group.<a class="headerlink" href="#creating-a-placement-group" title="Permanent link">&para;</a></h3>
+<p>EC2 -&gt; Network &amp; Security -&gt; Placement Groups</p>
+<p>Only parameter: account-wide unique name for the Placement Group</p>
+<p>Strategy: "cluster" (what does that mean?)</p>
+<p>Choosing an instance type during creation that can't go into the placement group means the "Placement Group" option in the "Configure Instance" step won't appear.</p>
+<h3 id="launching-an-instance-into-a-placement-group">Launching an Instance into a Placement Group.<a class="headerlink" href="#launching-an-instance-into-a-placement-group" title="Permanent link">&para;</a></h3>
+<p>(If a "moderate" network performance instance like c4.large is put in a placement group does that performance change?)</p>
+<p>Provided the right instance type is chosen we have the option to put it into a placement group during the "Configure Instance" step.</p>
+<h3 id="deleting-a-placement-group">Deleting a Placement Group.<a class="headerlink" href="#deleting-a-placement-group" title="Permanent link">&para;</a></h3>
+<p>Can't delete a placement group that contains instances.</p>
+<p>Actions -&gt; instance state -&gt; terminate</p>
+<p>Placement Groups -&gt; Delete Placement Group</p>
+<h2 id="practice-auto-scaling">Practice: Auto Scaling<a class="headerlink" href="#practice-auto-scaling" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-lunch-configuration">Create a Lunch Configuration.<a class="headerlink" href="#create-a-lunch-configuration" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Auto Scaling -&gt; Launch Configurations -&gt; Create launch configuration</p>
+<p>Steps:</p>
+<ol>
+<li>Choose AMI</li>
+</ol>
+<p>Using "Amazon Linux 2 AMI" (ami-0cb72367e98845d43)</p>
+<ol>
+<li>Choose Instance Type</li>
+</ol>
+<p>t2.micro (keep it free!)</p>
+<ol>
+<li>Configure details</li>
+</ol>
+<p>name: <code>ec2-autoscaling-launch-config</code>
+   * (others left at defaults)</p>
+<ol>
+<li>Add Storage</li>
+</ol>
+<p>Using <code>snap-05f1f2daed90efa18</code> by default, presumably part of the Amazon AMI. Leave default, including "delete on termination" since auto-created and auto-terminated instances are treated as disposable.</p>
+<ol>
+<li>
+<p>Configure Security Group</p>
+</li>
+<li>
+<p>Assign a security group: Create a new security group</p>
+</li>
+<li>Security group name: <code>ec2-autoscaling-sg</code></li>
+<li>Description: <code>For training autoscaling exercise</code></li>
+<li>Type: SSH</li>
+<li>
+<p>Source: My IP</p>
+</li>
+<li>
+<p>Review</p>
+</li>
+<li>
+<p>Create a new key pair</p>
+</li>
+<li>Key pair name <code>ec2-autoscaling-keypair</code></li>
+<li>Use PuTTYgen to convert to OpenSSH format with passphrase</li>
+<li>Add key to "pageant" so you can stop typing the passphrase all the time</li>
+</ol>
+<p>NOTE: It looks like Amazon wants us to use
+<a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html">Launch Templates</a> instead.</p>
+<div class="highlight"><pre><span></span><code>Defining a launch template instead of a launch configuration allows you to have multiple versions of a template. With versioning, you can create a subset of the full set of parameters and then reuse it to create other templates or template versions. For example, you can create a default template that defines common configuration parameters such as tags or network configurations, and allow the other parameters to be specified as part of another version of the same template.
+
+We recommend that you use launch templates instead of launch configurations to ensure that you can use the latest features of Amazon EC2, such as T2 Unlimited instances.
+</code></pre></div>
+<h3 id="create-a-launch-template">Create a Launch Template.<a class="headerlink" href="#create-a-launch-template" title="Permanent link">&para;</a></h3>
+<p>Beforehand:</p>
+<ol>
+<li>Create Security Groups</li>
+<li><code>ec2-autoscaling-web-sg</code> for HTTP/HTTPS only from anywhere</li>
+<li><code>ec2-autoscaling-sg</code> for SSH only + HTTP/HTTPS from above <code>ec2-autoscaling-web-sg</code> web security group to allow ELB traffic into the instances.Type <code>sg</code> into the source field to bring up a drop-down of security groups. Magic!</li>
+<li>Create Key Pair <code>ec2-autoscaling-keypair</code></li>
+<li>Create Network Interfaces <code>ec2-autoscaling-nic01</code></li>
+<li>Subnet: picked the one on us-west-2a</li>
+<li>Security Group: <code>ec2-autoscaling-sg</code></li>
+<li>Copy/paste ID for below config <code>eni-0897f5a5b47381d07</code></li>
+<li>This didn't seem to be used yet I was prompted to create one when it didn't exist. Odd.</li>
+</ol>
+<p>Services -&gt; EC2 -&gt; Instances -&gt; Launch Templates -&gt; Create Launch Template</p>
+<p>Create launch template</p>
+<ul>
+<li>Launch template name: <code>ec2-autoscaling-launch-template</code></li>
+<li>Template version description: <code>initial version</code></li>
+<li>Source template: None (default)</li>
+<li>AMI ID: <code>ami-0cb72367e98845d43</code> (found via "Search for AMI")</li>
+<li>Instance type: <code>t2.micro</code> (selection doesn't show free tier as easily.)</li>
+<li>Key pair name: <code>ec2-autoscaling-keypair</code></li>
+<li>Security Groups: <code>ec2-autoscaling-sg</code> (doesn't seem to have as easy an option for creating new Security Groups)</li>
+<li>Network Interfaces: (lots of off-screen horizontal issues here with horizontal scrolling only possible when vertically scrolled to the bottom)</li>
+<li>Provided we already created a network interface this section doesn't appear to be required.</li>
+<li>This seems like something that should be handled with sensible defaults on auto-created instances.</li>
+</ul>
+<p>TODO: AMI doesn't have a webserver running by default. Need to enable it or the ELB health check fails.</p>
+<h4 id="edit-launch-template">Edit Launch Template.<a class="headerlink" href="#edit-launch-template" title="Permanent link">&para;</a></h4>
+<p>Add this to <code>User Data</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/sh</span>
+yum -y install httpd
+systemctl <span class="nb">enable</span> --now httpd
+<span class="nb">echo</span> <span class="s1">&#39;&lt;h1&gt;Your Autoscaling lab exercise worked!&lt;/h1&gt;&#39;</span> &gt; /var/www/html/index.html
+</code></pre></div>
+<h4 id="edit-auto-scaling-group">Edit Auto Scaling Group.<a class="headerlink" href="#edit-auto-scaling-group" title="Permanent link">&para;</a></h4>
+<p>Change the Launch Template version to <code>$Latest</code></p>
+<h3 id="create-an-auto-scaling-group">Create an Auto Scaling Group.<a class="headerlink" href="#create-an-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Auto Scaling -&gt; Auto Scaling Groups</p>
+<p>Choose <code>ec2-autoscaling-launch-template</code></p>
+<ol>
+<li>
+<p>Configure Auto Scaling group details</p>
+</li>
+<li>
+<p>Group name: <code>ec2-autoscaling-group</code></p>
+</li>
+<li>
+<p>Subnet: (use the us-west-2a default)</p>
+</li>
+<li>
+<p>Configure scaling policies</p>
+</li>
+<li>
+<p>Keep this group at its initial size (we'll set up scaling later on to avoid a chicken-and-egg problem with setting up the Elastic Load Balancer.)</p>
+</li>
+<li>
+<p>Configure Notifications</p>
+</li>
+<li>
+<p>Add notification</p>
+</li>
+<li>Send notification to <code>ec2-autoscaling-notify</code></li>
+<li>With these recipients: <code>&lt;add E-mail addresses here&gt;</code></li>
+<li>
+<p>Whenever instances: (leave default)</p>
+</li>
+<li>
+<p>Configure Tags</p>
+</li>
+<li>
+<p>No tags needed for this exercise</p>
+</li>
+<li>
+<p>Perhaps a name tag could have been useful?</p>
+</li>
+<li>
+<p>Review</p>
+</li>
+</ol>
+<h3 id="attach-instances">Attach Instances.<a class="headerlink" href="#attach-instances" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Instances</p>
+<p>Already one instance running since the Auto Scaling Group auto-creates one instance to start.</p>
+<h3 id="load-balance-the-auto-scaling-group">Load Balance the auto scaling group.<a class="headerlink" href="#load-balance-the-auto-scaling-group" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Load Balancers -&gt; Application Load Balancer -&gt; Create</p>
+<ol>
+<li>Configure Load Balancer</li>
+</ol>
+<p>1.1 Basic Configuration</p>
+<ul>
+<li>Name: <code>ec2-autoscaling-elb</code></li>
+<li>Scheme: internet-facing (default)</li>
+<li>IP address type: IPv4 (default)</li>
+</ul>
+<p>1.2 Listeners</p>
+<ul>
+<li>HTTP: port 80 (default)</li>
+</ul>
+<p>1.3 Availability Zones</p>
+<ul>
+<li>VPC: (use default)</li>
+<li>
+<p>Availability Zones:</p>
+<ul>
+<li><code>us-west-2a</code> IPv4 address assigned by AWS (default)</li>
+<li><code>us-west-2b</code> IPv4 address assigned by AWS (default)</li>
+</ul>
+</li>
+<li>
+<p>Configure Security Settings</p>
+</li>
+</ul>
+<p>(I would need to use a registered domain in order to make use of <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">Amazon AWS Certificate Manager</a>)</p>
+<ol>
+<li>Configure Security Groups</li>
+</ol>
+<p>Use <code>ec2-autoscaling-web-sg</code> to allow HTTP/HTTPS</p>
+<ol>
+<li>
+<p>Configure Routing</p>
+</li>
+<li>
+<p>Target group: new target group</p>
+</li>
+<li>
+<p>Name: <code>ec2-autoscaling-elb-target</code></p>
+</li>
+<li>
+<p>Register Targets</p>
+</li>
+<li>
+<p>Add the one instance running from the autoscaling auto-creation</p>
+</li>
+<li>
+<p>Review</p>
+</li>
+</ol>
+<p>Services -&gt; EC2 -&gt; Auto Scaling -&gt; Auto Scaling Groups -&gt; Edit</p>
+<ul>
+<li>Target Groups: <code>ec2-autoscaling-elb-target</code></li>
+<li>Health Check Type: ELB</li>
+</ul>
+<h3 id="optional-change-scaling-policy-to-use-elb">(Optional) Change scaling policy to use ELB.<a class="headerlink" href="#optional-change-scaling-policy-to-use-elb" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use scaling policies to adjust the capacity of this group</li>
+<li>Scale between 1 and <code>4</code> instances.</li>
+<li>Name: <code>ec2-autoscaling-load-policy</code></li>
+<li>Metric type: <code>Application load balancer request count per target</code></li>
+<li>Target value: <code>1000</code> (this is arbitrary, in a real deployment this would be determined by measuring application performance as connections went up.)</li>
+<li>Instance need: <code>300</code> seconds to warm up after scaling (also arbitrary, but slamming an instance that's still booting isn't going to give good performance results.)</li>
+</ul>
+<h4 id="security-group-checks">security group checks.<a class="headerlink" href="#security-group-checks" title="Permanent link">&para;</a></h4>
+<p><code>awspec generate security_group &lt;VPC ID&gt;</code></p>
+<p>This ends up with group IDs hardcoded. I changed the ELB security group to <code>:ELB_security_group</code> and my source IP + '/32' to <code>:admin_source_IP</code> in the below example. The group ID in the second group should match the <code>:ELB_security_group</code>. There's probably a way to tell <code>awspec</code> how to to do that automatically, but I don't yet know how.</p>
+<div class="highlight"><pre><span></span><code>describe security_group<span class="o">(</span><span class="s1">&#39;ec2-autoscaling-sg&#39;</span><span class="o">)</span> <span class="k">do</span>
+  let<span class="o">(</span>:admin_source_IP<span class="o">)</span> <span class="o">{</span> <span class="s1">&#39;1.2.3.4/32&#39;</span> <span class="o">}</span>
+  let<span class="o">(</span>:ELB_security_group<span class="o">)</span> <span class="o">{</span> <span class="s1">&#39;sg-0aeb724c8e35d7d91&#39;</span> <span class="o">}</span>
+
+  it <span class="o">{</span> should exist <span class="o">}</span>
+  its<span class="o">(</span>:group_name<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;ec2-autoscaling-sg&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound<span class="o">)</span> <span class="o">{</span> should be_opened<span class="o">(</span><span class="m">80</span><span class="o">)</span>.protocol<span class="o">(</span><span class="s1">&#39;tcp&#39;</span><span class="o">)</span>.for<span class="o">(</span>:ELB_security_group<span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound<span class="o">)</span> <span class="o">{</span> should be_opened<span class="o">(</span><span class="m">22</span><span class="o">)</span>.protocol<span class="o">(</span><span class="s1">&#39;tcp&#39;</span><span class="o">)</span>.for<span class="o">(</span>:admin_source_IP<span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound<span class="o">)</span> <span class="o">{</span> should be_opened<span class="o">(</span><span class="m">443</span><span class="o">)</span>.protocol<span class="o">(</span><span class="s1">&#39;tcp&#39;</span><span class="o">)</span>.for<span class="o">(</span>:ELB_security_group<span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound<span class="o">)</span> <span class="o">{</span> should be_opened.protocol<span class="o">(</span><span class="s1">&#39;all&#39;</span><span class="o">)</span>.for<span class="o">(</span><span class="s1">&#39;0.0.0.0/0&#39;</span><span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound_rule_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">3</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound_rule_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound_permissions_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">3</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound_permissions_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+end
+
+describe security_group<span class="o">(</span><span class="s1">&#39;ec2-autoscaling-web-sg&#39;</span><span class="o">)</span> <span class="k">do</span>
+  it <span class="o">{</span> should exist <span class="o">}</span>
+  its<span class="o">(</span>:group_id<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;sg-0aeb724c8e35d7d91&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:group_name<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;ec2-autoscaling-web-sg&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound<span class="o">)</span> <span class="o">{</span> should be_opened<span class="o">(</span><span class="m">80</span><span class="o">)</span>.protocol<span class="o">(</span><span class="s1">&#39;tcp&#39;</span><span class="o">)</span>.for<span class="o">(</span><span class="s1">&#39;0.0.0.0/0&#39;</span><span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound<span class="o">)</span> <span class="o">{</span> should be_opened<span class="o">(</span><span class="m">443</span><span class="o">)</span>.protocol<span class="o">(</span><span class="s1">&#39;tcp&#39;</span><span class="o">)</span>.for<span class="o">(</span><span class="s1">&#39;0.0.0.0/0&#39;</span><span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound<span class="o">)</span> <span class="o">{</span> should be_opened.protocol<span class="o">(</span><span class="s1">&#39;all&#39;</span><span class="o">)</span>.for<span class="o">(</span><span class="s1">&#39;0.0.0.0/0&#39;</span><span class="o">)</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound_rule_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">2</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound_rule_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+  its<span class="o">(</span>:inbound_permissions_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">2</span> <span class="o">}</span>
+  its<span class="o">(</span>:outbound_permissions_count<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+end
+</code></pre></div>
+<h4 id="autoscaling-group-checks">autoscaling group checks.<a class="headerlink" href="#autoscaling-group-checks" title="Permanent link">&para;</a></h4>
+<p><code>awspec generate autoscaling_group &lt;VPC ID&gt;</code></p>
+<p>The subnet IDs won't translate to other environments, but are probably worth keeping in place for easy changing to new VPCs.</p>
+<div class="highlight"><pre><span></span><code>describe autoscaling_group<span class="o">(</span><span class="s1">&#39;ec2-autoscaling-group&#39;</span><span class="o">)</span> <span class="k">do</span>
+  it <span class="o">{</span> should exist <span class="o">}</span>
+  its<span class="o">(</span>:auto_scaling_group_name<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;ec2-autoscaling-group&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:min_size<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+  its<span class="o">(</span>:max_size<span class="o">)</span> <span class="o">{</span> should eq <span class="m">4</span> <span class="o">}</span>
+  its<span class="o">(</span>:desired_capacity<span class="o">)</span> <span class="o">{</span> should eq <span class="m">1</span> <span class="o">}</span>
+  its<span class="o">(</span>:default_cooldown<span class="o">)</span> <span class="o">{</span> should eq <span class="m">300</span> <span class="o">}</span>
+  its<span class="o">(</span>:availability_zones<span class="o">)</span> <span class="o">{</span> should eq <span class="o">[</span><span class="s2">&quot;us-west-2a&quot;</span>, <span class="s2">&quot;us-west-2b&quot;</span><span class="o">]</span> <span class="o">}</span>
+  its<span class="o">(</span>:health_check_type<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;ELB&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:health_check_grace_period<span class="o">)</span> <span class="o">{</span> should eq <span class="m">300</span> <span class="o">}</span>
+  its<span class="o">(</span>:vpc_zone_identifier<span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;subnet-4ac1c633,subnet-af8cade4&#39;</span> <span class="o">}</span>
+  its<span class="o">(</span>:termination_policies<span class="o">)</span> <span class="o">{</span> should eq <span class="o">[</span><span class="s2">&quot;Default&quot;</span><span class="o">]</span> <span class="o">}</span>
+  its<span class="o">(</span>:new_instances_protected_from_scale_in<span class="o">)</span> <span class="o">{</span> should eq <span class="nb">false</span> <span class="o">}</span>
+  its<span class="o">(</span><span class="s1">&#39;launch_template.launch_template_name&#39;</span><span class="o">)</span> <span class="o">{</span> should eq <span class="s1">&#39;ec2-autoscaling-launch-template&#39;</span> <span class="o">}</span>
+  it <span class="o">{</span> should have_alb_target_group<span class="o">(</span><span class="s1">&#39;ec2-autoscaling-elb-target&#39;</span><span class="o">)</span> <span class="o">}</span>
+end
+</code></pre></div>
+<h4 id="elastic-load-balancing-checks">Elastic Load Balancing checks.<a class="headerlink" href="#elastic-load-balancing-checks" title="Permanent link">&para;</a></h4>
+<p><code>$ awspec generate elb &lt;VPC ID&gt;</code></p>
+<p>No output produced. Odd.</p>
+<p><code>$ aws elb describe-load-balancers</code> has no net output:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;LoadBalancerDescriptions&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>However, that's because we're using ELBv2 (newer):</p>
+<div class="highlight"><pre><span></span><code><span class="err">$</span> <span class="err">aws</span> <span class="err">elbv</span><span class="mi">2</span> <span class="err">describe</span><span class="mi">-</span><span class="err">load</span><span class="mi">-</span><span class="err">bala</span><span class="kc">n</span><span class="err">cers</span>
+<span class="p">{</span>
+    <span class="nt">&quot;LoadBalancers&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;LoadBalancerArn&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:elasticloadbalancing:us-west-2:146679865661:loadbalancer/app/ec2-autoscaling-elb/e3b9918dc5f21a15&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;DNSName&quot;</span><span class="p">:</span> <span class="s2">&quot;ec2-autoscaling-elb-1546742660.us-west-2.elb.amazonaws.com&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;CanonicalHostedZoneId&quot;</span><span class="p">:</span> <span class="s2">&quot;Z1H1FL5HABSF5&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;CreatedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-06-04T18:11:27.940Z&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;LoadBalancerName&quot;</span><span class="p">:</span> <span class="s2">&quot;ec2-autoscaling-elb&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;Scheme&quot;</span><span class="p">:</span> <span class="s2">&quot;internet-facing&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;VpcId&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;VPC ID&gt;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;State&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;Code&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;AvailabilityZones&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;ZoneName&quot;</span><span class="p">:</span> <span class="s2">&quot;us-west-2b&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;SubnetId&quot;</span><span class="p">:</span> <span class="s2">&quot;subnet-4ac1c633&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;ZoneName&quot;</span><span class="p">:</span> <span class="s2">&quot;us-west-2a&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;SubnetId&quot;</span><span class="p">:</span> <span class="s2">&quot;subnet-af8cade4&quot;</span>
+                <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;SecurityGroups&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;sg-0aeb724c8e35d7d91&quot;</span>
+            <span class="p">],</span>
+            <span class="nt">&quot;IpAddressType&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Maybe it's just a documentation issue?</p>
+<div class="highlight"><pre><span></span><code>$ awspec generate elbv2 vpc-5468c22c
+Could not find <span class="nb">command</span> <span class="s2">&quot;elbv2&quot;</span>.
+Did you mean?  <span class="s2">&quot;elb&quot;</span>
+</code></pre></div>
+<p>Nope.</p>
+<p>It looks like ELBv2 goes by the alias "ALB" as seen in this <a href="https://github.com/k1LoW/awspec/issues/203">awspec github issue</a>.</p>
+<p><code>awspec generate alb &lt;VPC ID&gt;</code></p>
+<p>```bash
+describe alb('ec2-autoscaling-elb') do
+  it { should exist }
+  its(:load_balancer_name) { should eq 'ec2-autoscaling-elb' }
+  its(:scheme) { should eq 'internet-facing' }
+  its(:type) { should eq 'application' }
+  its(:ip_address_type) { should eq 'ipv4' }
+end
+````</p>
+<p>There it is! Interesting that the security group info isn't there.</p>
+<h3 id="final-check-go-to-the-elb-public-ip-and-confirm-we-see-the-apache-page">Final Check: Go to the ELB public IP and confirm we see the Apache page<a class="headerlink" href="#final-check-go-to-the-elb-public-ip-and-confirm-we-see-the-apache-page" title="Permanent link">&para;</a></h3>
+<p>Success shows "Your Autoscaling lab exercise worked!"</p>
+<p>Failures might include:</p>
+<ul>
+<li>
+<p>503: Service Unavailable</p>
+</li>
+<li>
+<p>When no targets on the back end</p>
+</li>
+<li>
+<p>504: Gateway Time-out</p>
+</li>
+<li>
+<p>Immediately after targets added to ELB</p>
+</li>
+<li>Instance security group doesn't allow ELB to reach port 80</li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../0200_EC2_Overview/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../0400_Databases_and_Application_Services/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Database & Application
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>

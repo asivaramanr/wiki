@@ -1,0 +1,1590 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0200_EC2_Overview/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>Overview - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creating-a-ec2-instance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-tabs__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-nav__link">
+        Lab Install
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Overview
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ec2-components-overview" class="md-nav__link">
+    EC2 Components Overview.
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2 Components Overview.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ec2-concepts" class="md-nav__link">
+    EC2 Concepts.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-vpc" class="md-nav__link">
+    Creating a VPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-linux-ec2-instance" class="md-nav__link">
+    Creating a Linux EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-marketplace" class="md-nav__link">
+    AWS Marketplace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-windows-ec2-instance" class="md-nav__link">
+    Creating a Windows EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-an-ec2-instance" class="md-nav__link">
+    Connecting to an EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-groups" class="md-nav__link">
+    Security Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ec2-security-groups-overview" class="md-nav__link">
+    EC2 Security Groups Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-deleting-an-ec2-security-group" class="md-nav__link">
+    Creating and Deleting an EC2 Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-rules-to-an-ec2-security-group" class="md-nav__link">
+    Adding Rules to an EC2 Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-ec2-security-groups-for-vpc" class="md-nav__link">
+    Configuring EC2 Security Groups for VPC.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elastic-block-store-ebs" class="md-nav__link">
+    Elastic Block Store (EBS)
+  </a>
+  
+    <nav class="md-nav" aria-label="Elastic Block Store (EBS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elastic-block-store-overview" class="md-nav__link">
+    Elastic Block Store Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-ebs-volumes" class="md-nav__link">
+    Creating a EBS Volumes.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-ec2-snapshots" class="md-nav__link">
+    Creating EC2 Snapshots.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ec2-amazon-machine-images-ami" class="md-nav__link">
+    EC2 Amazon Machine Images (AMI)
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2 Amazon Machine Images (AMI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-machine-images-overview" class="md-nav__link">
+    Amazon Machine Images Overview.
+  </a>
+  
+    <nav class="md-nav" aria-label="Amazon Machine Images Overview.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ami-life-cycle" class="md-nav__link">
+    AMI Life Cycle.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ami-in-ec2" class="md-nav__link">
+    Creating an AMI in EC2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-and-exporting-an-ami-in-ec2" class="md-nav__link">
+    Importing and Exporting an AMI in EC2.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raid-on-ebs" class="md-nav__link">
+    RAID on EBS
+  </a>
+  
+    <nav class="md-nav" aria-label="RAID on EBS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ebs-raid-configuration-options" class="md-nav__link">
+    EBS RAID Configuration Options.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ebs-raid-array-on-linux" class="md-nav__link">
+    Creating an EBS RAID Array on Linux.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ebs-raid-array-on-windows" class="md-nav__link">
+    Creating an EBS RAID Array on Windows.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    Monitoring
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-ec2-load-balancers" class="md-nav__link">
+    Configuring EC2 Load Balancers.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-ec2-health-checks" class="md-nav__link">
+    Performing EC2 Health Checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-ec2-instances-with-cloudwatch" class="md-nav__link">
+    Monitoring EC2 Instances with CloudWatch.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-configuring-ec2" class="md-nav__link">
+    Practice: Configuring EC2.
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Configuring EC2.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-cli-test" class="md-nav__link">
+    AWS CLI test.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-vpc-and-security-group" class="md-nav__link">
+    Create a VPC and Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-ami-from-an-ec2-instance" class="md-nav__link">
+    Create an AMI from an EC2 instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-three-ebs-volumes" class="md-nav__link">
+    Create three EBS volumes.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0300_EC2_Autoscaling/" class="md-nav__link">
+        EC2 Autoscaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0400_Databases_and_Application_Services/" class="md-nav__link">
+        Database & Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0500_Networking_and_Best_Practice/" class="md-nav__link">
+        Networking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2000_Well_Architected_Framework/" class="md-nav__link">
+        Well Architected
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ec2-components-overview" class="md-nav__link">
+    EC2 Components Overview.
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2 Components Overview.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ec2-concepts" class="md-nav__link">
+    EC2 Concepts.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-vpc" class="md-nav__link">
+    Creating a VPC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-linux-ec2-instance" class="md-nav__link">
+    Creating a Linux EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aws-marketplace" class="md-nav__link">
+    AWS Marketplace
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-a-windows-ec2-instance" class="md-nav__link">
+    Creating a Windows EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-to-an-ec2-instance" class="md-nav__link">
+    Connecting to an EC2 Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-groups" class="md-nav__link">
+    Security Groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ec2-security-groups-overview" class="md-nav__link">
+    EC2 Security Groups Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-deleting-an-ec2-security-group" class="md-nav__link">
+    Creating and Deleting an EC2 Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-rules-to-an-ec2-security-group" class="md-nav__link">
+    Adding Rules to an EC2 Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-ec2-security-groups-for-vpc" class="md-nav__link">
+    Configuring EC2 Security Groups for VPC.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elastic-block-store-ebs" class="md-nav__link">
+    Elastic Block Store (EBS)
+  </a>
+  
+    <nav class="md-nav" aria-label="Elastic Block Store (EBS)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elastic-block-store-overview" class="md-nav__link">
+    Elastic Block Store Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-ebs-volumes" class="md-nav__link">
+    Creating a EBS Volumes.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-ec2-snapshots" class="md-nav__link">
+    Creating EC2 Snapshots.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ec2-amazon-machine-images-ami" class="md-nav__link">
+    EC2 Amazon Machine Images (AMI)
+  </a>
+  
+    <nav class="md-nav" aria-label="EC2 Amazon Machine Images (AMI)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amazon-machine-images-overview" class="md-nav__link">
+    Amazon Machine Images Overview.
+  </a>
+  
+    <nav class="md-nav" aria-label="Amazon Machine Images Overview.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ami-life-cycle" class="md-nav__link">
+    AMI Life Cycle.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ami-in-ec2" class="md-nav__link">
+    Creating an AMI in EC2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importing-and-exporting-an-ami-in-ec2" class="md-nav__link">
+    Importing and Exporting an AMI in EC2.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raid-on-ebs" class="md-nav__link">
+    RAID on EBS
+  </a>
+  
+    <nav class="md-nav" aria-label="RAID on EBS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ebs-raid-configuration-options" class="md-nav__link">
+    EBS RAID Configuration Options.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ebs-raid-array-on-linux" class="md-nav__link">
+    Creating an EBS RAID Array on Linux.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-an-ebs-raid-array-on-windows" class="md-nav__link">
+    Creating an EBS RAID Array on Windows.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    Monitoring
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-ec2-load-balancers" class="md-nav__link">
+    Configuring EC2 Load Balancers.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performing-ec2-health-checks" class="md-nav__link">
+    Performing EC2 Health Checks.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-ec2-instances-with-cloudwatch" class="md-nav__link">
+    Monitoring EC2 Instances with CloudWatch.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-configuring-ec2" class="md-nav__link">
+    Practice: Configuring EC2.
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: Configuring EC2.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-cli-test" class="md-nav__link">
+    AWS CLI test.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-vpc-and-security-group" class="md-nav__link">
+    Create a VPC and Security Group.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-ami-from-an-ec2-instance" class="md-nav__link">
+    Create an AMI from an EC2 instance.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-three-ebs-volumes" class="md-nav__link">
+    Create three EBS volumes.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="creating-a-ec2-instance"><strong>Creating a EC2 Instance</strong><a class="headerlink" href="#creating-a-ec2-instance" title="Permanent link">&para;</a></h1>
+<h2 id="ec2-components-overview">EC2 Components Overview.<a class="headerlink" href="#ec2-components-overview" title="Permanent link">&para;</a></h2>
+<p>EC2 instances created from images called Amazon Machine Images. Contains info like CPU, memory, storage, etc. and OS type.</p>
+<p>Initial login via key pairs, either generated or previously provided public (ONLY) key.</p>
+<p>Linux: SSH</p>
+<p>Windows: RDP</p>
+<p>EC2 Firewall config. EC2 instances associated with Security Group and the Security Groups can have network traffic policies applied to them.</p>
+<p>Virtual Private Cloud (VPC) is an isolated network. There is always one Default VPC but additional ones can be added. Each VPC has its own (isolated) subnet ranges and network ACLs on ingress/egress points.</p>
+<p>Elastic IP addresses are linked to an AWS account, not any particular VM instance. These can be mapped to VM instances (one-to-one) via NAT. Can have up to 5 EIPs per VPC. This makes VMs visible to the Internet.</p>
+<p>Elastic Block Storage is persistent block-based (not file/object based) storage. Linked to specific VMs. Can be encrypted.</p>
+<p>Instance Store: temp storage used while instance is running.</p>
+<p>S3: object storage</p>
+<h3 id="ec2-concepts">EC2 Concepts.<a class="headerlink" href="#ec2-concepts" title="Permanent link">&para;</a></h3>
+<p>AMIs are used to create VM instances and define its resources.</p>
+<p>Amazon limits the total on-demand instances per region. On-demand instances are charged by the hour. This is contrasted with a "reserved instance" which is paid for an extended period of time (1+ year?)</p>
+<p>"spot instance" auction for vm instances other customers aren't using. We specify a bid price and when that matches or exceeds a spot price, we would gain access to the instance.</p>
+<p><a href="https://aws.amazon.com/ec2/instance-types">EC2 instance types</a></p>
+<ul>
+<li>T: General purpose (software development)</li>
+<li>C: Compute-optimized (batch processing, analytics)</li>
+<li>R: Memory-optimized (databases)</li>
+<li>I or D: Storage-optimized (transactional database, data warehouse)</li>
+<li>G: GPU instances: Video encoding</li>
+</ul>
+<p>Further broken down into sub-types with specific details.</p>
+<p>AMIs can be custom or marketplace AMIs.</p>
+<p>We can add tags as key/value pairs to various resources. Tag keys and values are case-sensitive and scope is limited to within the same AWS account.</p>
+<p>Cannot tag IPs.</p>
+<h2 id="creating-a-vpc">Creating a VPC<a class="headerlink" href="#creating-a-vpc" title="Permanent link">&para;</a></h2>
+<p>One default VPC with every account. Analagous to multiple VLANs on one LAN.</p>
+<p>GUI VPC config wizard with common configs like "VPC with a single public subnet" or "VPC with a private subnet only and hardware VPN access"</p>
+<p>VPC configured with:</p>
+<ul>
+<li>name: unique identifer for the VPC</li>
+<li>CIDR block: the /16 or smaller block that all IPs within the VPC will use (this can be further divided later)</li>
+<li>Tenancy: Default or dedicated hardware</li>
+</ul>
+<p><code>DHCP options set</code> means DHCP is configured with the given options, which by default are an Amazon <code>.compute.internal</code> DNS domain and Amazon-provided DNS servers. The IP ranges provided by DHCP depend on the subnets which aren't yet present.</p>
+<p>Each VPC can have one or more subnets.</p>
+<p>Subnets configured with:</p>
+<ul>
+<li>Name tag: unique identifier for the VPC</li>
+<li>VPC: the VPC the subnet will exist within</li>
+<li>Availability zone: (not usually specified)</li>
+<li>CIDR block: the IP range for the subnet</li>
+</ul>
+<p>VM instances get linked to a particular subnet in a VPC.</p>
+<p>When a VM instance is created we have these configuration options:</p>
+<ul>
+<li>Number of instances</li>
+<li>Purchasing option: (this is where Spot Instances would be used)</li>
+<li>Network: our VPC network (NOT subnet)</li>
+<li>Subnet: our new subnet</li>
+<li>Auto-assign public IP:</li>
+<li>IAM role:</li>
+<li>Shutdown behavior:</li>
+<li>Enable termination protection: The Sarah Connor option?</li>
+</ul>
+<p>Private DNS auto-assigned, private IP also assigned.</p>
+<p>Check VPC again and now DHCP options like the DNS hostnames can be configured.</p>
+<p>Network ACL was auto-created with the VPC. Rule 100 allows all traffic. Default denies all traffic but won't get hit on this default, very open, config.</p>
+<p>Creation order is:</p>
+<ol>
+<li>Choose AMI</li>
+<li>Choose Instance Type</li>
+<li>Configure Instance</li>
+<li>Add Storage</li>
+<li>Tag instance</li>
+<li>Configure Security Group</li>
+</ol>
+<h2 id="creating-a-linux-ec2-instance">Creating a Linux EC2 Instance<a class="headerlink" href="#creating-a-linux-ec2-instance" title="Permanent link">&para;</a></h2>
+<p>Services -&gt; EC2 -&gt; Launch Instance</p>
+<p>When a VM instance is created we have these configuration options:</p>
+<ul>
+<li>Number of instances</li>
+<li>Purchasing option: (this is where Spot Instances would be used)</li>
+<li>Network: our VPC network (NOT subnet)</li>
+<li>Subnet: our new subnet</li>
+<li>Auto-assign public IP:</li>
+<li>IAM role: Allows AWS to manage key-based access</li>
+<li>Shutdown behavior: Stop or Terminate (auto-delete-self)</li>
+<li>Enable termination protection: often a good idea</li>
+<li>Monitoring:</li>
+<li>Tenancy:</li>
+</ul>
+<p>Adding storage-- default for Root already there. Delete on termination-- removes EBS when the instance is deleted.</p>
+<p>Tags: key/value pairs</p>
+<p>Security Group controls network access into the instance. SSH from anywhere enabled by default.</p>
+<p>SSH private key (PEM) must be safeguarded to ensure access to the instances.</p>
+<h2 id="aws-marketplace">AWS Marketplace<a class="headerlink" href="#aws-marketplace" title="Permanent link">&para;</a></h2>
+<p>Useful for finding specialized appliances.</p>
+<p>LDAP? EVIL! :-)</p>
+<p>Check the VPC settings-- may not be what we want.</p>
+<p>The example e-commerce AMI includes a security group with port 80 and 443 open. (Which makes sense!)</p>
+<h2 id="creating-a-windows-ec2-instance">Creating a Windows EC2 Instance<a class="headerlink" href="#creating-a-windows-ec2-instance" title="Permanent link">&para;</a></h2>
+<p>New config item:</p>
+<ul>
+<li>Domain join directory: Joins a given AD domain</li>
+</ul>
+<p>RDP on port 3389 open by default. <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html">Uses public/private keys for auth</a> but it sure seems a lot more complicated than the ssh-right-in approach Linux uses. Key to get a password to embed in a config file?</p>
+<h2 id="connecting-to-an-ec2-instance">Connecting to an EC2 Instance<a class="headerlink" href="#connecting-to-an-ec2-instance" title="Permanent link">&para;</a></h2>
+<p>The EC2 instance list has a "connect" tab which lets you download the RDP file describing the connection to the instance. The "Get Password" button offers an option to show the password, but it's encrypted.</p>
+<p>The <code>Key Pair Path</code> is the path to the PRIVATE key. Putting a private key in a web form seems like a bad idea in general and it's sad that this is common on AWS.</p>
+<p>The PEM secret key needs to be (locally) converted to use PuTTY. Save without passphrase? Bad example! OK, well, at least he acknowledges the weakness. Maybe he needs to learn about <code>pageant.exe</code>.</p>
+<p>Normal linux username: <code>ec2-user</code></p>
+<h2 id="security-groups">Security Groups<a class="headerlink" href="#security-groups" title="Permanent link">&para;</a></h2>
+<h3 id="ec2-security-groups-overview">EC2 Security Groups Overview.<a class="headerlink" href="#ec2-security-groups-overview" title="Permanent link">&para;</a></h3>
+<p>Virtual firewalls to control access to EC2 instances.</p>
+<p>When the policy for a security group is changed, all instances in that group see the changes.</p>
+<p>EC2-Classic (older config) had a single network shared by AWS customers. Security groups would be in the same region as the VM instances. There were at most 500 security groups per instance and max 100 rules per group. Can't change on running instances.</p>
+<p>New method: EC2-VPC which uses those virtual private clouds to logically isolate each AWS customer. These rules can change on running instances. 5 groups per instance and 50 rules per security group.</p>
+<p>Security groups control inbound and outbound network traffic. Outbound is allowed by default.</p>
+<p>For ICMP the type would be defined (vs. port)</p>
+<p>Default security group created for default VPC. Only allows inbound traffic from the default VPC, but allows all outbound.</p>
+<p>A custom security group requires a name and description.</p>
+<h3 id="creating-and-deleting-an-ec2-security-group">Creating and Deleting an EC2 Security Group.<a class="headerlink" href="#creating-and-deleting-an-ec2-security-group" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Network &amp; Security -&gt; Security Groups</p>
+<p>(Launches a Windows instance where RDP is inaccessible by Security Group rules. Odd.)</p>
+<p>Ah... he adds the rule later.</p>
+<h3 id="adding-rules-to-an-ec2-security-group">Adding Rules to an EC2 Security Group.<a class="headerlink" href="#adding-rules-to-an-ec2-security-group" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Network &amp; Security -&gt; Security Groups</p>
+<p>Custom TCP: opens up port range as an option</p>
+<p>All traffic: might be useful to allow instances in different VPCs to intercommunicate.</p>
+<p>"My IP" literally your current IP as seen on the Internet.</p>
+<h3 id="configuring-ec2-security-groups-for-vpc">Configuring EC2 Security Groups for VPC.<a class="headerlink" href="#configuring-ec2-security-groups-for-vpc" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Network &amp; Security -&gt; Security Groups</p>
+<p>OR</p>
+<p>Services -&gt; VPC -&gt; Security -&gt; Security Groups</p>
+<p>Network ACLs might look like Security Groups but they apply to a subnet, not a VM. Security groups have no <code>DENY</code> option, but Network ACLs do.</p>
+<p>The source can be another security group-- allows traffic from another VPC. Source can also be an IP address range, e.g. part of another VPC.</p>
+<h2 id="elastic-block-store-ebs">Elastic Block Store (EBS)<a class="headerlink" href="#elastic-block-store-ebs" title="Permanent link">&para;</a></h2>
+<h3 id="elastic-block-store-overview">Elastic Block Store Overview.<a class="headerlink" href="#elastic-block-store-overview" title="Permanent link">&para;</a></h3>
+<p>Works like an unformatted hard drive for EC2 instances.</p>
+<p>High Availability replicates EBS within an availability zone automaticaly.</p>
+<p>Persistent storage even when instances are shut down.</p>
+<p>Encryption possible provided the instance supports it. (Seems odd-- if the encryption is within EBS itself that should be transparent to the OS on the instance.)</p>
+<p>EBS Types:</p>
+<ul>
+<li>Magnetic volume: 100 IOPS, 1TB max size</li>
+<li>General purpose: SSD, 3 IOPS/GB + 3000 IOPS burst, 16TB max size</li>
+<li>Provisioned IOPS: SSD, up to 20,000 IOPS and 320MB/s, 16TB max size</li>
+</ul>
+<p>EBS snapshots, can create new EBS volumes from snapshot.</p>
+<p>Unencrypted snapshots can be shared.</p>
+<p>Shapshots must stay in the same region where they were created.</p>
+<p>EBS encrypted volumes, each gets unique AES256 key. Managed via AWS, FIPS-approved (US government standard). Encrypted with a volume key and then an account key. Both would be needed to decrypt.</p>
+<p>To encrypt data, move it to an encrypted volume.</p>
+<p>Creation process Services -&gt; EC2 -&gt; Elastic Block Storage -&gt; Volumes -&gt; Create Volume</p>
+<p>Creation options:</p>
+<ul>
+<li>Type: e.g. magnetic, provisioned IOPS</li>
+<li>Size: in GB</li>
+<li>IOPS: (if provisioned IOPS)</li>
+<li>Availability Zone: keep this the same zone as the VMs which will be using it</li>
+<li>Snapshot ID:</li>
+<li>Encryption:</li>
+</ul>
+<h3 id="creating-a-ebs-volumes">Creating a EBS Volumes.<a class="headerlink" href="#creating-a-ebs-volumes" title="Permanent link">&para;</a></h3>
+<p>EBS can exist independent from any VM instance.</p>
+<p>Normally used for disk volumes within an instance that get frequent access.</p>
+<p>Services -&gt; EC2 -&gt; Elastic Block Storage -&gt; Volumes</p>
+<p>Selecting an existing volume shows what instance it's attached to under "Attachment information."</p>
+<p>Snapshot ID: source snapshot for creating the new volume (copy of snapshot)</p>
+<p>Shows up as a new blank hard drive (Virtual SCSI device).</p>
+<h3 id="creating-ec2-snapshots">Creating EC2 Snapshots.<a class="headerlink" href="#creating-ec2-snapshots" title="Permanent link">&para;</a></h3>
+<p>Snapshots hold changed blocks (incremental)</p>
+<p>EBS -&gt; Volumes -&gt; Actions -&gt; Create Snapshot</p>
+<p>If possible, shut down instance before creating snapshot of the root EBS volume.</p>
+<p>Creating can take hours for large EBS volumes.</p>
+<p>Can create a new EBS volume from a snapshot.</p>
+<h2 id="ec2-amazon-machine-images-ami">EC2 Amazon Machine Images (AMI)<a class="headerlink" href="#ec2-amazon-machine-images-ami" title="Permanent link">&para;</a></h2>
+<h3 id="amazon-machine-images-overview">Amazon Machine Images Overview.<a class="headerlink" href="#amazon-machine-images-overview" title="Permanent link">&para;</a></h3>
+<p>Create new instances in EC2 from AMIs. The AMI defines a template for the root volume (e.g. base OS?), defines which accounts can use the AMI, and maps EBS to block devices within the instance OS image.</p>
+<h4 id="ami-life-cycle">AMI Life Cycle.<a class="headerlink" href="#ami-life-cycle" title="Permanent link">&para;</a></h4>
+<p>Create an AMI</p>
+<p>Use AMI to create an instance.</p>
+<p>Modify instance if needed and "register" to create a new AMI. These can also be "deregistered" to remove them from future use.</p>
+<p>The new AMi can also be used to launch new instances or copied directly to a new, independent AMI.</p>
+<p>Shared AMIs are available. Sharing can be public or to specific AWS accounts.</p>
+<p>We don't know how a public/shared AMI was created so we should use them with caution.</p>
+<p>Amazon-created AMIs are named "amazon"</p>
+<p>AMIs can be purchased or sold. Marketplace has categories and search.</p>
+<p>What actions appear on the <code>Actions</code> menu for an AMI?</p>
+<h3 id="creating-an-ami-in-ec2">Creating an AMI in EC2.<a class="headerlink" href="#creating-an-ami-in-ec2" title="Permanent link">&para;</a></h3>
+<p>"What if we find ourselves making the same changes once we launch an instance from an AMI?" Me: It doesn't matter since those changes are all documented and automatically applied using modern Infrastructure as Code methods, which allow for easy, versioned, granular changes rather than baking all the changes into one giant, hard-to-adjust blob.</p>
+<p>Me: Creating AMIs for known-source-traceability seems like a much better reason for making an AMI.</p>
+<p>EC2 -&gt; Instances -&gt; Actions -&gt; Image -&gt; Create Image</p>
+<p>Can create from an EBS snapshot.</p>
+<p>RHN subscriptions not maintained through snapshots? That seems odd-- I would expect it to be duplicated since the machine registration is stored on the EBS volume. Perhaps they mean that RedHat detects the duplication and disables one or both of the subscriptions?</p>
+<p>Windows can also have problem when starting from a snapshot.</p>
+<p>Advise that it's best to create an AMI from an instance rather than a snapshot.</p>
+<p>Copy AMI copies to another region.</p>
+<h3 id="importing-and-exporting-an-ami-in-ec2">Importing and Exporting an AMI in EC2.<a class="headerlink" href="#importing-and-exporting-an-ami-in-ec2" title="Permanent link">&para;</a></h3>
+<p>Import can allow us to re-use an existing virtual machine (hosted at Amazon.)</p>
+<p>Also can be used for DR.</p>
+<p>Managed via CLI or API.</p>
+<p>Preparing the source VM requires things like:</p>
+<ul>
+<li>Remove security software (antivirus / IDS)</li>
+<li>Disconnect virtual DVD-ROMs since backing storage probably doesn't exist in AWS</li>
+<li>Reconfigure for DHCP (optional, but allows immediate instance access that way.)</li>
+<li>Remove VMware tools or other hypervisor-specific software</li>
+<li>Sysprep (Windows) or equivalent (RHEL) (optional)</li>
+</ul>
+<p>Sounds more like making a template than moving a VM...</p>
+<p>Export it from existing environment, make an OVF.</p>
+<p>Upload to AWS via <code>aws ec2 import-image --cli-input-json ...</code></p>
+<p>(Based on the test, I had that wrong-- the upload precedes the import but I didn't notice how they did it in the video.)</p>
+<p>Export from EC2 via <code>aws ec2 create-instance-export-task</code>.</p>
+<h2 id="raid-on-ebs">RAID on EBS<a class="headerlink" href="#raid-on-ebs" title="Permanent link">&para;</a></h2>
+<h3 id="ebs-raid-configuration-options">EBS RAID Configuration Options.<a class="headerlink" href="#ebs-raid-configuration-options" title="Permanent link">&para;</a></h3>
+<p>Software RAID within the OS.</p>
+<p>(This seems like a terrible idea for AWS images. Isn't the EBS already redundant/reliable? We should avoid making our instances individually tough and instead focus on making them easily replaced.)</p>
+<p>RAID-0 might have a place if we have a single image that requires a truly ridiculous amount of storage throughput. The Measured IOPS caps at 20,000 / 320MB/s per EBS. Would we really be able to get more with software RAID-0 or would other internal limit be hit? (e.g. virtual SCSI limits.)</p>
+<p>I think that there are probably better solutions for the problems software RAID within AWS is trying to solve. (E.g. high performance databases.)</p>
+<p>Overall this doesn't seem AWS-specific and should probably be avoided on AWS as a general rule.</p>
+<h3 id="creating-an-ebs-raid-array-on-linux">Creating an EBS RAID Array on Linux.<a class="headerlink" href="#creating-an-ebs-raid-array-on-linux" title="Permanent link">&para;</a></h3>
+<p><code>fdisk</code> really? The Linux RAID auto is quite optional. Whole disks can be used for the <code>md</code> device, though we probably want to use one of the static <code>/dev/disk/by-id</code> devices or a <code>disk-mapper</code> device.</p>
+<p><code>mdadm --create</code> for creating new <code>md</code> device</p>
+<p><code>mdadm --detail</code> for info about the device</p>
+<p><code>mkfs</code> on bare device? It hurts! If you're going to all this trouble, at least use LVM. (Well, at least he didn't partition the <code>md</code> device...)</p>
+<h3 id="creating-an-ebs-raid-array-on-windows">Creating an EBS RAID Array on Windows.<a class="headerlink" href="#creating-an-ebs-raid-array-on-windows" title="Permanent link">&para;</a></h3>
+<p>Server Manager -&gt; Tools -&gt; Computer Management -&gt; Disk Management</p>
+<p>Right click new disk -&gt; New Mirrored Volume</p>
+<p>Add both disks to "selected", choose drive letter</p>
+<p>Add a label. Convert to dynamic disks.</p>
+<h2 id="monitoring">Monitoring<a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h2>
+<h3 id="configuring-ec2-load-balancers">Configuring EC2 Load Balancers.<a class="headerlink" href="#configuring-ec2-load-balancers" title="Permanent link">&para;</a></h3>
+<p>Sits between our service instances (e.g. web servers) and the Internet and spreads the load across the service instances. Users connect to the load balancers.</p>
+<p>Process:</p>
+<ol>
+<li>Define Load Balancer</li>
+<li>Assign Security Groups</li>
+<li>Configure Security Settings</li>
+<li>Configure Health Check</li>
+<li>Add EC2 Instances</li>
+<li>Add Tags</li>
+</ol>
+<p>Define load balancer: needs to know the protocol + port for the incoming requests ("load balancer protocol") and the same for your back-end instances.</p>
+<p>The load balancer subnets need to be in at least two different availability zones. This is not the instance back-end subnet, but the subnets for the front-end connections end users will be directed into. (They look to be NATted so there's something else going on too.)</p>
+<p>Create security group to allow appropriate access. (e.g. TCP port 80 from anywhere.)</p>
+<p>Health checks: make sure back end instances are healthy via HTTP GET. (Would it be useful to have a combination of frequent "simple" health checks and infrequent "complex" health checks?)</p>
+<p>We should create a DNS record (CNAME) to the load balancer DNS name. (That can be slow since it requires two DNS lookups from separate domains to complete. Is there a better way?) Route53 allows an "Alias" A record to be created directly to the ELB: <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html">Route 53 docs</a></p>
+<h3 id="performing-ec2-health-checks">Performing EC2 Health Checks.<a class="headerlink" href="#performing-ec2-health-checks" title="Permanent link">&para;</a></h3>
+<p>Is an instance running properly or not?</p>
+<p>Demo on how to filter by state when viewing instances in the web interface.</p>
+<p>"Monitoring" has some per-instance performance metrics and history.</p>
+<p>Auto-scaling lets us auto-create instances in response to monitoring events.</p>
+<p>Seems like a big emphasis on instance resource monitors rather than measuring application health. Probably because it's simple and easy, not because it's useful. <a href="https://en.wikipedia.org/wiki/Streetlight_effect">"The light is better over here."</a></p>
+<p>EC2 Actions possible:</p>
+<ul>
+<li>Rebooot instance: stays on same underlying hardware</li>
+<li>Recover instance: moves instance image to new hardware</li>
+<li>Stop instance</li>
+<li>Terminate instance (delete)</li>
+</ul>
+<h3 id="monitoring-ec2-instances-with-cloudwatch">Monitoring EC2 Instances with CloudWatch.<a class="headerlink" href="#monitoring-ec2-instances-with-cloudwatch" title="Permanent link">&para;</a></h3>
+<p>Allow for tracking and alerting of metrics on resources.</p>
+<p>The metric graphs could be helpful for troubleshooting a specific performance issue, but really are best used in conjunction with application-level information and metrics. E.g. What is the application waiting for when performance is poor?</p>
+<p>Defining alarms: "consecutive periods" what is that? Defined at the lower right. "period"</p>
+<p>EC2 Actions could be useful (e.g. auto-reboot to clear memory leaks.)</p>
+<h2 id="practice-configuring-ec2">Practice: Configuring EC2.<a class="headerlink" href="#practice-configuring-ec2" title="Permanent link">&para;</a></h2>
+<p>Overkill: Use Test-Driven Development concepts for this AWS practice using <code>awspec</code>. <a href="https://github.com/sbonds/awspec/blob/master/doc/resource_types.md">Resource Type Checks Available from <code>awspec</code></a></p>
+<h3 id="aws-cli-test">AWS CLI test.<a class="headerlink" href="#aws-cli-test" title="Permanent link">&para;</a></h3>
+<p><a href="https://stackoverflow.com/questions/31836816/how-to-test-credentials-for-aws-command-line-tools">How to test credentials for AWS Command Line Tools</a></p>
+<p><code>aws sts get-caller-identity</code></p>
+<h3 id="create-a-vpc-and-security-group">Create a VPC and Security Group.<a class="headerlink" href="#create-a-vpc-and-security-group" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>describe vpc(&#39;ec2-overview-vpc&#39;) do
+  it { should exist }
+end
+
+describe security_group(&#39;ec2-overview-sg&#39;) do
+  it { should exist }
+  its(:outbound) { should be_opened }
+  its(:inbound) { should be_opened(22) }
+end
+</code></pre></div>
+<h3 id="create-an-ami-from-an-ec2-instance">Create an AMI from an EC2 instance.<a class="headerlink" href="#create-an-ami-from-an-ec2-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>describe ec2(&#39;ec2-overview-ec2-01&#39;) do
+  it { should belong_to_vpc(&#39;ec2-overview-vpc&#39;) }
+  it { should have_security_group(&#39;ec2-overview-sg&#39;) }
+end
+
+describe ami(&#39;ec2-overview-ami&#39;) do
+  it { should exist }
+end
+</code></pre></div>
+<h3 id="create-three-ebs-volumes">Create three EBS volumes.<a class="headerlink" href="#create-three-ebs-volumes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>describe ebs(&#39;ec2-overview-ebs01&#39;) do
+  it { should exist }
+  it { should be_attached_to(&#39;ec2-overview-ec2-01&#39;) }
+end
+describe ebs(&#39;ec2-overview-ebs02&#39;) do
+  it { should exist }
+  it { should be_attached_to(&#39;ec2-overview-ec2-01&#39;) }
+end
+describe ebs(&#39;ec2-overview-ebs02&#39;) do
+  it { should exist }
+  it { should be_attached_to(&#39;ec2-overview-ec2-01&#39;) }
+end
+</code></pre></div>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../Kubernetes/Installing_Kubernetes/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Lab Install
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../0300_EC2_Autoscaling/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              EC2 Autoscaling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,118 @@
+# Project information
+site_name: Documentation as Code
+site_url: https://github.com/asivaramanr/wiki
+site_author: Aswin Sivaraman .R
+
+# Repository
+repo_name: asivaramanr/wiki
+repo_url: https://github.com/asivaramanr/wiki
+edit_uri: ""
+
+# Configuration
+theme:
+  name: material
+  locale: en
+  highlightjs: true
+  hljs_languages:
+        - yaml
+        - django
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    #- toc.integrate 
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode      
+  font:
+    text: Roboto
+    code: Roboto Mono
+# Page tree
+nav:
+    - Home: 
+        - Documentation as Code: index.md
+        
+    - DevOps:
+        - Overview: DevOps/DevOps_Cloud.md
+    - Kubernetes:
+        - Lab Install: Kubernetes/Installing_Kubernetes.md 
+    - AWS:
+        - Architecting AWS:
+            - Overview: AWS/0200_EC2_Overview.md
+            - EC2 Autoscaling: AWS/0300_EC2_Autoscaling.md
+            - Database & Application : AWS/0400_Databases_and_Application_Services.md
+            - Networking: AWS/0500_Networking_and_Best_Practice.md
+            - Well Architected: AWS/2000_Well_Architected_Framework.md
+          
+extra_css:
+    - css/extra.css
+plugins:
+  - git-revision-date    
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: asivaramanr
+      repo: asivaramanr/wiki
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Customization    
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/asivaramanr
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/aswinsivaramanr
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/aswin_sivaraman
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<aswinsivaraman@aol.com>    
+
+# Copyright
+copyright: Copyright &copy; 2017 - 2021 Aswin Sivaraman .R        
+
+# Google Analytics
+google_analytics: ['UA-36723568-3', 'mkdocs.org'] 

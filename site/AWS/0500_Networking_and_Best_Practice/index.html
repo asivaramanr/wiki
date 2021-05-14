@@ -1,0 +1,1782 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Aswin Sivaraman .R">
+      
+      
+        <link rel="canonical" href="https://github.ibm.com/Aswin-Sivaraman1/wiki/AWS/0500_Networking_and_Best_Practice/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+    
+    
+      
+        <title>Networking - Documentation as Code</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#networking-and-best-practice" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentation as Code" class="md-header__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation as Code
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Networking
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="red" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-tabs__link">
+        DevOps
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-tabs__link">
+        Kubernetes
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0200_EC2_Overview/" class="md-tabs__link md-tabs__link--active">
+        AWS
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentation as Code" class="md-nav__button md-logo" aria-label="Documentation as Code" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Documentation as Code
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.ibm.com/Aswin-Sivaraman1/wiki" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Aswin-Sivaraman1/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      <label class="md-nav__link" for="__nav_1">
+        Home
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Home" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Home
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Documentation as Code
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        DevOps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DevOps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          DevOps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DevOps/DevOps_Cloud/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Kubernetes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Kubernetes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Kubernetes/Installing_Kubernetes/" class="md-nav__link">
+        Lab Install
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AWS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        Architecting AWS
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Architecting AWS" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Architecting AWS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0200_EC2_Overview/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0300_EC2_Autoscaling/" class="md-nav__link">
+        EC2 Autoscaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0400_Databases_and_Application_Services/" class="md-nav__link">
+        Database & Application
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Networking
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Networking
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#route-53" class="md-nav__link">
+    Route 53
+  </a>
+  
+    <nav class="md-nav" aria-label="Route 53">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#route-53-overview" class="md-nav__link">
+    Route 53 Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registering-a-domain-through-route-53" class="md-nav__link">
+    Registering a Domain through Route 53.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-route-53-as-your-dns-provider" class="md-nav__link">
+    Configuring Route 53 as your DNS Provider.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-private-cloud" class="md-nav__link">
+    Virtual Private Cloud
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual Private Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-virtual-private-cloud" class="md-nav__link">
+    Create Virtual Private Cloud.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-virtual-private-cloud-subnets" class="md-nav__link">
+    Configure Virtual Private Cloud Subnets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-an-ec2-instance-into-a-virtual-private-cloud" class="md-nav__link">
+    Launch an EC2 Instance into a Virtual Private Cloud.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-vpc-network-address-translation" class="md-nav__link">
+    Configuring VPC Network Address Translation.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-vpc-access-control-lists" class="md-nav__link">
+    Configuring VPC Access Control Lists.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-connect" class="md-nav__link">
+    Direct Connect
+  </a>
+  
+    <nav class="md-nav" aria-label="Direct Connect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#direct-connect-overview" class="md-nav__link">
+    Direct Connect Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-deleting-a-connection" class="md-nav__link">
+    Creating and Deleting a Connection.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-virtual-interfaces" class="md-nav__link">
+    Working with Virtual Interfaces.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloud-best-practice" class="md-nav__link">
+    Cloud Best Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Cloud Best Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design-for-failure" class="md-nav__link">
+    Design for Failure.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decouple-components" class="md-nav__link">
+    Decouple Components.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement-elasticity" class="md-nav__link">
+    Implement Elasticity.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelize" class="md-nav__link">
+    Parallelize.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-location" class="md-nav__link">
+    Data Location.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-best-practice" class="md-nav__link">
+    Security Best Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Best Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-shared-responsibility-model" class="md-nav__link">
+    AWS Shared Responsibility Model.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-and-categorize-assets" class="md-nav__link">
+    Define and Categorize Assets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-isms-to-protect-aws-assets" class="md-nav__link">
+    Design ISMS to Protect AWS Assets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-accounts" class="md-nav__link">
+    Manage Accounts.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-access-to-ec2" class="md-nav__link">
+    Manage Access to EC2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s3-data-at-rest" class="md-nav__link">
+    S3 Data at Rest.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ebs-data-at-rest" class="md-nav__link">
+    EBS Data at Rest.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rds-data-at-rest" class="md-nav__link">
+    RDS Data at Rest.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-aws-best-practices" class="md-nav__link">
+    Practice: AWS Best Practices.
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: AWS Best Practices.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availabilityscalability" class="md-nav__link">
+    High availability/Scalability
+  </a>
+  
+    <nav class="md-nav" aria-label="High availability/Scalability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-front-end" class="md-nav__link">
+    web front end
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-server" class="md-nav__link">
+    application server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-at-rest-security" class="md-nav__link">
+    Data at Rest Security.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provided-solution" class="md-nav__link">
+    Provided Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Provided Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability" class="md-nav__link">
+    high availability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalability" class="md-nav__link">
+    scalability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    security
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2000_Well_Architected_Framework/" class="md-nav__link">
+        Well Architected
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#route-53" class="md-nav__link">
+    Route 53
+  </a>
+  
+    <nav class="md-nav" aria-label="Route 53">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#route-53-overview" class="md-nav__link">
+    Route 53 Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registering-a-domain-through-route-53" class="md-nav__link">
+    Registering a Domain through Route 53.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-route-53-as-your-dns-provider" class="md-nav__link">
+    Configuring Route 53 as your DNS Provider.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-private-cloud" class="md-nav__link">
+    Virtual Private Cloud
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual Private Cloud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-virtual-private-cloud" class="md-nav__link">
+    Create Virtual Private Cloud.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-virtual-private-cloud-subnets" class="md-nav__link">
+    Configure Virtual Private Cloud Subnets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-an-ec2-instance-into-a-virtual-private-cloud" class="md-nav__link">
+    Launch an EC2 Instance into a Virtual Private Cloud.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-vpc-network-address-translation" class="md-nav__link">
+    Configuring VPC Network Address Translation.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-vpc-access-control-lists" class="md-nav__link">
+    Configuring VPC Access Control Lists.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-connect" class="md-nav__link">
+    Direct Connect
+  </a>
+  
+    <nav class="md-nav" aria-label="Direct Connect">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#direct-connect-overview" class="md-nav__link">
+    Direct Connect Overview.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-deleting-a-connection" class="md-nav__link">
+    Creating and Deleting a Connection.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-virtual-interfaces" class="md-nav__link">
+    Working with Virtual Interfaces.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cloud-best-practice" class="md-nav__link">
+    Cloud Best Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Cloud Best Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design-for-failure" class="md-nav__link">
+    Design for Failure.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decouple-components" class="md-nav__link">
+    Decouple Components.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement-elasticity" class="md-nav__link">
+    Implement Elasticity.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parallelize" class="md-nav__link">
+    Parallelize.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-location" class="md-nav__link">
+    Data Location.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-best-practice" class="md-nav__link">
+    Security Best Practice
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Best Practice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aws-shared-responsibility-model" class="md-nav__link">
+    AWS Shared Responsibility Model.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-and-categorize-assets" class="md-nav__link">
+    Define and Categorize Assets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-isms-to-protect-aws-assets" class="md-nav__link">
+    Design ISMS to Protect AWS Assets.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-accounts" class="md-nav__link">
+    Manage Accounts.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-access-to-ec2" class="md-nav__link">
+    Manage Access to EC2.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#s3-data-at-rest" class="md-nav__link">
+    S3 Data at Rest.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ebs-data-at-rest" class="md-nav__link">
+    EBS Data at Rest.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rds-data-at-rest" class="md-nav__link">
+    RDS Data at Rest.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practice-aws-best-practices" class="md-nav__link">
+    Practice: AWS Best Practices.
+  </a>
+  
+    <nav class="md-nav" aria-label="Practice: AWS Best Practices.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availabilityscalability" class="md-nav__link">
+    High availability/Scalability
+  </a>
+  
+    <nav class="md-nav" aria-label="High availability/Scalability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#web-front-end" class="md-nav__link">
+    web front end
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-server" class="md-nav__link">
+    application server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    database
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-at-rest-security" class="md-nav__link">
+    Data at Rest Security.
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provided-solution" class="md-nav__link">
+    Provided Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Provided Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-availability" class="md-nav__link">
+    high availability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scalability" class="md-nav__link">
+    scalability
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    security
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="networking-and-best-practice"><strong>Networking and Best Practice</strong><a class="headerlink" href="#networking-and-best-practice" title="Permanent link">&para;</a></h1>
+<h2 id="route-53">Route 53<a class="headerlink" href="#route-53" title="Permanent link">&para;</a></h2>
+<h3 id="route-53-overview">Route 53 Overview.<a class="headerlink" href="#route-53-overview" title="Permanent link">&para;</a></h3>
+<p>Amazon's DNS service.</p>
+<p>Elastic: easily changed with new records added/removed</p>
+<p>Fault tolerant: can handle the loss of availability zones and still function</p>
+<p>Geo redundant: available in multiple regions</p>
+<p>Offers three services:</p>
+<ol>
+<li>DNS name resolution</li>
+<li>DNS domain registration (or migration)</li>
+<li>Health checking</li>
+</ol>
+<p>Global network of authoritative DNS servers (those responsible for a whole domain.)</p>
+<p>Route 53 can route traffic to the nearest edge location based on the client location (lowest latency.)</p>
+<p>Can transfer other domains. Includes support for newer domains (e.g. <code>.technology</code>)</p>
+<p>For health checks, route 53 can check out app to ensure it's reachable/available as well as functional.</p>
+<h3 id="registering-a-domain-through-route-53">Registering a Domain through Route 53.<a class="headerlink" href="#registering-a-domain-through-route-53" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; Networking -&gt; Route 53 -&gt; Registered Domains -&gt; Register Domain</p>
+<p>"Pending Requests" shows registration in progress</p>
+<p>Eventually "Hosted Zones" will show our registered domain.</p>
+<p>An <code>SOA</code> and <code>NS</code> record are created by default.</p>
+<h3 id="configuring-route-53-as-your-dns-provider">Configuring Route 53 as your DNS Provider.<a class="headerlink" href="#configuring-route-53-as-your-dns-provider" title="Permanent link">&para;</a></h3>
+<p>Convert Amazon public DNS names to something friendlier.</p>
+<p>One approach: create 'A' record for the public IP of an EC2 instance.</p>
+<h2 id="virtual-private-cloud">Virtual Private Cloud<a class="headerlink" href="#virtual-private-cloud" title="Permanent link">&para;</a></h2>
+<h3 id="create-virtual-private-cloud">Create Virtual Private Cloud.<a class="headerlink" href="#create-virtual-private-cloud" title="Permanent link">&para;</a></h3>
+<p>Used for network isolation, similar to VLANs.</p>
+<p>Services -&gt; VPC -&gt; Create VPC</p>
+<p>Configuration:</p>
+<ul>
+<li>Name tag</li>
+<li>CIDR block (up to /16)</li>
+<li>Tenancy (default or dedicated)</li>
+</ul>
+<p>Once created we can see the VPC's DHCP options set, Route table, and Network ACL in the Summary tab.</p>
+<p>DHCP Options Set parameters:</p>
+<ul>
+<li>Name tag</li>
+<li>Domain name</li>
+<li>Domain name servers</li>
+<li>NTP servers</li>
+<li>NetBIOS name servers</li>
+<li>NetBIOS node type</li>
+</ul>
+<p>Network ACL allows both allow and deny rules. Similar config to security groups.</p>
+<h3 id="configure-virtual-private-cloud-subnets">Configure Virtual Private Cloud Subnets.<a class="headerlink" href="#configure-virtual-private-cloud-subnets" title="Permanent link">&para;</a></h3>
+<p>Can create subnets to separate resources by IP address range.</p>
+<p>Services -&gt; VPC -&gt; Subnets -&gt; Create Subnet</p>
+<p>Configuration items:</p>
+<ul>
+<li>Name tag</li>
+<li>VPC</li>
+<li>Availability zone</li>
+<li>CIDR block</li>
+</ul>
+<p>Subnets inherit the route table and network ACL from parent VPC.</p>
+<p>To allow subnet to auto-assign public IPs use Subnet Actions -&gt; Modify Auto-Assign Public IP. Still need an Internet Gateway configured on the VPC to allow Internet traffic in.</p>
+<p>Assign an Internet Gateway to the VPC using VPC -&gt; Internet Gateways.</p>
+<p>The VPC route table will show a destination of 0.0.0.0/0 via the newly added Internet Gateway.</p>
+<h3 id="launch-an-ec2-instance-into-a-virtual-private-cloud">Launch an EC2 Instance into a Virtual Private Cloud.<a class="headerlink" href="#launch-an-ec2-instance-into-a-virtual-private-cloud" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; EC2 -&gt; Create</p>
+<p>Step 3, "Configure Instance" has a "Network" field for choosing the VPC.</p>
+<p>New Windows instance can't seem to get to the Internet. DHCP options set a custom DNS earlier. Instead we should use the Amazon provided DNS unless there's a compelling reason not to.</p>
+<h3 id="configuring-vpc-network-address-translation">Configuring VPC Network Address Translation.<a class="headerlink" href="#configuring-vpc-network-address-translation" title="Permanent link">&para;</a></h3>
+<p>Allows VPCs to access the Internet without using public IPs.</p>
+<p>VPC creation process has four initial configurations:</p>
+<ol>
+<li>VPC with a Single Public Subnet</li>
+<li>VPC with Public and Private Subnets</li>
+<li>VPC with Public and Private Subnets and Hardware VPN access</li>
+<li>VPC with Private Subnet Only and Hardware VPN access</li>
+</ol>
+<p>To demo NAT, use option 2. Their mini-diagram shows NAT between the public and private subnets, but wouldn't the NAT really be between the public subnet and the Internet? The public subnet still uses private IPs internally, right?</p>
+<p>Config items for basic architecture 2:</p>
+<ul>
+<li>IP CIDR Block</li>
+<li>VPC Name</li>
+<li>Public subnet</li>
+<li>Availability zone</li>
+<li>Public subnet name</li>
+<li>Private subnet</li>
+<li>Availability zone</li>
+<li>Public subnet name</li>
+<li>NAT instance</li>
+<li>Instance type</li>
+<li>Key pair name</li>
+<li>S3 endpoint subnet</li>
+<li>Enable DNS hostnames</li>
+<li>Hardware tenancy</li>
+</ul>
+<p>New EC2 instance created based on an Amazon vpc-nat AMI.</p>
+<p>Sample EC2 instance created in the private subnet can't be reached from the Internet but can reach the Internet via NAT.</p>
+<p>SSH (PuTTY) can be used to reach NAT. And he finally shows us "pageant" to manage keys. Yay! If we can't reach the NAT instance, check security group.</p>
+<h3 id="configuring-vpc-access-control-lists">Configuring VPC Access Control Lists.<a class="headerlink" href="#configuring-vpc-access-control-lists" title="Permanent link">&para;</a></h3>
+<p>Apply to all traffic entering/leaving subnets within the VPC. Security groups can work similarly, but for specific instances.</p>
+<p>The Network ACL associated with a VPC is in the VPC summary when the VPC is selected from the VPC list.</p>
+<p>Example: set ACL to deny ICMP outbound traffic</p>
+<h2 id="direct-connect">Direct Connect<a class="headerlink" href="#direct-connect" title="Permanent link">&para;</a></h2>
+<h3 id="direct-connect-overview">Direct Connect Overview.<a class="headerlink" href="#direct-connect-overview" title="Permanent link">&para;</a></h3>
+<p>Allows direct physical connections to private networks on AWS.</p>
+<p>Amazon hardware on premises with amazon-provided network link. Traffic bypasses Internet entirely.</p>
+<p>1 or 10 Gigabits available.</p>
+<p>Great for large volume transfers, real-time data, and added data security.</p>
+<p>Typically the Amazon endpoint is in a DMZ to control reverse access from AWS. Sometimes, depending on the physical location, the actual connection is to an Amazon partner who in turn connects directly to AWS.</p>
+<p>Direct connect needs at least one virtual interface per VPC within AWS that will receive Direct Connect traffic. Additonal virtual interfaces might be needed for public AWS resources.</p>
+<p>Direct connect operates at Layer 2. The AWS routing must be configured into the internal on-premises routers.</p>
+<p>Cross Connect can allow teaming of multiple Direct Connect links.</p>
+<h3 id="creating-and-deleting-a-connection">Creating and Deleting a Connection.<a class="headerlink" href="#creating-and-deleting-a-connection" title="Permanent link">&para;</a></h3>
+<p>Services -&gt; Networking -&gt; Direct Connect -&gt; Get Started with Direct Connect</p>
+<p>us-west-2 Locations include (from live AWS, not video):</p>
+<ul>
+<li>EdgeConnex Hillsboro OR</li>
+<li>Pittock Block, Portland OR</li>
+</ul>
+<p>Since this is a physical install, we would provide contact info and AWS will send a "letter of authorization" to the physical address asking for specific information related to the physical install. For example, we would provide info about our on-premises router. (New method appears to be a download of the LOA which we would take to an APN partner like the two above.)</p>
+<p>Provision virtual interfaces for public AWS resources or our private VPCs.</p>
+<p>To remove direct connect:</p>
+<ol>
+<li>Delete virtual interfaces</li>
+<li>Delete Direct Connect config</li>
+<li>Cancel cross connect network services</li>
+</ol>
+<h3 id="working-with-virtual-interfaces">Working with Virtual Interfaces.<a class="headerlink" href="#working-with-virtual-interfaces" title="Permanent link">&para;</a></h3>
+<p>Need to have a Direct Connect connection configured to create Virtual Interfaces.</p>
+<p>Public virtual interfaces allow us to use public AWS resources (e.g. S3, Glacier) using their public IPs but routed over that Direct Connect connection.</p>
+<p>Private virtual interfaces let us reach a VPC using private IP addresses. One virtual interface per VPC.</p>
+<p>Virtual interfaces (layer 2) use 802.1Q VLAN tags and can apply to the whole AWS cloud or a single specific VPC.</p>
+<p>Routing handled via Border Gateway Protocol (BGP.)</p>
+<p>The AWS console can provide router-specific configuration details needed to make the virtual interface work with our on-premises router.</p>
+<p>Helpful to have at least one EC2 instance per VPC running so that simple connectivity testing can be done.</p>
+<h2 id="cloud-best-practice">Cloud Best Practice<a class="headerlink" href="#cloud-best-practice" title="Permanent link">&para;</a></h2>
+<h3 id="design-for-failure">Design for Failure.<a class="headerlink" href="#design-for-failure" title="Permanent link">&para;</a></h3>
+<p>Assume things will fail (a common assumption for high availability.)</p>
+<p>Design for automated recovery. For example, Auto Scaling groups can terminate misbehaving instances.</p>
+<p>Where are the single points of failure? For example:</p>
+<ul>
+<li>Load balancers</li>
+<li>Cluster master nodes</li>
+</ul>
+<p>What happens when one of those single points of failure dies? How do we know when it has failed? (What about poor performance vs. hard failure?) How will the failed node be replaced?</p>
+<p>Auto Scaling groups is a common way to auto-create new nodes when others fail.</p>
+<p>How does a failover happen? How will users be impacted during a failover event?</p>
+<p>How does the application handle lack of response from a dependent service? (e.g. app server no longer getting responses from its back-end database.) Applications need to have built-in exception handling.</p>
+<p>How are changes in dependent service APIs handled?</p>
+<p>Cloud architecures should handle rebooting or relaunching (new HW) an instance without the whole service going offline.</p>
+<p>For SQS and SimpleDB plan around having a controller thread restart on failure. Ensure apps handle the controller restart appropriately.</p>
+<p>Use Elastic IPs for public access-- move IP from a dead instance to a functional one.</p>
+<p>Keep AMIs with customization on hand to quickly restore an environment from the AMI.</p>
+<p>Use multiple Availability Zones to guard against AZ failure.</p>
+<p>EBS and automated snapshots can allow for a limited roll-back ability, but additional backups of some sort are also needed.</p>
+<p>CloudWatch should be used to monitor resource capacity.</p>
+<p>RDS automated backups should be used to allow for recovery of accidentally removed data.</p>
+<h3 id="decouple-components">Decouple Components.<a class="headerlink" href="#decouple-components" title="Permanent link">&para;</a></h3>
+<p>Loosely coupled components scale better.</p>
+<p>Build components (apps) that tolerate other components which:</p>
+<ul>
+<li>Fail</li>
+<li>Pause</li>
+<li>Respond slowly</li>
+</ul>
+<p>Components are treated as "black boxes" with the internals hidden. They can be re-used in different contexts by following the published access methods.</p>
+<p>Use asynchronous communications rather than waiting for a (possibly slow) reply.</p>
+<p>No dependencies across application layers.</p>
+<p>One example of loose coupling-- replace direct API calls with message queues.</p>
+<p>Add components to an AMI so they can be launched and immediately used. (Me: automate the creation of AMIs from known good base components so we can easily make repeatable changes to the underlying AMI.)</p>
+<p>Design components with "service interfaces" where things like a timeout can be added to reduce tight coupling.</p>
+<p>Make applications stateless so if the back-end app dies, its state loss doesn't matter.</p>
+<p>Use SQS to isolate apps from one another and buffer their communications, reducing tight coupling.</p>
+<h3 id="implement-elasticity">Implement Elasticity.<a class="headerlink" href="#implement-elasticity" title="Permanent link">&para;</a></h3>
+<p>Allows rapid add/remove of AWS resources.</p>
+<p>Auto Scaling can be based on demand or proactively scheduled. (e.g. seasonal variation, in response to marketing campaign, etc.)</p>
+<p>Automation is a big advantage that cloud has built in. Making deployments automated is critical to getting the best advantage from the cloud. Automation reduces errors and inconsistencies and enables easier scaling.</p>
+<p>Chef recipes can help with automating the configuration of the EC2 instance contents themselves. (e.g. users, packages, third party software, etc.)</p>
+<p>Deploy with custom AMIs which could contain specific instance configurations.</p>
+<p>Bootstrapping sets up the Chef client within the OS of the instance so that further customization can be done more easily. The Chef client will pull any client-image-specific changes and customizations that are needed and apply them.</p>
+<p>Bootstrapping also allows instances to be attached to clusters. (What kind of clusters? Unclear...)</p>
+<p>Can auto-provision more storage when needed (is this the only way?)</p>
+<p>Environments like development, staging, and production are easily re-created and deployment errors are reduced when using Bootstrapping.</p>
+<p>App components should be location-agnostic (part of making them loosely coupled.)</p>
+<p>Consider using Just Enough Operating System (JeOS), a minimally configured host OS. Similar to virtual appliances. This can be managed using AMIs.</p>
+<p>Use Auto Scaling Groups.</p>
+<p>Learn and use Chef, Puppet, etc. They can cost some time to learn, but save time in re-used code and increased consistency later on.</p>
+<p>EBS volumes boot faster than instance stores.</p>
+<p>Use SimpleDB to store and retrieve configuration data.</p>
+<h3 id="parallelize">Parallelize.<a class="headerlink" href="#parallelize" title="Permanent link">&para;</a></h3>
+<p>It's easy to run multiple processes in cloud environments. It's easy to add more instances so the ability to run many tasks in parallel on freshly created instances allows virtually unlimited scaling.</p>
+<p>Multiple threads should be used, all services should be thread-safe and use a share-nothing architecture. Each component should be able to run independently of other components.</p>
+<p>Distribute incoming web connections using a load balancer. Web servers should process asyncronously-- each web server process should be independent from the others.</p>
+<p>Batch processing should use multiple processing units (slave units) which makes it possible to use Elastic MapReduce to scale out our processing.</p>
+<p>Use multi-threaded S3 requests and multi-thread SimpleDB <code>GET</code> and <code>BATCHPUT</code>.</p>
+<h3 id="data-location">Data Location.<a class="headerlink" href="#data-location" title="Permanent link">&para;</a></h3>
+<p>Dynamic data should be at a location with low latency compared to its processing location.</p>
+<p>Static data should be kept at a locataion close to the end user. Static data includes things like PDFs, CSS, and JavaScript. CloudFront can help cache this info close to end users for a faster web experience.</p>
+<p>If data is generated in the cloud, ideally any consumers of that data also run in the cloud (in the same region, though keep redundancy in mind.)</p>
+<p>For large imports, consider physical shipping. </p>
+<p>Launch cluster members within the same availability zone.</p>
+<h2 id="security-best-practice">Security Best Practice<a class="headerlink" href="#security-best-practice" title="Permanent link">&para;</a></h2>
+<h3 id="aws-shared-responsibility-model">AWS Shared Responsibility Model.<a class="headerlink" href="#aws-shared-responsibility-model" title="Permanent link">&para;</a></h3>
+<p>Amazon responsible for:</p>
+<ul>
+<li>Facilities</li>
+<li>Hardware physical security</li>
+<li>Network infrastructure</li>
+<li>Virtualization infrastructure (e.g. hypervisors)</li>
+</ul>
+<p>Customer responsible for:</p>
+<ul>
+<li>Amazon Machine Images and OS</li>
+<li>Applications</li>
+<li>Configuration and policies applied to AWS resources</li>
+<li>Credentials (IAM + other)</li>
+<li>Data at rest</li>
+<li>Data in transit</li>
+<li>Data stores</li>
+</ul>
+<p>Container services model is different as Amazon manages more of the underlying infrastructure, up through the OS hosting the containers.</p>
+<p>In the Abstracted Services model, Amazon manages even more, up to the client-side data being managed by the customer.</p>
+<h3 id="define-and-categorize-assets">Define and Categorize Assets.<a class="headerlink" href="#define-and-categorize-assets" title="Permanent link">&para;</a></h3>
+<p>When designing an Information Security Management System (ISMS) we should work out a way where the effort of securing assets is appropriate for the level of protection they need.</p>
+<p>Qualitative categorization uses expected risks and their expected likelihood to help prioritize our efforts.</p>
+<p>Quantitative categorization uses financial impacts to help prioritize our efforts.</p>
+<p>Once threats are identified, solutions can be made to protect against the threats by mitigation or prevention.</p>
+<p>Essential assets:</p>
+<ul>
+<li>Processes (business processess like cloud computing)</li>
+<li>Activities (for achieving business goals)</li>
+<li>Business information (off-site backups to protect from fire, for example)</li>
+<li>Reputation</li>
+</ul>
+<p>Support assets:</p>
+<ul>
+<li>Personnel</li>
+<li>Hardware</li>
+<li>Sites</li>
+<li>Partners</li>
+</ul>
+<p>Build an asset matrix with info like:</p>
+<ul>
+<li>Owner</li>
+<li>Category (sensitivity level)</li>
+<li>Dependencies (network, database)</li>
+<li>Asset sensitivity (dupe?)</li>
+<li>Related costs (deployment, maintenance, replacement, etc.)</li>
+</ul>
+<h3 id="design-isms-to-protect-aws-assets">Design ISMS to Protect AWS Assets.<a class="headerlink" href="#design-isms-to-protect-aws-assets" title="Permanent link">&para;</a></h3>
+<p>Start with business objectives. For example, storing trade secrets in an S3 bucket will require careful handling to ensure only trusted people have access to the underlying information. (Me: use client-side decryption with a good key management and auditing system.)</p>
+<p>Certain regulations might need to be followed, such as a requirement to retain certain records for a given length of time.</p>
+<p>The size of the organization and its internal business processes might determine which methods are easiest to use.</p>
+<p>An Information Security Management System is a phased approach to apply security. A standard framework like ISO 27001 can help.</p>
+<p>Steps in building ISMS:</p>
+<ol>
+<li>Define scope (AWS services which need to be secured)</li>
+<li>Create a policy (what data needs to be encrypted, for example)</li>
+<li>Risk assessment (evaluate threats and apply controls)</li>
+<li>Choose a framework (ISO 27001, ISO 12207)</li>
+<li>Get management approval</li>
+<li>Create a statement of applicability (describes the specific controls that are to be used)</li>
+</ol>
+<h3 id="manage-accounts">Manage Accounts.<a class="headerlink" href="#manage-accounts" title="Permanent link">&para;</a></h3>
+<p>Ensure just enough permissions granted (principle of least privilege)</p>
+<p>IAM users + groups makes assigning permissions easier.</p>
+<p>Special account: the AWS account</p>
+<ul>
+<li>Used to sign up and represents the business relationship with AWS</li>
+<li>Has root permission to all resources</li>
+<li>Multiple AWS accounts can exist (can multiple root accounts per AWS account exist?)</li>
+</ul>
+<p>Normal accounts: IAM accounts</p>
+<ul>
+<li>Multiple IAM users under a single AWS account</li>
+<li>Can be a person or application</li>
+<li>Fine grained permissions</li>
+</ul>
+<p>Scenarios for multiple AWS accounts</p>
+<ul>
+<li>Prod, dev, and test might be under different accounts</li>
+<li>Multiple departments with autonomoy</li>
+<li>Centralized security with multiple autonomous projects</li>
+<li>One AWS account for centralized common resources</li>
+<li>Separate AWS accounts per autonomous project</li>
+</ul>
+<p>Credential types:</p>
+<ul>
+<li>Sign-in: like username/password + MFA</li>
+<li>Programmatic: access keys or developer-created MFA-protected API calls</li>
+</ul>
+<p>Delegation needed when:</p>
+<ul>
+<li>Applications on EC2 require AWS resource access</li>
+<li>Access between AWS accounts</li>
+<li>Corporate identity federation</li>
+</ul>
+<h3 id="manage-access-to-ec2">Manage Access to EC2.<a class="headerlink" href="#manage-access-to-ec2" title="Permanent link">&para;</a></h3>
+<p>OS-level access to EC2 instances uses OS-level credentials, not AWS-level credentials.</p>
+<p>Customers own and change the OS credentials, but AWS can help bootstratp this process via EC2 key pairs. Other options include X.509 certificates, Microsoft AD, or OS-local authentication.</p>
+<p>AWS provides asymmetric RSA key pairs. (public/private key) and can be moved between IAM or AWS accounts via import.</p>
+<p>Linux uses the <code>cloud-init</code> daemon to grant initial access. This appends the key pair defined during instance creation to the <code>authorized_keys</code> file.</p>
+<p>(Connection demo using PuTTY... isn't this a review?)</p>
+<p>Windows <code>ec2config</code> service sets a random admin password, and encrypts it with the public key used during EC2 instance creation.</p>
+<p>We then need to submit our private key via web form (<strong>WHICH IS A TERRIBLE IDEA FOR SECRET INFORMATION</strong>) to decrypt the admin password. This is a terrible idea because:</p>
+<ul>
+<li>It trains end users that submitting secret keys to websites is normal and accepted</li>
+<li>It could allow the secret key to be intercepted by a man-in-the-middle attack</li>
+<li>We can no longer tell auditors that a secret key has never left our control</li>
+</ul>
+<p>We should be sure that Windows key pairs are never used for any purpose beyond intial Windows instance access.</p>
+<h3 id="s3-data-at-rest">S3 Data at Rest.<a class="headerlink" href="#s3-data-at-rest" title="Permanent link">&para;</a></h3>
+<p>Data at rest concerns:</p>
+<ul>
+<li>Deletion</li>
+<li>Disclosure</li>
+<li>Modification</li>
+<li>Availabilty</li>
+</ul>
+<p>Methods to help mitigate these issues</p>
+<ul>
+<li>Permissions (controls who can do the above activities)</li>
+<li>Bucket-level</li>
+<li>Object-level</li>
+<li>IAM policies</li>
+<li>Versioning (allows an undo if an activity was unwanted)</li>
+<li>Disabled by default</li>
+<li>Protects from deletion or modification at increased risk of disclosure</li>
+</ul>
+<p>Replication improves availability of S3 data by replicating it across all the availability zones in a region. Won't protect from deletion or modification.</p>
+<p>Backups can also protect from deletion or modification. S3 backups are not automated, though we can configure a backup to Glacier. OS-level backups may still be needed for data within instances. (EBS?)</p>
+<p>S3 server-side encryption can be done easily and transparently to the end user. Each object is encrypted with a unique AES256 key. That key is encrypted with a master AES256 key which is rotated and used for auto-decryption.</p>
+<p>S3 client-side encryption can also be used, but requires us to manage our own keys outside of AWS. The data is encrypted with our key on the way to S3 and the key itself is kept by us outside of AWS. The application reading the S3 data will decrypt it. (Hopefully there are well-audited libraries to handle this for developers since getting encryption done right is very hard.)</p>
+<p>There's an <a href="https://docs.aws.amazon.com/general/latest/gr/aws_sdk_cryptography.html">AWS Encryption SDK to use for this</a> though it might be best to avoid using an SDK published by the same company holding the data since if Amazon itself were compromised, that SDK might itself have leaks found or introduced.</p>
+<h3 id="ebs-data-at-rest">EBS Data at Rest.<a class="headerlink" href="#ebs-data-at-rest" title="Permanent link">&para;</a></h3>
+<p>EBS volumes are stored internal to AWS as files. Two copies are kept in the same availability zone (mirroring) which allows the data to survive an underlying hardware failure but not a AZ-wide disaster.</p>
+<p>EBS snapshots can be created as a backup with independent permissions. An encrypted EBS volume always creates encrypted EBS snapshots.</p>
+<p>Windows can use Encrypting File System (EFS) for local-to-the-instance encryption of the OS data. Bitlocker can also be used but only works with a password since EC2 doesn't include any Trusted Platform Module support.</p>
+<p>Linux can use <code>dm-crypt</code> for transparent encryption and key management.</p>
+<p>Other third party tools which can be used:</p>
+<ul>
+<li>TrueCrypt (discontinued in 2014. What year was this video made?)</li>
+<li>SafeNet ProtectV</li>
+</ul>
+<h3 id="rds-data-at-rest">RDS Data at Rest.<a class="headerlink" href="#rds-data-at-rest" title="Permanent link">&para;</a></h3>
+<p>AES256 used to encrypt RDS data. This must be specified when the database is created.</p>
+<p>There may be additional crypto APIs available from specific database instances.</p>
+<p>Apps can use PKI certificates to help encrypt/decrypt database info.</p>
+<p>Instance-Specific APIs:</p>
+<ul>
+<li>MS SQL</li>
+<li>Transact-SQL functions for encryption, signing, and hashing</li>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>Oracle Transparent Data Encryption (Enterprise Edition)</li>
+<li>Bring your own license only for EE</li>
+</ul>
+<p>(no PostgreSQL?)</p>
+<p>For storing personally identifiable info (PII) it may be better to obfuscate the info using a one-way hash.</p>
+<p>RDS encryption not available for Amazon Aurora.</p>
+<p>Selective encryption of database fields can create problems for data lookups since the encrypted data may not be found.</p>
+<h2 id="practice-aws-best-practices">Practice: AWS Best Practices.<a class="headerlink" href="#practice-aws-best-practices" title="Permanent link">&para;</a></h2>
+<p>Goal: Build a 3 tier web application on AWS</p>
+<p>Questions:</p>
+<ul>
+<li>How do you ensure high availability?</li>
+<li>How do you enable scalability</li>
+<li>What are the data-at-rest security considerations at each tier?</li>
+</ul>
+<h3 id="high-availabilityscalability">High availability/Scalability<a class="headerlink" href="#high-availabilityscalability" title="Permanent link">&para;</a></h3>
+<h4 id="web-front-end">web front end<a class="headerlink" href="#web-front-end" title="Permanent link">&para;</a></h4>
+<p>Use route 53 health checks across at least two regions to provide DR if an AZ fails as well as reducing end user latency on web requests.</p>
+<p>Use SQS for fetching app server info.</p>
+<p>An Amazon AMI is built using automated/scripted methods to serve as the web front end immediately upon deployment.</p>
+<h4 id="application-server">application server<a class="headerlink" href="#application-server" title="Permanent link">&para;</a></h4>
+<p>Use automatic scaling groups with a minimum of two instances split across AZs.</p>
+<p>memcached will be used to cache database info locally for repeated application server queries to the same records.</p>
+<p>Use SQS for fetching database data and for passing info to the web server.</p>
+<p>An Amazon AMI is built using automated/scripted methods to serve as the application server immediately upon deployment.</p>
+<h4 id="database">database<a class="headerlink" href="#database" title="Permanent link">&para;</a></h4>
+<p>Consider either a multi-AZ deployment or the Amazon Aurora Global Database if multi-region redundancy is desired.</p>
+<p>Use SQS for passing info to the app server.</p>
+<h3 id="data-at-rest-security">Data at Rest Security.<a class="headerlink" href="#data-at-rest-security" title="Permanent link">&para;</a></h3>
+<p>Like most web applications, availability and data integrity are more important than unauthorized disclosure so there is no use of encryption.</p>
+<p>Static web objects will use S3 versioned storage for simplified recovery in the event of unwanted modification.</p>
+<p>The Amazon AMIs mitigate the need for regular backups of the web or app server instances.</p>
+<p>The database will have snapshots taken regularly.</p>
+<p>The database will go into a separate VPC so that access can be more easily controlled.</p>
+<h3 id="provided-solution">Provided Solution<a class="headerlink" href="#provided-solution" title="Permanent link">&para;</a></h3>
+<h4 id="high-availability">high availability<a class="headerlink" href="#high-availability" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Design for failure</li>
+<li>Identify single points of failure</li>
+<li>Graceful failover with elastic IPs</li>
+<li>Maintain AMIs to restore environments</li>
+<li>Use Availability Zones</li>
+<li>Use EBS and automated snapshots</li>
+<li>Use CloudWatch for monitoring</li>
+<li>Use RDS automated backups</li>
+</ul>
+<h4 id="scalability">scalability<a class="headerlink" href="#scalability" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Decouple components</li>
+<li>Bundle components with AMIs</li>
+<li>Design components with service interfaces</li>
+<li>Make applications stateless</li>
+<li>Use SQS message queueing</li>
+<li>Use auto scaling groups</li>
+<li>Implement elasticity</li>
+<li>App components location-agnostic</li>
+<li>Reduce OS footprint in AMI (Just Enough Operating System)</li>
+<li>Use auto scaling groups</li>
+<li>Use deployment / configuration management tools (Chef / Puppet / Ansible / Terraform)</li>
+<li>Monitor system metrics and set auto-scaling options</li>
+<li>Store config information using SimpleDB (off-server)</li>
+</ul>
+<h4 id="security">security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h4>
+<ul>
+<li>database</li>
+<li>Use internal crypto functions</li>
+<li>Hash PII</li>
+<li>Put the DB in separate secured VPC (good idea!)</li>
+<li>app servers</li>
+<li>encryption local to OS</li>
+<li>web servers</li>
+<li>S3 server-side encryption</li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2021-05-14
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" title="Back to top" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../0400_Databases_and_Application_Services/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Database & Application
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../2000_Well_Architected_Framework/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Well Architected
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2021 Aswin Sivaraman .R
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://gts-ibm.slack.com/team/U020F7D4771" target="_blank" rel="noopener" title="Aswin" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+      </a>
+    
+      
+      
+      <a href="mailto:<aswin.sivaraman1@ibm.com>" target="_blank" rel="noopener" title="" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M476 3.2 12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.ibm.com/Aswin-Sivaraman1" target="_blank" rel="noopener" title="github.ibm.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      
+    
+  </body>
+</html>
