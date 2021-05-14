@@ -1,6 +1,6 @@
 # **Installing Kubernetes cluster on Azure Cloud VM's**
 
-In this document we are going to install kubernetes on Azure VM's and will deploy the containers from there. You can use the [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI) & [Ansible](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to proceed.
+In this document we are going to install kubernetes on Azure VM's and will deploy the containers from there. You can use the [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) & [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to proceed.
 
 ## Prerequisites:
 
@@ -8,11 +8,11 @@ In this document we are going to install kubernetes on Azure VM's and will deplo
 
 An SSH key pair from jumphost to all the servers. (Remember to enble root login to yes in sshd_config).
 
-Use the script `Azure_create_vm_jumphost.ps1` from [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI) to create a jumphost with PublicIP and in seperate VNET.
+Use the script `Azure_create_vm_jumphost.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) to create a jumphost with PublicIP and in seperate VNET.
 
 2.  Two or Three Linux servers with at least 2GB RAM and 2 vCPUs each. You should be able to SSH into each server as the root user with your SSH key pair.
 
-Use the script `Azure_create_vm_4kubernetes_NATGW.ps1` from [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI) for Kube Master and worker nodes.
+Use the script `Azure_create_vm_4kubernetes_NATGW.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) for Kube Master and worker nodes.
 
 The above script will create the Data host with Debian 10 and in Seperate VNET from jumphost. 
 
@@ -49,14 +49,14 @@ ansible_python_interpreter=/usr/bin/python3
 ```
 ## Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:
 
-Use script `user_creation_initial.yml` from [Ansible](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
+Use script `user_creation_initial.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/user_creation_initial.yml
 ```
 ## Step 3 — Installing Kubernetes Dependencies:
 
-Use script `kube_dependencies_install.yml` from [Ansible](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
+Use script `kube_dependencies_install.yml` from [Ansible](https://ggithub.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/kube_dependencies_install.yml
@@ -67,7 +67,7 @@ After execution, Docker, kubeadm, and kubelet will be installed on all of the re
 
 ## Step 4 — Setting Up the Master Node:
 
-Use `kube-cluster/master_initial.yml` from [Ansible](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
+Use `kube-cluster/master_initial.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/master_initial.yml 
@@ -87,7 +87,7 @@ ansible@debian1:~$
 ```
 ## Step 5 — Setting Up the Worker Nodes:
 
-Use `kube-cluster/join_worker_nodes.yml` from [Ansible](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
+Use `kube-cluster/join_worker_nodes.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
@@ -214,4 +214,4 @@ ansible@debian1:~$"
 
  We created all the resources in one single Resource Group. By deleting the RG, we will be deleting all the resources created for this expriment.
  
- Use `Azure_delete_resourcegroup.ps1 from` [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI)
+ Use `Azure_delete_resourcegroup.ps1 from` [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI)
