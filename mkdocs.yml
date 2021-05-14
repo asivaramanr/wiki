@@ -56,8 +56,7 @@ nav:
           
 extra_css:
     - css/extra.css
-plugins:
-  - git-revision-date    
+
 
 # Extensions
 markdown_extensions:
