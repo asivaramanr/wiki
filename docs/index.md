@@ -180,3 +180,6 @@ From here, we can use tools like Pandoc or AsciiDoctor inside our scripts to aut
 ## Conclusion
 
 Documentation as Code is still a raw concept and I’m sure that it will start to emerge in a few years or months. To me, it is a procedure together with tools to get the best documentation and revision control along with the code. The way of creating documentation must be simple and the result must be useful.  The scripts shown here are just ideas and I’m sure that once you read this, a lot of new ones will strike your head.
+
+!!! note
+    These docs are created for my personal use. You are welcome to read them.
