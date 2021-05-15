@@ -177,7 +177,7 @@ ansible@debian1:~$
 ```
 
 !!! success
-    you have successfully set up a Kubernetes cluster on Linux using Kubeadm and Ansible.
+    You have successfully set up a Kubernetes cluster on Linux using Kubeadm and Ansible.
 
 ## Now Cleanup the resources tosave the bill.
 
