@@ -1,10 +1,10 @@
-# **DevOps Overview**
+# **Overview**
 
 ## DevOps Model Defined
 
 DevOps is the combination of cultural philosophies, practices, and tools that increases an organization’s ability to deliver applications and services at high velocity: evolving and improving products at a faster pace than organizations using traditional software development and infrastructure management processes. This speed enables organizations to better serve their customers and compete more effectively in the market.
 
-## How DevOps Works
+## How DevOps Works?
 
 
 
@@ -99,7 +99,4 @@ Increased communication and collaboration in an organization is one of the key c
 
 ## DevOps Tools
 
-The DevOps model relies on effective tooling to help teams rapidly and reliably deploy and innovate for their customers. These tools automate manual tasks, help teams manage complex environments at scale, and keep engineers in control of the high velocity that is enabled by DevOps. AWS provides services that are designed for DevOps and that are built first for use with the AWS cloud. These services help you use the DevOps practices described above.
-
-
-
+The DevOps model relies on effective tooling to help teams rapidly and reliably deploy and innovate for their customers. These tools automate manual tasks, help teams manage complex environments at scale, and keep engineers in control of the high velocity that is enabled by DevOps. 
