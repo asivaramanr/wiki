@@ -4,26 +4,25 @@ In this document we are going to install kubernetes on Azure VM's and will deplo
 
 ## Prerequisites:
 
-1. A Jumphost with PublicIP, (We will use jumphost as Ansible Master and Datahost for KubeMaster and Worker nodes)
+* A Jumphost with PublicIP, (We will use jumphost as Ansible Master and Datahost for KubeMaster and Worker nodes)
 
-An SSH key pair from jumphost to all the servers. (Remember to enble root login to yes in sshd_config).
+* An SSH key pair from jumphost to all the servers. (Remember to enble root login to yes in sshd_config).
 
-Use the script `Azure_create_vm_jumphost.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) to create a jumphost with PublicIP and in seperate VNET.
+  Use the script `Azure_create_vm_jumphost.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) to create a jumphost with PublicIP and in seperate VNET.
 
-2.  Two or Three Linux servers with at least 2GB RAM and 2 vCPUs each. You should be able to SSH into each server as the root user with your SSH key pair.
+* Two or Three Linux servers with at least 2GB RAM and 2 vCPUs each. You should be able to SSH into each server as the root user with your SSH key pair.
 
-Use the script `Azure_create_vm_4kubernetes_NATGW.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) for Kube Master and worker nodes.
+  Use the script `Azure_create_vm_4kubernetes_NATGW.ps1` from [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) for Kube Master and worker nodes.
 
-The above script will create the Data host with Debian 10 and in Seperate VNET from jumphost. 
+  The above script will create the Data host with Debian 10 and in Seperate VNET from jumphost. 
 
-3.  Ansible installed on jumphost. For installation instructions, follow the official [Ansible installation documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
+* Ansible installed on jumphost. For installation instructions, follow the official [Ansible installation documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 
 Update the /etc/hosts file on all servers:
 ```
 10.1.0.4 debian1 master
 10.1.0.5 debian2 worker1
 10.1.0.6 debian3 worker2
-root@jumphost:~/kube-cluster#
 ```
 ## Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root:
 
