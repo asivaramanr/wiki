@@ -176,9 +176,8 @@ Commercial support is available at
 ansible@debian1:~$ 
 ```
 
-## Conclusion :
-
-If you get the output. COngragulations !! you’ve successfully set up a Kubernetes cluster on Debian Linux using Kubeadm and Ansible.
+!!! success
+    you have successfully set up a Kubernetes cluster on Linux using Kubeadm and Ansible.
 
 ## Now Cleanup the resources tosave the bill.
 
