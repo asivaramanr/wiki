@@ -102,13 +102,13 @@ markdown_extensions:
 # Customization    
 extra:
   social:
-    - icon: brands/github
+    - icon: fontawesome/brands/github
       link: https://github.com/asivaramanr
-    - icon: brands/docker
+    - icon: fontawesome/brands/docker
       link: https://hub.docker.com/u/aswinsivaramanr
-    - icon: brands/twitter
+    - icon: fontawesome/brands/twitter
       link: https://twitter.com/aswin_sivaraman
-    - icon: solid/envelope
+    - icon: fontawesome/solid/envelope
       link: mailto:<aswinsivaraman@aol.com>    
 
 # Copyright
