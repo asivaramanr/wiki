@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,4 +13,4 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material
       - run: pip install mkdocs-git-revision-date-plugin
-      - run: mkdocs gh-deploy --force
+      - run: mkdocs gh-deploy -c
