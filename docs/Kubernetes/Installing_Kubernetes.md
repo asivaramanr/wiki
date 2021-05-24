@@ -111,28 +111,33 @@ Deployment scripts are [here](https://github.com/asivaramanr/VisualStudio/tree/m
 ```
 kubectl create -f nginx-deploy.yml
 ```
-A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The above deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.
-
-Next, run the following command to create a service named nginx-service that will expose the app publicly. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port opened on each node of the cluster:
+A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.
 
 ```
-kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
+kubectl get deployment -l app=nginx-app
 ```
+```
+ansible@master:~$ kubectl get deployment -l app=nginx-app
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           45m
+ansible@master:~$
+```
+
 ### Services
 
 Services are another type of Kubernetes object that expose cluster internal services to clients, both internal and external. They are also capable of load balancing requests to multiple pods, and are an integral component in Kubernetes, frequently interacting with other components.
 
-Run the following command on maaster as ansible:
+Next, run the following command to create a service named nginx-service that will expose the app to Public IP. It will do so through a LoadBalancer, a scheme that will make the pod accessible through an arbitrary port on a loadBalancer public IP:
+
 ```
-kubectl get services
+kubectl get service -l app=nginx-app
 ```
 Output:
 ```
-ansible@debian1:~$ kubectl get services
-NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        34m
-nginx        NodePort    10.104.93.128   <none>        80:32638/TCP   8m10s
-ansible@debian1:~$
+ansible@master:~$ kubectl get service -l app=nginx-app
+NAME               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+nginx-service-lb   LoadBalancer   10.109.131.114   <pending>     80:31000/TCP   11m
+ansible@master:~$
 ```
 ## To test that everything is working:
 
