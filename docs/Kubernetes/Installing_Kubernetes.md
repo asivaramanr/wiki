@@ -76,7 +76,9 @@ ansible@debian1:~$
 ```
 ## Step 5 — Setting Up the Worker Nodes:
 
+!!! important
 Switch back to root account from ansible to completed the final step of installation.
+
 ```
 ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
 ```
