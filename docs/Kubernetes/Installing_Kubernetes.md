@@ -192,7 +192,8 @@ Output:
 No resources found in default namespace.
 ansible@debian1:~$"
 ```
- ### To delete all the resources created in Azure 
+
+### To delete all the resources created in Azure 
 
  If you used the scripts. We created all the resources in one single Resource Group. By deleting the RG,  all the resources created inside the RG will be deleted.
  
