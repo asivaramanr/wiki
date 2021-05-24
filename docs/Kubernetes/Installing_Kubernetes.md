@@ -1,12 +1,12 @@
-# **Installing Kubernetes cluster on Azure Cloud VM's**
+# **Installing Kubernetes cluster on Cloud Platform VM's**
 
-In this we are going to install kubernetes on any of the Cloud platforms and will deploy pod & expose services to outside network. You can use the [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI), if you are using Azure as a platform & [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to install & configure kubernetes on nodes.
+We are going to install kubernetes cluster on the Cloud platforms and will deploy pod & expose services to outside network. You can use the [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI), if you are using Azure Cloud  to deploy the VM's & [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to install & configure kubernetes.
 
 ## Prerequisites:
 
 1. A Kubernetes master node with mininum of 2vCPU and 4GB Memory.
 
-    1. Passwordless authentication from master to all the worker nodes as root. (Remember to enble root login to yes in sshd_config).
+    1. Passwordless authentication to all nodes as root. (Remember to enble root login to yes in sshd_config).
 
 2.  Two or Three worker nodes with at least 2 vCPUs and 8GB RAM each. 
 
@@ -14,22 +14,23 @@ In this we are going to install kubernetes on any of the Cloud platforms and wil
 3.  Ansible installed on master. For installation instructions, follow the official [Ansible installation documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 
     1. Update the /etc/hosts file on all servers:
+
     ```
-    10.1.0.4 debian1 master
-    10.1.0.5 debian2 worker1
-    10.1.0.6 debian3 worker2
+    10.1.0.4 master
+    10.1.0.5 worker1
+    10.1.0.6 worker2
     ```
 
-## Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root user:
+## Step 1 — Setting Up the Workspace Directory and Ansible Inventory file as root user:
 
-This will be on the master node we just created. 
+This will be on the master node we created. 
 
 ```
 mkdir ~/kube-cluster ; cd ~/kube-cluster
 ```
 This directory will be our workspace and will contain all of our Ansible playbooks. It will also be the directory inside which you will run local commands.
 
-Create a file named `~/kube-cluster/hosts` using nano or your favorite text editor and update below:
+Create a file named `hosts` using nano or your favorite text editor and update below:
 
 ```
 [masters]
@@ -44,15 +45,20 @@ ansible_python_interpreter=/usr/bin/python3
 ```
 ## Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:
 
+We will create a non-root user to execute kubectl commands.
+
+!!! important
+    We will be using root account for cluster installation and all kubectl commands should be executed on master server as ansible user.
+
 ```
 ansible-playbook -i hosts ~/kube-cluster/user_creation_initial.yml
 ```
-## Step 3 — Installing Kubernetes Dependencies:
+## Step 3 — Installing Kubernetes & Dependencies:
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/kube_dependencies_install.yml
 ```
-(Current version of k8s is 1.21.0-00 change it as required)
+> (Current version of k8s is 1.21.0-00 change it as required)
 
 After execution, Docker, kubeadm, and kubelet will be installed on all of the remote servers. kubectl is not a required component and is only needed for executing cluster commands. 
 
@@ -75,16 +81,15 @@ debian1   Ready    control-plane,master   20m   v1.21.0
 ansible@debian1:~$
 ```
 ## Step 5 — Setting Up the Worker Nodes:
-
 !!! important
-    Switch back to root account from ansible to completed the final step of installation.
+    Run below command as root user
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
 ```
 ## Step 6 — Verifying the Cluster:
 
-Now onwards we will use only ansible account for creating deployments and services.
+Now onwards we will use ansible user for creating deployments and services.
 
 ```
 kubectl get nodes
@@ -102,21 +107,20 @@ ansible@debian1:~$
 If all of your nodes have the value Ready for STATUS, it means that they’re part of the cluster and ready to run workloads.
 
 !!! success
-    You have successfully set up a Kubernetes cluster with Ansible.
+    You have successfully installed Kubernetes cluster.
 
-## Step 7 — Deploying Application on the Cluster:
+## Step 7 — Deploying Applications in the Cluster:
 
 Deployment scripts are [here](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes).
 
 ### Deployment
 
-!!! note
-    All the kubectl commands should be executed as non-root user (ansible) we created initially.
+A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.
 
 ```
 kubectl create -f nginx-deploy.yml
 ```
-A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.
+Once the deployment is successful verify the status using below.
 
 ```
 kubectl get deployment -l app=nginx-app
@@ -165,6 +169,9 @@ ansible@master:~$
 
 
 ![nginx](nginx.PNG)
+
+                
+                                     😆🤪 😆 🤪😆 😆🤪 😆 🤪
 
 
 ## Cleanup the resources .
