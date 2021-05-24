@@ -110,6 +110,9 @@ Deployment scripts are [here](https://github.com/asivaramanr/VisualStudio/tree/m
 
 ### Deployment
 
+!!! note
+    All the kubectl commands should be executed as non-root user (ansible) we created initially.
+
 ```
 kubectl create -f nginx-deploy.yml
 ```
