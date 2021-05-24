@@ -127,7 +127,7 @@ ansible@master:~$
 
 Services are another type of Kubernetes object that expose cluster internal services to clients, both internal and external. They are also capable of load balancing requests to multiple pods, and are an integral component in Kubernetes, frequently interacting with other components.
 
-Next, run the following command to create a service named nginx-service that will expose the app to Public IP. It will do so through a LoadBalancer, a scheme that will make the pod accessible through an arbitrary port on a loadBalancer public IP:
+Next, run the following command to create a service named nginx-service that will expose the app to Public IP. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port on a worker public IP:
 
 ```
 kubectl get service -l app=nginx-app
@@ -135,46 +135,32 @@ kubectl get service -l app=nginx-app
 Output:
 ```
 ansible@master:~$ kubectl get service -l app=nginx-app
-NAME               TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-nginx-service-lb   LoadBalancer   10.109.131.114   <pending>     80:31000/TCP   11m
+NAME               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+nginx-service-np   NodePort   10.104.48.148   <none>        80:31000/TCP   4m27s
 ansible@master:~$
 ```
 ## To test that everything is working:
 
-Run below command:
+Check on which worker node the pods are running
 ```
-curl http://10.1.0.5:32638
+kubectl get pods --output=wide
 ```
-Output:
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-ansible@debian1:~$ 
 ```
+ansible@master:~$  kubectl get pods --output=wide
+NAME                               READY   STATUS    RESTARTS   AGE    IP               NODE      NOMINATED NODE   READINESS GATES
+nginx-deployment-8bc69dc67-c62t7   1/1     Running   0          120m   10.244.235.131   worker1   <none>           <none>
+nginx-deployment-8bc69dc67-crjbd   1/1     Running   0          120m   10.244.189.66    worker2   <none>           <none>
+nginx-deployment-8bc69dc67-frsv5   1/1     Running   0          111m   10.244.189.67    worker2   <none>           <none>
+ansible@master:~$
+```
+
+Now you can use the public IP of worker node with port 31000 to get the default nginxpage.
+
+
+![nginx](nginx.PNG)
+
+
 ## Now Cleanup the resources tosave the bill.
 
 ### If you would like to remove the Nginx application, first delete the nginx service from the master node:
