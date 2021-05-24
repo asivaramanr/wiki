@@ -104,14 +104,16 @@ If all of your nodes have the value Ready for STATUS, it means that they’re pa
 
 ## Step 7 — Deploying Application on the Cluster:
 
+Deployment scripts are [here](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes).
+
 ### Deployment
 
 ```
-kubectl create deployment nginx --image=nginx
+kubectl create -f nginx-deploy.yml
 ```
 A deployment is a type of Kubernetes object that ensures there’s always a specified number of pods running based on a defined template, even if the pod crashes during the cluster’s lifetime. The above deployment will create a pod with one container from the Docker registry’s Nginx Docker Image.
 
-Next, run the following command to create a service named nginx that will expose the app publicly. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port opened on each node of the cluster:
+Next, run the following command to create a service named nginx-service that will expose the app publicly. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port opened on each node of the cluster:
 
 ```
 kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
