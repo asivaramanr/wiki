@@ -130,7 +130,7 @@ Services are another type of Kubernetes object that expose cluster internal serv
 Next, run the following command to create a service named nginx-service that will expose the app to Public IP. It will do so through a NodePort, a scheme that will make the pod accessible through an arbitrary port on a worker public IP:
 
 ```
-kubectl get service -l app=nginx-app
+kubectl create -f nginx-service-np.yml
 ```
 Output:
 ```
@@ -155,17 +155,18 @@ nginx-deployment-8bc69dc67-frsv5   1/1     Running   0          111m   10.244.18
 ansible@master:~$
 ```
 
-Now you can use the public IP of worker node with port 31000 to get the default nginxpage.
+
+### Now you can use the public IP of worker node with port 31000 to get the default nginx page.
 
 
 ![nginx](nginx.PNG)
 
 
-## Now Cleanup the resources tosave the bill.
+## Cleanup the resources .
 
 ### If you would like to remove the Nginx application, first delete the nginx service from the master node:
 ```
-kubectl delete service nginx
+kubectl delete -f nginx-service-np.yml
 ```
 ### Run the following to ensure that the service has been deleted:
 ```
@@ -181,7 +182,7 @@ ansible@debian1:~$
 ```
 ### Then delete the deployment:
 ```
-kubectl delete deployment nginx
+kubectl delete -f nginx-deploy.yml
 ```
 ### Run the `kubectl get services` again to confirm it worked:
 
@@ -193,6 +194,6 @@ ansible@debian1:~$"
 ```
  ### To delete all the resources created in Azure 
 
- We created all the resources in one single Resource Group. By deleting the RG, we will be deleting all the resources created for this expriment.
+ If you used the scripts. We created all the resources in one single Resource Group. By deleting the RG,  all the resources created inside the RG will be deleted.
  
  Use `Azure_delete_resourcegroup.ps1 from` [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI)
