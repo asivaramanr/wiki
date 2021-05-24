@@ -1,22 +1,17 @@
 # **Installing Kubernetes cluster on Azure Cloud VM's**
 
-In this document we are going to install kubernetes on Azure VM's and will deploy the containers from there. You can use the [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI) & [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to proceed.
+In this we are going to install kubernetes on any of the Cloud platforms and will deploy pod & expose services to outside network. You can use the [AzureCLI](https://github.com/asivaramanr/VisualStudio/tree/master/AzureCLI), if you are using Azure as a platform & [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install) scripts from my github  to install & configure kubernetes on nodes.
 
 ## Prerequisites:
 
-1. A Jumphost with PublicIP, (We will use jumphost as Ansible Master and Datahost for KubeMaster and Worker nodes)
+1. A Kubernetes master node with mininum of 2vCPU and 4GB Memory.
 
-    1. An SSH key pair from jumphost to all the servers. (Remember to enble root login to yes in sshd_config).
+    1. Passwordless authentication from master to all the worker nodes as root. (Remember to enble root login to yes in sshd_config).
 
-    2. Use the script `Azure_create_vm_jumphost.ps1` from [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI) to create a jumphost with PublicIP and in seperate VNET.
+2.  Two or Three worker nodes with at least 2 vCPUs and 8GB RAM each. 
 
-2.  Two or Three Linux servers with at least 2GB RAM and 2 vCPUs each. You should be able to SSH into each server as the root user with your SSH key pair.
 
-    1. Use the script `Azure_create_vm_4kubernetes_NATGW.ps1` from [AzureCLI](https://github.ibm.com/Aswin-Sivaraman1/VisualStudio/tree/master/AzureCLI) for Kube Master and worker nodes.
-
-    2. The above script will create the Data host with Debian 10 and in Seperate VNET from jumphost. 
-
-3.  Ansible installed on jumphost. For installation instructions, follow the official [Ansible installation documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
+3.  Ansible installed on master. For installation instructions, follow the official [Ansible installation documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html).
 
     1. Update the /etc/hosts file on all servers:
     ```
@@ -25,9 +20,9 @@ In this document we are going to install kubernetes on Azure VM's and will deplo
     10.1.0.6 debian3 worker2
     ```
 
-## Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root:
+## Step 1 — Setting Up the Workspace Directory and Ansible Inventory File as root user:
 
-This will be on the jumphost we just created. 
+This will be on the master node we just created. 
 
 ```
 mkdir ~/kube-cluster ; cd ~/kube-cluster
@@ -49,14 +44,10 @@ ansible_python_interpreter=/usr/bin/python3
 ```
 ## Step 2 — Creating a Non-Root User (ansible) on All Remote Servers:
 
-Use script `user_creation_initial.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
-
 ```
 ansible-playbook -i hosts ~/kube-cluster/user_creation_initial.yml
 ```
 ## Step 3 — Installing Kubernetes Dependencies:
-
-Use script `kube_dependencies_install.yml` from [Ansible](https://ggithub.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
 
 ```
 ansible-playbook -i hosts ~/kube-cluster/kube_dependencies_install.yml
@@ -67,13 +58,11 @@ After execution, Docker, kubeadm, and kubelet will be installed on all of the re
 
 ## Step 4 — Setting Up the Master Node:
 
-Use `kube-cluster/master_initial.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
-
 ```
 ansible-playbook -i hosts ~/kube-cluster/master_initial.yml 
 ```
 
-Once inside the master node as **ansible** user ssh ansible@master, execute below command:
+Once inside the master node as **ansible** user , execute below command:
 
 ```
 kubectl get nodes
@@ -87,12 +76,13 @@ ansible@debian1:~$
 ```
 ## Step 5 — Setting Up the Worker Nodes:
 
-Use `kube-cluster/join_worker_nodes.yml` from [Ansible](https://github.com/asivaramanr/VisualStudio/tree/master/Yaml/Ansible/Kubernetes_Install)
-
+Switch back to root account from ansible to completed the final step of installation.
 ```
 ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
 ```
 ## Step 6 — Verifying the Cluster:
+
+Now onwards we will use only ansible account for creating deployments and services.
 
 ```
 kubectl get nodes
@@ -109,7 +99,10 @@ ansible@debian1:~$
 ```
 If all of your nodes have the value Ready for STATUS, it means that they’re part of the cluster and ready to run workloads.
 
-## Step 7 — Running An Application on the Cluster:
+!!! success
+    You have successfully set up a Kubernetes cluster with Ansible.
+
+## Step 7 — Deploying Application on the Cluster:
 
 ### Deployment
 
@@ -175,10 +168,6 @@ Commercial support is available at
 </html>
 ansible@debian1:~$ 
 ```
-
-!!! success
-    You have successfully set up a Kubernetes cluster on Linux using Kubeadm and Ansible.
-
 ## Now Cleanup the resources tosave the bill.
 
 ### If you would like to remove the Nginx application, first delete the nginx service from the master node:
