@@ -68,7 +68,7 @@ After execution, Docker, kubeadm, and kubelet will be installed on all of the re
 ansible-playbook -i hosts ~/kube-cluster/master_initial.yml 
 ```
 
-Once inside the master node as **ansible** user , execute below command:
+Execute below command as **ansible** user to verify the cluster status:
 
 ```
 kubectl get nodes
@@ -89,7 +89,7 @@ ansible-playbook -i hosts ~/kube-cluster/join_worker_nodes.yml
 ```
 ## Step 6 — Verifying the Cluster:
 
-Now onwards we will use ansible user for creating deployments and services.
+Now onwards we will be using **ansible** user for creating deployments and services.
 
 ```
 kubectl get nodes
@@ -132,6 +132,8 @@ nginx-deployment   3/3     3            3           45m
 ansible@master:~$
 ```
 
+Deployment is competed with 3 replica set of nginx
+
 ### Services
 
 Services are another type of Kubernetes object that expose cluster internal services to clients, both internal and external. They are also capable of load balancing requests to multiple pods, and are an integral component in Kubernetes, frequently interacting with other components.
@@ -165,14 +167,15 @@ ansible@master:~$
 ```
 
 
-### Now you can use the public IP of worker node with port 31000 to get the default nginx page.
+### Now you can use the public IP of any worker node with port 31000 to get the default nginx page.
 
 
 ![nginx](nginx.PNG)
 
                 
-                   :smile:  :zany_face:           :smile:  :zany_face:        :smile:  :zany_face:
-
+             
+!!! info
+    NodePort is not recommended in Production Enviornment instead use LoadBalancer. 
 
 ## Cleanup the resources .
 
