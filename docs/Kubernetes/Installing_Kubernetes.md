@@ -81,7 +81,7 @@ debian1   Ready    control-plane,master   20m   v1.21.0
 ansible@debian1:~$
 ```
 ## Step 5 — Setting Up the Worker Nodes:
-!!! important
+!!! caution
     Run below command as root user
 
 ```
@@ -171,7 +171,7 @@ ansible@master:~$
 ![nginx](nginx.PNG)
 
                 
-                                     😆🤪 😆 🤪😆 😆🤪 😆 🤪
+                   :smile:  :zany_face:           :smile:  :zany_face:        :smile:  :zany_face:
 
 
 ## Cleanup the resources .
