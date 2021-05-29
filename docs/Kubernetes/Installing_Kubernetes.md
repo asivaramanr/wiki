@@ -1,8 +1,8 @@
-# **Installing Kubernetes cluster on Cloud Platform VM's**
+# **Installing Kubernetes cluster on unmanaged Cloud Platform VM's**
 
 We are going to install kubernetes cluster on the Cloud platforms and will deploy pod & expose services to outside network. You can use the [AzureCLI](https://github.com/asivaramanr/Azure/tree/master/AzureCLI), if you are using Azure Cloud  to deploy the VM's & [Ansible](https://github.com/asivaramanr/Ansible/tree/master/kubernetes_installation) scripts from my github  to install & configure kubernetes.
 
-## Prerequisites ':'
+## Prerequisites
 
 1. A Kubernetes master node with mininum of 2vCPU and 4GB Memory.
 
