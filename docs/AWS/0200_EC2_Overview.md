@@ -425,11 +425,9 @@ EC2 Actions could be useful (e.g. auto-reboot to clear memory leaks.)
 
 ## Practice: Configuring EC2.
 
-Overkill: Use Test-Driven Development concepts for this AWS practice using `awspec`. [Resource Type Checks Available from `awspec`](https://github.com/sbonds/awspec/blob/master/doc/resource_types.md)
-
 ### AWS CLI test.
 
-[How to test credentials for AWS Command Line Tools](https://stackoverflow.com/questions/31836816/how-to-test-credentials-for-aws-command-line-tools)
+How to test credentials for AWS Command Line Tools
 
 `aws sts get-caller-identity`
 
