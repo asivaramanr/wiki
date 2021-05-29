@@ -56,9 +56,9 @@ nav:
             - Well Architected: AWS/2000_Well_Architected_Framework.md
           
 extra_css:
-    - css/extra.css
-plugins:
-  - git-revision-date  
+    - stylesheets/extra.css
+#plugins:
+ # - git-revision-date  
 
 # Extensions
 markdown_extensions:
@@ -116,4 +116,6 @@ extra:
 copyright: Copyright &copy; 2017 - 2021 Aswin Sivaraman .R        
 
 # Google Analytics
-google_analytics: ['UA-36723568-3', 'mkdocs.org'] 
+google_analytics:
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - auto
