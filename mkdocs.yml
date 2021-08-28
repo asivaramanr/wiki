@@ -116,6 +116,6 @@ extra:
 copyright: Copyright &copy; 2017 - 2021 Aswin Sivaraman .R        
 
 # Google Analytics
-google_analytics:
-  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
-  - auto
+#  google_analytics:
+#    - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+#    - auto
