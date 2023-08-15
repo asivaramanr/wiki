@@ -1,4 +1,3 @@
-
 # Kubernetes
 
 
@@ -125,4 +124,4 @@ Containers started by Kubernetes automatically include this DNS server in their 
 
 ### Cluster-level Logging
 
-A [cluster-level logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/) mechanism is responsible for saving container logs to a central log store with search/browsing interface.
+[cluster-level logging](https://kubernetes.io/docs/concepts/cluster-administration/logging/) mechanism is responsible for saving container logs to a central log store with search/browsing interface.
